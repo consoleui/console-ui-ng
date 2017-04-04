@@ -1,6 +1,18 @@
 {
   "name": "console-ui-ng",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Console UI Framework based on Angular.",
+  "keywords": ["Console-UI", "HTML5", "CSS3", "Angular", "TypeScript"],
+  "homepage": "https://github.com/consoleui/console-ui-ng#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/consoleui/console-ui-ng.git"
+  },
+  "bugs": {
+    "url": "https://github.com/consoleui/console-ui-ng/issues"
+  },
+  "author": "Yin Tao",
+  "private": true,
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -10,7 +22,6 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "private": true,
   "dependencies": {
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
