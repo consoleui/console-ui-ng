@@ -2,7 +2,13 @@
   "name": "console-ui-ng",
   "version": "1.0.0",
   "description": "Console UI Framework based on Angular.",
-  "keywords": ["Console-UI", "HTML5", "CSS3", "Angular", "TypeScript"],
+  "keywords": [
+    "Console-UI",
+    "HTML5",
+    "CSS3",
+    "Angular",
+    "TypeScript"
+  ],
   "homepage": "https://github.com/consoleui/console-ui-ng#readme",
   "repository": {
     "type": "git",
@@ -20,7 +26,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "ngc": "ngc"
   },
   "dependencies": {
     "@angular/common": "^4.0.0",
@@ -31,6 +38,7 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
+    "bootstrap": "^4.0.0-alpha.6",
     "core-js": "^2.4.1",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"

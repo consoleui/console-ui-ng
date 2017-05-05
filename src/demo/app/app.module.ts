@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+// import { FooModule } from '../../lib/app/foo/foo.module';
+import { ConsoleUIModule } from 'consoleui';
+
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -12,7 +15,9 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+
+    ConsoleUIModule
   ],
   providers: [],
   bootstrap: [AppComponent]
