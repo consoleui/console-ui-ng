@@ -18,7 +18,7 @@
     ],
     "paths": {
       "consoleui": [
-        "../dist/lib"
+        "../dist/consoleui"
       ]
     }
   }

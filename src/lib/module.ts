@@ -1,24 +1,13 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 
-const CONSOLE_UI_MODULES = [];
+import { ButtonModule } from './button/button.module';
+
+const CONSOLE_UI_MODULES = [
+    ButtonModule
+];
 
 @NgModule({
-    imports: [],
-    exports: [...CONSOLE_UI_MODULES],
-    declarations: [],
-    providers: [],
+    imports: [...CONSOLE_UI_MODULES],
+    exports: [...CONSOLE_UI_MODULES]
 })
 export class ConsoleUIModule { }
-
-// @NgModule({
-//   imports: CONSOLE_UI_MODULES,
-//   exports: CONSOLE_UI_MODULES,
-// })
-// export class ConsoleUIModule {
-//   /** @deprecated */
-//   static forRoot(): ModuleWithProviders {
-//     return {ngModule: ConsoleUIRootModule};
-//   }
-// }
-
-export default ConsoleUIModule;

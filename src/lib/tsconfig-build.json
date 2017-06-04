@@ -4,7 +4,7 @@
     "stripInternal": false,
     "experimentalDecorators": true,
     "moduleResolution": "node",
-    "outDir": "../../dist/lib",
+    "outDir": "../../dist/consoleui",
     "module": "es2015",
     "baseUrl": ".",
     "types": [],
