@@ -1,0 +1,128 @@
+
+html, body {
+    width: 100%;
+    height: 100vh;
+}
+
+
+.cui-layout {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+
+    &-header {
+        flex: none;
+        display: flex;
+    }
+    
+    &-footer {
+        flex: none;
+        display: flex;
+    }
+
+    &-body {
+        flex: 1;
+        display: flex;
+    }
+
+    &-sidebar {
+        // flex: 0 0 18rem;
+        flex: none; // 等价于 flex: 0 0 auto; 
+        overflow-y: auto;
+        // overflow-x: hidden;
+        display: flex;
+    }
+
+    &-workbench {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        display: flex;
+    }
+
+    &-header-content, 
+    &-footer-content,
+    &-sidebar-content,
+    &-workbench-content {
+        flex: 1;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.cui-layout-sidebar {
+    // background-color: #F3F3F5;
+    // border-right: 1px solid #DDDDE1;
+}
+.cui-layout-footer {
+    // background-color: #F0F0F0;
+}
+
+.topbar {
+    width: 100%;
+    height: 4rem;
+    background-color: $bg-color-primary;
+    color: $color-primary-light;
+    overflow: hidden;
+
+    .title {
+        line-height: 4rem;
+        margin: 0;
+        margin-left: 1rem;
+        display: inline;
+        font-size: 2rem;
+    }
+}
+
+
+
+
+
+
+
+.with-side {
+    display: flex;
+
+    > .side {
+        flex: 0 0 15rem;
+        position: relative;
+
+        .side-handle {
+            position: absolute;
+            right: 0;
+            top: 1px;
+            z-index: +2;
+            display: block;
+            width: 1rem;
+            height: 3rem;
+            line-height: 3rem;
+            text-align: center;
+            background-color: #cccccc;
+            cursor: pointer;
+        }
+    }
+
+    > .main {
+        flex: 1;
+        margin-left: 1rem;
+    }
+
+    &.side-hide {
+        > .side {
+            flex: 0;
+            
+            .side-handle {
+                // right: -1rem;
+            }
+
+            .side-body {
+                display: none;
+            }
+        }
+
+        > .main {
+            margin-left: 0;
+        }
+    }
+}
+

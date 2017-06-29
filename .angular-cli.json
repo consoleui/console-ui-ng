@@ -5,8 +5,8 @@
   },
   "apps": [
     {
-      "root": "src/demo",
-      "outDir": "dist/demo",
+      "root": "src",
+      "outDir": "dist",
       "assets": [
         "assets",
         "favicon.ico"
@@ -15,13 +15,20 @@
       "main": "main.ts",
       "polyfills": "polyfills.ts",
       "test": "test.ts",
-      "tsconfig": "tsconfig.demo.json",
+      "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "cui",
+      "prefix": "app",
       "styles": [
+        "../node_modules/font-awesome/css/font-awesome.css",
+        "app/lib/themes/bootstrap/bootstrap.scss",
+        "app/lib/consoleui.scss",
         "styles.scss"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/tether/dist/js/tether.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

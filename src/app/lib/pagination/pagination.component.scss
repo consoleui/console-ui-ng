@@ -1,0 +1,10 @@
+
+.page-action-item {
+    display: inline-block;
+    padding: 0 0.25rem;
+
+    &.disabled {
+        color: #ccc;
+        cursor: not-allowed;
+    }
+}

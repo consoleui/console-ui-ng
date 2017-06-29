@@ -1,0 +1,24 @@
+
+<div class="cui-select" [ngClass]="{'closed': !open, 'open': !!open}">
+  <div class="cui-select-single d-flex" (click)="toggle()">
+    <span class="placeholder" style="flex: 1;" *ngIf="!selected">{{placeholder}}</span>
+    <span class="selecte-opt" style="flex: 1;" *ngIf="selected">{{selected | objectPath:options.item.text}}</span>
+    <span style="flex: 0 0 1rem; text-align: right;"><i class="fa" [ngClass]="{'fa-caret-down': !open, 'fa-caret-up': open}"></i></span>
+  </div>
+  <div class="cui-select-drop">
+    <div class="cui-select-search">
+      <input type="text" name="{{name}}-select-search" value="" class="form-control" placeholder="请输入搜索">
+    </div>
+    <div class="cui-select-options tree-options">
+      <tree-root #selectTree [nodes]="data" [options]="options.treeOptions" (activate)="select($event.node.data)">
+        <ng-template #treeNodeTemplate let-node let-index="index">
+          <span><i class="fa text-warning" [ngClass]="{'fa-folder-open': node.isExpanded, 'fa-folder': !node.isExpanded}"></i></span>
+          <span>{{node.data.name}}</span>
+        </ng-template>
+      </tree-root>
+    </div>
+  </div>
+</div>
+<div class="overlay" *ngIf="open" (click)="close()"></div>
+
+<input type="text" name="{{name}}" class="d-none" value="{{selected | objectPath:options.item.value}}">

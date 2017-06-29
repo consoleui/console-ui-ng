@@ -1,0 +1,10 @@
+<h5 cui-dialog-title>确认</h5>
+<div cui-dialog-content>
+  <p>
+    {{confirmText}}
+  </p>
+</div>
+<div cui-dialog-actions class="text-right">
+  <button type="button" class="btn btn-primary" (click)="ok($event)">确定</button>
+  <button type="button" class="btn btn-secondary" (click)="cancel($event)">取消</button>
+</div>

@@ -1,0 +1,19 @@
+
+{
+    "name": "consoleui",
+    "description": "Simple console UI with Angular2/4.",
+    "authors": "Tony Een",
+    "version": "0.0.1",
+    "main": "index.js",
+    "peerDependencies": {
+        "@angular/core": "^4.0.0",
+        "@angular/common": "^4.0.0",
+        "bootstrap": "^4.0.0-alpha.6",
+        "font-awesome": "^4.7.0",
+        "object-path": "^0.11.4",
+        "angular-tree-component": "^3.7.3"
+    },
+    "dependencies": {
+        "tslib": "^1.7.1"
+    }
+}

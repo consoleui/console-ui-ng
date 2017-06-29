@@ -1,0 +1,21 @@
+
+.page-header {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+
+    h1, h2, h3, h4, h5, h6 {
+        display: inline-block;
+
+        &.page-title {
+            font-size: 1.25rem;
+            font-weight: normal;
+            
+            border-left: 2px solid green;
+            padding-left: 0.75rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+    }
+}

@@ -12,3 +12,5 @@ createPackageBuildTasks('consoleui');
 
 import './tasks/clean';
 import './tasks/develop';
+
+import './tasks/release';

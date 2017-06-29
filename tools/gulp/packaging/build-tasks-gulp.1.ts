@@ -18,7 +18,7 @@ const watch = require('gulp-watch');
  */
 export function createPackageBuildTasks(packageName: string, requirePackages: string[] = [], ) {
     // 重定向包名为 'consoleui' 的包到实际开发目录 'lib/' 。
-    const packageRoot = join(SOURCE_ROOT, packageName === 'consoleui' ? 'app/lib' : packageName);
+    const packageRoot = join(SOURCE_ROOT, packageName === 'consoleui' ? 'lib' : packageName);
     const packageOut = join(DIST_ROOT, packageName);
 
     const tsconfigBuild = join(packageRoot, 'tsconfig-build.json');
@@ -70,11 +70,11 @@ export function createPackageBuildTasks(packageName: string, requirePackages: st
 
     task(`${packageName}:assets:inline`, () => inlineResources(packageOut));
 
-    // task(`${packageName}:watch`, () => {
+    task(`${packageName}:watch`, () => {
         // gulp 原生的 watch 在 WSL 上不好用，坐等 WSL 升级
         // watch(join(packageRoot, '**/*.+(ts|scss|html)'), {mode: 'poll'}, [`${packageName}:build`, triggerLivereload]);
-        // watch(join(packageRoot, '**/*.+(ts|scss|html)'), {usePolling: true}, () => {
-        //     start(`${packageName}:build`);
-        // });
-    // });
+        watch(join(packageRoot, '**/*.+(ts|scss|html)'), {usePolling: true}, () => {
+            start(`${packageName}:build`);
+        });
+    });
 }
