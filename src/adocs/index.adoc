@@ -1,3 +1,0 @@
-= Preference of Console UI for Angular
-
-== What's new ?
