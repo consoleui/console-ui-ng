@@ -1,0 +1,14 @@
+.cui-message-icon, .cui-message-list {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.cui-growl {
+    position: fixed;
+    top: 5rem;
+    right: 1.5rem;
+    width: 20rem;
+
+    z-index: 1999;
+    opacity: 0.9;
+}

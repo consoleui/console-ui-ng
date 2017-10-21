@@ -35,18 +35,27 @@ let globals = {
   'rxjs/observable/of': 'Rx.Observable',
   'rxjs/operator/auditTime': 'Rx.Observable.prototype',
   'rxjs/operator/catch': 'Rx.Observable.prototype',
+  'rxjs/operator/concatAll': 'Rx.Observable.prototype',
   'rxjs/operator/debounceTime': 'Rx.Observable.prototype',
   'rxjs/operator/distinctUntilChanged': 'Rx.Observable.prototype',
   'rxjs/operator/do': 'Rx.Observable.prototype',
+  'rxjs/operator/every': 'Rx.Observable.prototype',
   'rxjs/operator/filter': 'Rx.Observable.prototype',
   'rxjs/operator/finally': 'Rx.Observable.prototype',
   'rxjs/operator/first': 'Rx.Observable.prototype',
+  'rxjs/operator/last': 'Rx.Observable.prototype',
   'rxjs/operator/map': 'Rx.Observable.prototype',
   'rxjs/operator/pluck': 'Rx.Observable.prototype',
   'rxjs/operator/startWith': 'Rx.Observable.prototype',
   'rxjs/operator/switchMap': 'Rx.Observable.prototype',
   'rxjs/operator/takeUntil': 'Rx.Observable.prototype',
   'rxjs/operator/throttleTime': 'Rx.Observable.prototype',
+  'rxjs/operator/mergeAll': 'Rx.Observable.prototype',
+  'rxjs/operator/mergeMap': 'Rx.Observable.prototype',
+  'rxjs/operator/concatMap': 'Rx.Observable.prototype',
+  'rxjs/operator/reduce': 'Rx.Observable.prototype',
+  'rxjs/observable/from': 'Rx.Observable',
+  'rxjs/util/EmptyError': 'Rx.Util',
 }
 
 if (format === 'es') {
@@ -91,8 +100,12 @@ export default {
         preprocessors: {
           template: template => minifyHtml(template, htmlminOpts),
           style: scss => {
+            if(scss) {
               const css = sass.renderSync({ data: scss }).css;
               return cssmin.minify(css).styles;
+            } else  {
+              return '';
+            }
           },
         }
       })

@@ -1,0 +1,127 @@
+.form-control-1 {
+    display: block;
+    // width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #464a4c;
+    background-color: #fff;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+.ui-widget, .cui-widget {
+    // @extend .form-control-1;
+}
+
+.ui-state-default {
+    border: 1px solid #d6d6d6;
+    background: #ffffff;
+    color: #555555;
+}
+
+.ui-helper-hidden-accessible, .cui-helper-hidden-accessible {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+
+    input, select {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+}
+
+.ui-chkbox, .cui-chkbox {
+    display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-right: .25em;
+
+    & {
+        &-box {
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            background-color: #ffffff;
+            -moz-transition: background-color 0.3s;
+            -o-transition: background-color 0.3s;
+            -webkit-transition: background-color 0.3s;
+            transition: background-color 0.3s;
+
+            width: 1rem;
+            height: 1rem;
+
+            &.active {
+                background-color: theme-color("primary");
+                color: $white;
+            }
+        }
+
+        &-icon {
+            display: block;
+        }
+    }
+}
+
+//是否被访问过
+.ng-touched {
+
+}
+.ng-untouched {}
+
+// 值是否发生变化
+.ng-dirty {}
+.ng-pristine {}
+
+// 值是否有效
+.ng-valid{}
+
+.-ng-invalid:not(form), .-ng-invalid:not(.form-group){
+    &.ng-touched, &.ng-dirty  {
+        $color: theme-color("danger");
+        &.form-control, .form-control {
+            // @include form-control-validation($brand-danger);
+            
+            color: $color;
+            border-color: $color;
+
+            &:focus {
+                @include box-shadow($input-box-shadow, 0 0 6px lighten($color, 20%));
+            }
+
+            .input-group-addon {
+                color: $color;
+                border-color: $color;
+                background-color: lighten($color, 40%);
+            }
+        }
+
+        + .form-control-feedback {
+            color: $color;
+        }
+    }
+}
+
+@import './forms-basic';
+
+@import './autocomplete/autocomplete';
+@import './calendar/calendar';
+@import './checkbox/checkbox';
+@import './chips/chips';
+@import './select/select';
+@import './input-switch/input-switch';
+@import './input-text/input-text';
+@import './textarea/textarea';
+@import './listbox/listbox';
+@import './password/password';
+@import './radio/radio';
+@import './tree-select/tree-select';
+@import './multi-select/multi-select';
+@import './wizard/wizard';
+@import './fileupload/fileupload';

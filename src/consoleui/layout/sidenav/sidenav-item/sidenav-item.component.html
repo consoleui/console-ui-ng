@@ -1,0 +1,17 @@
+<!--<li class="nav-item">
+  <a class="nav-link" [ngClass]="{'active': item.active}" (click)="onClick(item)">
+    <i *ngIf="!hasChildren()" class="nav-icon fa fa-fw fa-{{!!item.icon ? item.icon : 'file'}}"></i>
+    <i *ngIf="hasChildren()" class="nav-icon fa fa-fw fa-{{subClose ? 'angle-right' : 'angle-down'}}" [ngStyle]="{'margin-left': subClose ? '0.25rem' : ''}"></i>
+    <span class="nav-text" [ngStyle]="{'margin-left': hasChildren() && subClose ? '-0.25rem' : ''}">{{item.name}}</span>
+  </a>
+
+  <ul class="nav subnav" *ngIf="hasChildren() && !subClose">
+    <cui-sidenav-item *ngFor="let ci of item.children" [item]="ci" (itemClick)="onClick($event)"></cui-sidenav-item>
+  </ul>
+</li>-->
+
+
+<cui-submenu *ngIf="item.children && item.children.length > 0" [title]="item.name" [icon]="item.icon" (expanded)="onExpanded()">
+  <cui-sidenav-item *ngFor="let i of item.children" [item]="i"></cui-sidenav-item>
+</cui-submenu>
+<cui-menuitem *ngIf="!item.children" [routerLink]="[item.route]" [icon]="item.icon">{{item.name}}</cui-menuitem>

@@ -1,11 +1,22 @@
+import { FormsModule } from '@angular/forms';
+import { CuiFormsModule } from './../../forms/forms.module';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
-import { CuiDataTableComponent } from './data-table/data-table.component';
+import { CuiCoreModule } from '../../core';
+import { DataTableComponent } from './data-table.component';
+import { PaginationModule } from '../pagination/pagination.module';
+import { ColTplDirective } from './col-tpl.directive';
 
 @NgModule({
-    imports: [],
-    exports: [CuiDataTableComponent],
-    declarations: [CuiDataTableComponent],
-    providers: [],
+  imports: [
+    CommonModule,
+    FormsModule,
+    CuiCoreModule,
+    CuiFormsModule,
+    PaginationModule
+  ],
+  declarations: [DataTableComponent, ColTplDirective],
+  exports: [DataTableComponent, ColTplDirective]
 })
-export class CuiDataTableModule { }
+export class DataTableModule { }

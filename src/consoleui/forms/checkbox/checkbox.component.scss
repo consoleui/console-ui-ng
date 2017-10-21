@@ -1,0 +1,18 @@
+/* label {
+    margin-bottom: 0px;
+} */
+
+.custom-control-indicator {
+    background-color: #fff;
+    border: 1px solid #999;
+    width: 1.125rem;
+    height: 1.125rem;
+}
+
+.custom-control-input:focus ~ .custom-control-indicator {
+    box-shadow: none;
+}
+
+.custom-control-input:checked ~ .custom-control-indicator {
+    border: none;
+}

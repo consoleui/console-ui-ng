@@ -1,0 +1,77 @@
+
+.cui-chips {
+    clear: left;
+    cursor: text;
+    list-style-type: none;
+    overflow: hidden;
+    margin-bottom: 0;
+
+    &.form-control {
+        padding: $input-padding-y/2 $input-padding-x;
+    }
+
+    &-token {
+        // @extend .badge;
+        // @extend .badge-primary;
+            display: inline-block;
+            padding: 0.25em 0.4em;
+            font-size: 75%;
+            font-weight: bold;
+            line-height: 1;
+            color: #fff;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 0.25rem;
+
+        cursor: default;
+        display: inline-block;
+        vertical-align: middle;
+        overflow: hidden;
+        padding: calc(#{$badge-padding-y}/2 + #{$input-padding-y}/2) $badge-padding-x;
+        white-space: nowrap;
+        position: relative;
+        margin-right: .125em;
+        font-size: 1em;
+        
+        background-color: theme-color("primary");
+        color: $white;
+        // font-weight: bold;
+
+        & {
+            &-label {
+                display: block;
+                margin-right: 1.25em;
+            }
+
+            &-icon {
+                margin-top: -.5em;
+                position: absolute;
+                right: 0.2em;
+                top: 50%;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &-input-token {
+        display: inline-block;
+        vertical-align: middle;
+        list-style-type: none;
+        margin: 0 0 0 .125em;
+        padding: $input-padding-y/2 0;
+
+        input {
+            border: 0 none;
+            width: 10em;
+            outline: medium none;
+            background-color: transparent;
+            margin: 0;
+            padding: 0;
+            box-shadow: none;
+            -moz-border-radius: 0;
+            -webkit-border-radius: 0;
+            border-radius: 0;
+        }
+    }
+}

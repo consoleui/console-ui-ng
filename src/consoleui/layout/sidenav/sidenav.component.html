@@ -1,0 +1,10 @@
+<!--<ul class="nav sidebar-nav {{color}}" [ngClass]="{'fold': isFold, 'unfold': !isFold, 'd-none': !isOpen}">
+  <cui-sidenav-item *ngFor="let item of navItems" [item]="item" (itemClick)="onItemClick($event)"></cui-sidenav-item>
+  <ng-content></ng-content>
+</ul>-->
+
+<div class="sidebar-nav" [ngClass]="{'fold': isFold, 'unfold': !isFold}">
+  <cui-menu direction="vertical" mode="inline">
+    <cui-sidenav-item #me *ngFor="let item of navItems; let i = index;" [item]="item" (expanded)="onExpanded(me)"></cui-sidenav-item>
+  </cui-menu>
+</div>

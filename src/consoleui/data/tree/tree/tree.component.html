@@ -1,0 +1,9 @@
+
+<div [ngClass]="{'cui-tree': true, 'cui-tree-selectable': selectionMode}" [ngStyle]="style" [class]="styleClass">
+  <div class="cui-tree-container">
+    <div class="cui-treenode-children loading" 
+      *ngIf="treeModel.virtualRoot?.hasChildren && treeModel.virtualRoot?.expanded && treeModel.virtualRoot?.loading">Loading</div>
+    <cui-treenode *ngFor="let node of treeModel.roots; let first=first; let last=last; let index=index;" [node]="node"
+      [isFirst]="first" [isLast]="last" [index]="index" [isRoot]="true"></cui-treenode>
+  </div>
+</div>

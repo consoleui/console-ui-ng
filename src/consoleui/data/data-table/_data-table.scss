@@ -1,0 +1,94 @@
+
+.table {
+    border: 1px solid #eceeef;
+    th, td {
+        border-top: 1px solid #e9ecef;
+        padding: 0.5rem;
+        vertical-align: top;
+    }
+    .action-group {
+        display: inline-block;
+    }
+
+    .emtpy-info {
+        background-color: #eceeef;
+        // text-align: center;
+        height: 200px;
+        color: #333;
+        font-size: 1.25rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    cui-checkbox {
+        label {
+            margin-top: 0.25rem; 
+            margin-bottom: 0;
+        }
+
+        .custom-control {
+            min-height: 1.125rem;
+
+            &-indicator {
+                top: 0;
+            }
+        }
+    }
+    cui-radio {
+        label {
+            margin-top: 0.25rem; 
+            margin-bottom: 0;
+        }
+
+        .custom-control {
+            min-height: 1.15rem;
+
+            &-indicator {
+                top: 0;
+            }
+        }
+    }
+}
+
+.list-search-bar {
+    position: relative;
+    margin-bottom: 0.75rem;
+    min-height: 2.5rem;
+
+    .list-tool-bar {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+}
+
+.search-bar {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    
+    .form-group {
+        .col-form-label {
+            text-align: right;
+        }
+    }
+}
+
+.data-table-no-data {
+    font-size: 1.25rem;
+}
+
+.cui-data-table-wrap {
+    position: relative;
+
+    .loading {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        text-align: center;
+        padding-top: 5rem;
+        color: theme-color("primary");
+    }
+}

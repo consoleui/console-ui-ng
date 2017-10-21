@@ -1,0 +1,52 @@
+<div #container [ngClass]="{'cui-multiselect form-control':true,'focus':focus,'disabled': disabled}"
+  [ngStyle]="style" [class]="styleClass" (click)="onMouseclick($event,in)">
+  <div class="cui-helper-hidden-accessible">
+    <input #in type="text" readonly="readonly" [attr.id]="inputId" (focus)="onFocus($event)" (blur)="onInputBlur($event)" [disabled]="disabled"
+      [attr.tabindex]="tabindex">
+  </div>
+  <div class="cui-multiselect-label-container" [title]="valuesAsString">
+    <label class="cui-multiselect-label">{{valuesAsString}}</label>
+  </div>
+  <div [ngClass]="{'cui-multiselect-trigger dropdown-toggle':true}">
+  </div>
+
+  <div #panel class="cui-multiselect-panel" [style.display]="overlayVisible ? 'block' : 'none'"
+    (click)="panelClick=true">
+    
+    <div class="cui-widget-header cui-multiselect-header clearfix">
+      <div class="cui-chkbox">
+        <div class="cui-helper-hidden-accessible">
+          <input #cb type="checkbox" readonly="readonly" [checked]="isAllChecked()">
+        </div>
+        <div class="cui-chkbox-box" [ngClass]="{'active':isAllChecked()}" (click)="toggleAll($event,cb)">
+          <span class="cui-chkbox-icon cui-clickable" [ngClass]="{'fa fa-check':isAllChecked()}"></span>
+        </div>
+      </div>
+      <div class="cui-multiselect-filter-container" *ngIf="filter">
+        <input type="text" role="textbox" (input)="onFilter($event)" class="form-control">
+        <span class="fa fa-fw fa-search"></span>
+      </div>
+      <a class="cui-multiselect-close" href="#" (click)="close($event)">
+          <span class="fa fa-close"></span>
+      </a>
+    </div>
+
+    <div class="cui-multiselect-items-wrapper">
+      <ul class="cui-multiselect-items cui-multiselect-list" [style.max-height]="scrollHeight||'auto'">
+        <li *ngFor="let option of options" class="cui-multiselect-item" (click)="onItemClick($event,option.value)" [style.display]="isItemVisible(option) ? 'block' : 'none'"
+          [ngClass]="{'highlight':isSelected(option.value)}">
+          <div class="cui-chkbox cui-widget">
+            <div class="cui-helper-hidden-accessible">
+              <input type="checkbox" readonly="readonly" [checked]="isSelected(option.value)">
+            </div>
+            <div class="cui-chkbox-box" [ngClass]="{'active':isSelected(option.value)}">
+              <span class="cui-chkbox-icon cui-clickable" [ngClass]="{'fa fa-check':isSelected(option.value)}"></span>
+            </div>
+          </div>
+          <label>{{option.label}}</label>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>

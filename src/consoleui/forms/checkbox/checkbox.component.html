@@ -1,0 +1,10 @@
+
+<label class="custom-control custom-checkbox">
+  <input type="checkbox" class="custom-control-input"
+      [attr.id]="inputId" [name]="name" [value]="value" [checked]="checked" [attr.indeterminate]="indeterminate"
+      [ngClass]="{'focus': focused}" [disabled]="disabled" [attr.tabindex]="tabindex"
+      (focus)="onFocus($event)" (blur)="onBlur($event)" (change)="handleChange($event)">
+  <span class="custom-control-indicator"></span>
+  <span class="custom-control-description" *ngIf="label">{{label}}</span>
+  <ng-content></ng-content>
+</label>

@@ -1,0 +1,64 @@
+
+:root .fa-rotate-45 {
+    -webkit-filter: none;
+    filter: none;
+}
+
+.fa-rotate-45 {
+    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.cui-treenode {
+    & {
+        &-content {
+            line-height: 1.8rem;
+            
+            &.cui-treenode-selectable {
+                cursor: pointer;
+                
+                &:hover:not(.selected) {
+                    background-color: rgba(180, 200, 255, .3);
+                }
+            }
+
+            &.selected {
+                // background-color: $brand-primary;
+                background-color: rgba(120, 200, 255, .5);
+            }
+        }
+
+        &-toggler {
+            cursor: pointer;
+        }
+
+        &-children {
+            padding-left: 1rem;
+        }
+
+    }
+
+    .cui-treenode-chkbox {
+        display: inline-block;
+        cursor: pointer;
+        vertical-align: middle;
+        margin-right: .25em;
+    }
+    .cui-chkbox-box {
+        cursor: pointer;
+
+        width: 1.15em;
+        height: 1.125em;
+        line-height: 1.125em;
+        border-radius: 2px;
+        text-align: center;
+
+        .cui-chkbox-icon {
+            display: block;
+            margin-top: 0.1rem;
+            margin-left: 0.05rem;
+        }
+    }
+}
+

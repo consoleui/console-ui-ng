@@ -1,0 +1,26 @@
+
+<div #container [ngClass]="{'form-control cui-dropdown cui-tree-select clearfix': true, 'disabled': disabled, 'cui-dropdown-open': panelVisible, 'focus': focus}"
+    [class]="styleClass" [ngStyle]="style" (click)="onMouseClick($event)">
+
+  <div class="cui-helper-hidden-accessible">
+    <input #in [attr.id]="inputId" type="text" readonly (focus)="onInputFocus($event)"
+        (blur)="onInputBlur($event)" (keydown)="onKeydown($event)" [disabled]="disabled" [attr.tabindex]="tabindex">
+  </div>
+
+  <span [ngClass]="{'cui-dropdown-label':true,'cui-dropdown-label-empty':!label}">{{label||'empty'}}</span>
+  <div class="cui-dropdown-trigger dropdown-toggle">
+  </div>
+
+  <div #panel [ngClass]="'cui-dropdown-panel hidden'" [style.display]="panelVisible ? 'block' : 'none'"
+      [ngStyle]="panelStyle" [class]="panelStyleClass">
+    <div *ngIf="filter" class="cui-dropdown-filter-container" (input)="onFilter($event)" (click)="$event.stopPropagation()">
+      <input #filter type="text" autocomplete="off" class="cui-dropdown-filter from-control"
+        [attr.placeholder]="filterPlaceholder" (keydown.enter)="$event.preventDefault()">
+      <span class="fa fa-search"></span>
+    </div>
+    <div #itemswrapper class="cui-dropdown-items-wrapper" [style.max-height]="scrollHeight||'auto'" (click)="onItemClick()">
+        <cui-tree [config]="config" selectionMode="single" (selectionChange)="onSelectionChange($event)"></cui-tree>
+    </div>
+  </div>
+
+</div>

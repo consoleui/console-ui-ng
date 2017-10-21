@@ -1,0 +1,9 @@
+<li class="nav-item cui-submenu" [class.open]="isOpen">
+  <a class="nav-link cui-submenu-title" (click)="toggleOpen()">
+      <i *ngIf="icon" class="nav-icon fa fa-fw fa-{{icon}}"></i>
+      <span class="nav-text">{{title}}</span>
+      <i class="icon-angle fa fa-angle-down"></i></a>
+  <ul class="nav cui-submenu-list">
+    <ng-content></ng-content>
+  </ul>
+</li>

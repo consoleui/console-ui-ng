@@ -1,0 +1,41 @@
+<div #container [ngClass]="{'cui-dropdown form-control clearfix':true, 'disabled':disabled,'cui-dropdown-open':panelVisible,'focus':focus}" 
+            (click)="onMouseclick($event)"
+  [ngStyle]="style" [class]="styleClass">
+  <div class="cui-helper-hidden-accessible" *ngIf="autoWidth">
+    <select [required]="required" name="options" [attr.aria-label]="selectedOption ? selectedOption.label : ' '" tabindex="-1"
+      aria-hidden="true">
+      <option *ngFor="let option of options" [value]="option.value" [selected]="selectedOption == option">{{option.label}}</option>
+    </select>
+  </div>
+  <div class="cui-helper-hidden-accessible">
+    <input #in [attr.id]="inputId" type="text" [attr.aria-label]="selectedOption ? selectedOption.label : ' '" readonly (focus)="onInputFocus($event)"
+      (blur)="onInputBlur($event)" (keydown)="onKeydown($event)" [disabled]="disabled" [attr.tabindex]="tabindex">
+  </div>
+  
+  <span [ngClass]="{'cui-dropdown-label':true,'cui-dropdown-label-empty':!label}" *ngIf="!editable">{{label||'empty'}}</span>
+  <input #editableInput type="text" [attr.aria-label]="selectedOption ? selectedOption.label : ' '" class="cui-dropdown-label"
+    *ngIf="editable" [disabled]="disabled" [attr.placeholder]="placeholder" (click)="onEditableInputClick($event)" (input)="onEditableInputChange($event)"
+    (focus)="onEditableInputFocus($event)" (blur)="onInputBlur($event)">
+  <div class="cui-dropdown-trigger dropdown-toggle">
+  </div>
+  
+  <!--[@panelState]="panelVisible ? 'visible' : 'hidden'"-->
+  <div #panel [ngClass]="'cui-dropdown-panel hidden'" [style.display]="panelVisible ? 'block' : 'none'"
+    [ngStyle]="panelStyle" [class]="panelStyleClass">
+    <div *ngIf="filter" class="cui-dropdown-filter-container" (input)="onFilter($event)" (click)="$event.stopPropagation()">
+      <input #filter type="text" autocomplete="off" class="cui-dropdown-filter from-control"
+        [attr.placeholder]="filterPlaceholder" (keydown.enter)="$event.preventDefault()">
+      <span class="fa fa-search"></span>
+    </div>
+    <div #itemswrapper class="cui-dropdown-items-wrapper" [style.max-height]="scrollHeight||'auto'">
+      <ul class="cui-dropdown-items cui-dropdown-list -content  cui-helper-reset" *ngIf="panelVisible">
+        <li *ngFor="let option of optionsToDisplay;let i=index" [ngClass]="{'cui-dropdown-item':true, 'highlight':(selectedOption == option), 
+                            'cui-dropdown-item-empty':!option.label||option.label.length === 0}" (click)="onItemClick($event, option)">
+          <span *ngIf="!itemTemplate">{{option.label||'empty'}}</span>
+          <!-- <ng-template [cuiTemplateWrapper]="itemTemplate" [item]="option" *ngIf="itemTemplate"></ng-template> -->
+          <ng-container *ngIf="itemTemplate" [ngTemplateOutlet]="itemTemplate" [ngOutletContext]="{item: item}"></ng-container>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+
+.cui-wizard {
+
+    .steps {
+
+        .nav {
+
+            .nav-item {
+
+                &:before {
+                    display: block;
+                    content: "";
+                    width: 100%;
+                    height: 1px;
+                    font-size: 0;
+                    overflow: hidden;
+                    border-top: 4px solid #CED1D6;
+                    position: relative;
+                    top: 21px;
+                    z-index: 1;
+                }
+
+                &:first-child:before {
+                    max-width: 51%;
+                    left: 50%;
+                }
+
+                &:last-child:before {
+                    max-width: 50%;
+                    width: 50%;
+                }
+
+                .cui-steps-number {
+                    border: 5px solid #CED1D6;
+                    color: #546474;
+                    font-size: 15px;
+                    border-radius: 100%;
+                    background-color: #FFF;
+                    position: relative;
+                    z-index: 2;
+                    display: inline-block;
+                    width: 40px;
+                    height: 40px;
+                    line-height: 30px;
+                    text-align: center;
+                }
+
+                .cui-steps-title {
+                    display: block;
+                    margin-top: 4px;
+                    max-width: 100%;
+                    color: #949EA7;
+                    font-size: 14px;
+                    z-index: 104;
+                    text-align: center;
+                    table-layout: fixed;
+                    word-wrap: break-word;
+                }
+
+                &.active, &.complete {
+                    &:before {
+                        border-color: #5293C4;
+                    }
+                    
+                    .cui-steps-number {
+                        border-color: #5293C4;
+                    }
+
+                    .cui-steps-title {
+                        color: #2B3D53;
+                    }
+                }
+            }
+        }
+    }
+}

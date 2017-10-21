@@ -1,0 +1,10 @@
+<div class="cui-growl">
+  <ng-container #growlContainer></ng-container>
+</div>
+
+<ng-template #growlItemTemplate let-msg>
+  <div *ngIf="msg" class="alert" [ngClass]="'alert-'+msg.severity">
+    <strong>{{msg.summary}}</strong>
+    <span>{{msg.detail}}</span>
+  </div>
+</ng-template>

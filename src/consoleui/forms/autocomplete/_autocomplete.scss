@@ -1,0 +1,108 @@
+$input-padding-y: 0.5rem;
+$input-padding-x: 0.75rem;
+
+.cui-autocomplete {
+
+    cursor: pointer;
+    position: relative;
+    // display: inline-block;
+
+    &-multiple-container{
+        margin: 0;
+
+        &.form-control {
+            // display: inline-block;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            cursor: text;
+            list-style-type: none;
+            overflow: hidden;
+            
+            padding: $input-padding-y/2 $input-padding-x;
+            //padding: $input-padding-y/2 $input-padding-x;
+
+            .badge {
+                padding: calc(#{$badge-padding-y}/2 + #{$input-padding-y}/2) $badge-padding-x;
+                //padding: $badge-padding-y + $input-padding-y/2 $badge-padding-x;
+                //$badge-padding-y 的单位是em, $input-padding-y的单位是 rem 不能运算
+            }
+        }
+    }
+
+    &-multiple-container &-token {
+        cursor: default;
+        display: inline-block;
+        vertical-align: middle;
+        overflow: hidden;
+        padding: .125rem .5rem;
+        white-space: nowrap;
+        position: relative;
+        margin-right: .125rem;
+        border: 0 none;
+        font-size: 1rem;
+
+        &-label {
+            display: block;
+            margin-right: 1.2rem;
+            font-size: 1rem;
+        }
+
+        &-icon {
+            margin-top: -.5rem;
+            position: absolute;
+            right: 0.2rem;
+            top: 50%;
+            cursor: pointer;
+        }
+    }
+
+    &-multiple-container &-input-token {
+        display: inline-block;
+        vertical-align: middle;
+        list-style-type: none;
+        margin: 0;
+        padding: $input-padding-y/2 0;
+
+        input {
+            border: 0 none;
+            width: 10rem;
+            outline: medium none;
+            background-color: transparent;
+            margin: 0;
+            padding: 0;
+            box-shadow: none;
+            -moz-border-radius: 0;
+            -webkit-border-radius: 0;
+            border-radius: 0;
+        }
+    }
+    
+    .dropdown-menu {
+        overflow-y: auto;
+        margin: -1px 0;
+    }
+
+/*    &-panel {
+        position: absolute;
+        overflow: auto;
+    }
+
+    &-panel &-list{
+        padding: 0.4rem;
+        border: 0 none;
+    }
+
+    &-panel &-list-item {
+        border: 0 none;
+        cursor: pointer;
+        font-weight: normal;
+        margin: 1px 0;
+        padding: 0.186em 0.313em;
+        text-align: left;
+
+        &.cui-state-highlight {
+            background-color: 
+        }
+    }*/
+}

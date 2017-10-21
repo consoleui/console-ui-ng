@@ -1,0 +1,9 @@
+
+.fa {
+    & {
+        &-field-required:before {
+            content: "*";
+            color: theme-color("danger");
+        }
+    }
+}

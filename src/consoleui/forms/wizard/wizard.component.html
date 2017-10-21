@@ -1,0 +1,26 @@
+
+<div [ngClass]="{'cui-wizard card': true, 'cui-wizard-horizontal': direction == 'horizontal', 'cui-wizard-vertical' : direction == 'vertical'}">
+  <div class="steps card-body">
+    <ul class="nav nav-pills" [ngClass]="{'nav-fill': direction == 'horizontal', 'flex-column' : direction == 'vertical'}">
+      <li *ngFor="let item of steps; let i = index" class="nav-item cui-steps-item" #menuitem
+          [ngClass]="{'active': item.active, 'complete': item.complete, 'disabled':item.disabled||(i !== activeIndex && readonly)}">
+          <!-- <a *ngIf="!item.routerLink" [href]="item.url||'#'" class="nav-link" (click)="itemClick($event, item, i)" [attr.target]="item.target"> -->
+            <span class="cui-steps-number">{{i + 1}}</span>
+            <span class="cui-steps-title">{{item.label}}</span>
+          <!-- </a> -->
+      </li>
+    </ul>
+  </div>
+
+  <div class="card-body">
+    <ng-content></ng-content>
+  </div>
+
+  <div class="card-body cui-wizard-actions text-right">
+    <button class="btn btn-primary" [disabled]="!prevEnabled" (click)="prev()">上一步</button>
+    <button class="btn btn-primary" [disabled]="!nextEnabled || !activeStep.valid" (click)="next()">下一步</button>
+    <button class="btn btn-success" [disabled]="!finishEnabled || !activeStep.valid" (click)="finish()">完成</button>
+    <button class="btn btn-secondary" [disabled]="!cancelEnabled" (click)="cancel()">取消</button>
+  </div>
+</div>
+

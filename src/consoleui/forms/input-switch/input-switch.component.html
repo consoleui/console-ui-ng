@@ -1,0 +1,17 @@
+<div [ngClass]="{'ui-inputswitch': true,
+            'ui-state-disabled': disabled,'ui-inputswitch-checked':checked}" (click)="toggle($event, in)" [ngStyle]="style"
+  [class]="styleClass">
+  <div class="ui-inputswitch-off">
+    <span class="ui-inputswitch-offlabel">{{offLabel}}</span>
+  </div>
+  <div class="ui-inputswitch-on">
+    <span class="ui-inputswitch-onlabel">{{onLabel}}</span>
+  </div>
+  <div [ngClass]="{'ui-inputswitch-handle':true, 'focus':focused}"></div>
+  <div class="ui-helper-hidden-accessible">
+    <!--<input #in type="checkbox" [attr.aria-label]="ariaLabel" [attr.aria-labelledby]="ariaLabelledBy" aria-live="polite" [attr.id]="inputId"
+      (focus)="onFocus($event)" (blur)="onBlur($event)" readonly="readonly" [attr.tabindex]="tabindex" />-->
+    <input #in type="checkbox" aria-live="polite" [attr.id]="inputId"
+      (focus)="onFocus($event)" (blur)="onBlur($event)" readonly="readonly" [attr.tabindex]="tabindex" />
+  </div>
+</div>

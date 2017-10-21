@@ -1,0 +1,37 @@
+<div [ngClass]="{'cui-autocomplete': true, 'cui-autocomplete-dd': dropdown, 'cui-autocomplete-multiple': multiple}" [ngStyle]="style" [class]="styleClass">
+  <div [ngClass]="{'input-group': dropdown}">
+    <input *ngIf="!multiple" #in [attr.type]="type" [attr.id]="inputId" [attr.name]="name"
+        [ngStyle]="inputStyle" [class]="inputStyleClass" [ngClass]="'form-control cui-autocomplete-input'" autocomplete="off"
+        [attr.placeholder]="placeholder" [attr.size]="size" [attr.maxlength]="maxlength" [attr.tabindex]="tabindex" [readonly]="readonly" [disabled]="disabled"
+        [value]="field ? (value[field] || '') : value"
+        (click)="onInputClick($event)" (input)="onInput($event)" (keydown)="onKeydown($event)"
+        (focus)="onInputFocus($event)" (blur)="onInputBlur($event)" (change)="onInputChange($event)">
+    <ul *ngIf="multiple" #multiContainer class="form-control cui-autocomplete-multiple-container"
+        [ngClass]="{'cui-state-disabled': disabled, 'focus': focus}" (click)="multiIn.focus()">
+      <li #token *ngFor="let val of value" class="cui-autocomplete-token badge badge-primary">
+        <span class="cui-autocomplete-token-icon fa fa-fw fa-close" (click)="removeItem(token)" *ngIf="!disabled"></span>
+        <span *ngIf="!selectedItemTemplete" class="cui-autocomplete-token-label">{{field ? val[field] : val}}</span>
+        <ng-template *ngIf="selectedItemTemplate" [cuiTemplateWrapper]="selectedItemTemplate" [item]="val"></ng-template>
+      </li>
+      <li class="cui-autocomplete-input-token">
+        <input #multiIn [attr.type]="type" [attr.id]="inputId"
+            [ngStyle]="inputStyle" [class]="inputStyleClass"  autocomplete="off"
+            [disabled]="disabled" [attr.placeholder]="placeholder" [attr.tabindex]="tabindex"
+            (click)="onInputClick($event)" (input)="onInput($event)" (keydown)="onKeydown($event)"
+            (focus)="onInputFocus($event)" (blur)="onInputBlur($event)">
+      </li>
+    </ul>
+    <div class="input-group-btn" *ngIf="dropdown">
+      <button type="button" icon="" class="btn btn-secondary dropdown-toggle"
+          [disabled]="disabled" (click)="handleDropdownClick($event)"></button>
+    </div>
+  </div>
+
+  <div #panel class="dropdown-menu" [style.display]="panelVisible ? 'block' : 'none'"
+      [style.width]="appendTo ? 'auto' : '100%'" [style.max-height]="scrollHeight">
+    <a *ngFor="let option of suggestions; let idx = index" [ngClass]="{'dropdown-item': true, 'active': (highlightOption==option)}" (click)="selectItem(option)">
+      <span *ngIf="!itemTemplate">{{field ? option[field] : option}}</span>
+      <ng-template *ngIf="itemTemplate" [cuiTemplateWrapper]="itemTemplate" [item]="option" [index]="idx"></ng-template>
+    </a>
+  </div>
+</div>
