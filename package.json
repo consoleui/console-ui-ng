@@ -8,7 +8,7 @@
     "start": "ng serve",
     "build": "ng build",
     "generate": "bash ./build.sh",
-    "release": "npm run generate && ng build --prod",
+    "release": "npm version patch && npm run generate && ng build --prod && npm publish publish",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
