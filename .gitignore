@@ -6,6 +6,7 @@ doc/
 tmp/
 out-tsc/
 publish/
+showcase/
 integration/**/lib/
 integration/**/*.ngfactory.ts
 integration/**/*.ngsummary.json
