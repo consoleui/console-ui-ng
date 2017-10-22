@@ -56,6 +56,8 @@ let globals = {
   'rxjs/operator/reduce': 'Rx.Observable.prototype',
   'rxjs/observable/from': 'Rx.Observable',
   'rxjs/util/EmptyError': 'Rx.Util',
+  'object-path': 'ObjectPath',
+  'lodash': 'lodash'
 }
 
 if (format === 'es') {

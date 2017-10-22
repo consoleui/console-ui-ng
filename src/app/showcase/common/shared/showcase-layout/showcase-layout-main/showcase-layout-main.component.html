@@ -1,0 +1,26 @@
+<cui-layout>
+  <cui-layout-header>
+    <cui-showcase-layout-header></cui-showcase-layout-header>
+  </cui-layout-header>
+
+  <cui-layout>
+    <cui-layout-sider width="280">
+      <cui-showcase-layout-sider></cui-showcase-layout-sider>
+    </cui-layout-sider>
+
+    <cui-layout>
+      <cui-layout-content>
+        <div class="py-4 px-5 bg-light">
+          <div class="py-3 px-5 bg-white">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+        <cui-showcase-layout-footer></cui-showcase-layout-footer>
+      </cui-layout-content>
+
+      <!-- <cui-layout-footer>
+      </cui-layout-footer> -->
+    </cui-layout>
+  </cui-layout>
+
+</cui-layout>

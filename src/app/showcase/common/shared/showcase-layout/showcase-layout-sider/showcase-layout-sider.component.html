@@ -1,0 +1,17 @@
+<ul nz-menu [nzMode]="'inline'" [nzTheme]="'light'">
+    <li nz-menu-item [routerLink]="['/intro']">介绍</li>
+    <li nz-menu-item [routerLink]="['/intro/getting-started']">快速上手</li>
+    <li nz-menu-item [routerLink]="['/intro/changelog']">更新日志</li>
+    <li nz-submenu [nzOpen]="true" >
+        <span title>Components</span>
+        <ul>
+            <li nz-submenu [nzOpen]="true" *ngFor="let mg of navComps">
+                <span title>{{mg.title}}</span>
+                <!-- <a class="d-none" [routerLink]="['/showcase', '']"></a> -->
+                <ul>
+                    <li nz-menu-item *ngFor="let m of mg.children" [routerLink]="m.routerLink">{{m.title}}</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>

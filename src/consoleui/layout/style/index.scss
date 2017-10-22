@@ -1,0 +1,91 @@
+$text-color: #333333;
+$font-size-base: 12px;
+
+$layout-body-bg: #ffffff;
+
+$layout-header-bg: #ffffff;
+$layout-header-padding: 0;
+$layout-header-height: 64px;
+
+$layout-footer-bg: #cccccc;
+$layout-footer-padding: 0;
+
+$layout-sider-bg: #dddddd;
+
+.cui-layout {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+    background: $layout-body-bg;
+
+    & {
+        &-has-sider {
+            flex-direction: row;
+    
+            > .cui-layout,
+            > .cui-layout-content {
+                overflow: hidden;
+            }
+        }
+    }
+
+    &-header, &-footer {
+        flex: 0 0 auto;
+    }
+
+    &-header {
+        background: $layout-header-bg;
+        padding: $layout-header-padding;
+        height: $layout-header-height;
+        // line-height: $layout-header-height;
+    }
+
+    &-footer {
+        padding: $layout-footer-padding;
+        color: $text-color;
+        font-size: $font-size-base;
+    }
+
+    &-content {
+        flex: auto;
+        overflow: auto;
+    }
+
+    &-sider {
+        transition: all .15s ease-in-out;
+        position: relative;
+        background: $layout-sider-bg;
+        overflow-y: auto;
+
+        min-width: 0;
+
+        &-has-trigger {
+            padding-bottom: 64px;
+        }
+
+        &-right {
+            order: 1;
+        }
+
+        &-trigger {
+
+        }
+
+        &-zero-width {
+            & > * {
+                overflow: hidden;
+            }
+
+            &-trigger {
+                position: absolute;
+                top: 50%;
+                right: -20px;
+                text-align: center;
+            }
+        }
+    }
+
+}

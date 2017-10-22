@@ -1,11 +1,23 @@
 
 .table {
     border: 1px solid #eceeef;
+
+    th {
+      background: #f8fbfd;
+    }
+
     th, td {
         border-top: 1px solid #e9ecef;
         padding: 0.5rem;
         vertical-align: top;
     }
+
+    tbody tr {
+        &:hover {
+            background: #fbfbfd;
+        }
+    }
+    
     .action-group {
         display: inline-block;
     }

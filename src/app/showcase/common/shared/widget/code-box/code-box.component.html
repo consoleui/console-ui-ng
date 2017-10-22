@@ -1,0 +1,55 @@
+<section class="code-box">
+  <section class="code-box-demo">
+    <div>
+      <ng-content select="[demo]"></ng-content>
+    </div>
+  </section>
+
+  <section class="code-box-meta asciidoc">
+    <div class="code-box-title">
+      <a>{{title}}</a>
+    </div>
+    <ng-content select="[intro]"></ng-content>
+    <nz-tooltip [nzTitle]="expanded?'收起代码':'展开代码'">
+      <span class="code-expand-icon" nz-tooltip (click)="expanded=!expanded">
+        <img alt="expand code" src="https://gw.alipayobjects.com/zos/rmsportal/wSAkBuJFbdxsosKKpqyq.svg" [class.code-expand-icon-show]="expanded" [class.code-expand-icon-hide]="!expanded">
+        <img alt="expand code" src="https://gw.alipayobjects.com/zos/rmsportal/OpROPHYqWmrMDBFMZtKF.svg" [class.code-expand-icon-show]="!expanded" [class.code-expand-icon-hide]="expanded">
+      </span>
+    </nz-tooltip>
+  </section>
+
+  <section class="code-box-code-wrapper" [hidden]="!expanded">
+    <ng-container *ngIf="_isFile" [ngTemplateOutlet]="codeFiles" [ngTemplateOutletContext]="{codeFiles: _code}"></ng-container>
+    <ng-container *ngIf="!_isFile" [ngTemplateOutlet]="codeItem" [ngTemplateOutletContext]="{codeItem: _code}"></ng-container>
+  </section>
+
+</section>
+
+<ng-template #codeItem let-codeItem="codeItem">
+  <section class="code-box-code highlight-wrapper">
+    <div class="hightlight">
+      <div class="code-box-actions">
+        <nz-tooltip [nzTitle]="'复制代码'">
+          <i nz-tooltip class="anticon code-box-code-copy" [class.anticon-copy]="!_copied" [class.anticon-check]="_copied" [class.ant-tooltip-open]="_copied" (click)="copyCode(codeItem.code)"></i>
+        </nz-tooltip>
+      </div>
+
+      <cui-highlight [code]="codeItem.code" [language]="codeItem.language"></cui-highlight>
+    </div>
+  </section>
+</ng-template>
+
+<ng-template #codeFiles let-codeFiles="codeFiles">
+  <nz-tabset [nzType]="'card'" >
+      <nz-tab *ngFor="let cf of codeFiles">
+          <ng-template #nzTabHeading>
+              {{cf.file}}
+          </ng-template>
+          
+          <ng-container *ngTemplateOutlet="codeItem; context: {codeItem: cf}"></ng-container>
+      </nz-tab>
+      <ng-template #nzTabBarExtraContent>
+          
+      </ng-template>
+  </nz-tabset>
+</ng-template>

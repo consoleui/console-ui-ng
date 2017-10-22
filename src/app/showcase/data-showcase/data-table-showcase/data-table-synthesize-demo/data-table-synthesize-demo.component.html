@@ -1,0 +1,181 @@
+
+<cui-data-table #tableHandle [columns]="columns" [data]="data?.content" [pagination]="data" 
+  selectType="checkbox" [(selection)]="selection" [loading]="loading">
+
+  <ng-template #complexSearch>
+    <ng-container *ngTemplateOutlet="complexSearchBox"></ng-container>
+  </ng-template>
+
+  <ng-template #simpleSearch>
+    <ng-container *ngTemplateOutlet="simpleSearchBox"></ng-container>
+  </ng-template>
+
+  <ng-template #listTools>
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> 创建计划</button>
+      <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" >
+        <span class="sr-only">Toggle Dropdown</span>
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item">复制历史计划</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item">批量创建</a>
+        <a class="dropdown-item">批量导入</a>
+      </div>
+    </div>
+    <button type="button" class="btn btn-outline-primary"><i class="fa fa-download"></i> 导出</button>
+    <div class="btn-group">
+      <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" >
+        <span>批量操作</span>
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item">批量删除</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item">批量创建</a>
+        <a class="dropdown-item">批量导入</a>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #actionGroup>
+    <div class="btn-group dropup">
+      <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" >
+        <span>批量操作</span>
+      </button>
+      <div class="dropdown-menu">
+        <a class="dropdown-item">批量删除</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item">批量创建</a>
+        <a class="dropdown-item">批量导入</a>
+      </div>
+    </div>
+  </ng-template>
+
+  <!-- 自定义列显示 -->
+  <ng-template cuiColTpl="name" let-row="row">
+    <a class="text-primary">{{row.name}}</a>
+  </ng-template>
+  <ng-template cuiColTpl="budget" let-row="row">
+    {{row.budget ? row.budget : '--'}}
+  </ng-template>
+  <ng-template cuiColTpl="createdDate" let-row="row">
+    {{row.createdDate | date: 'yyyy-MM-dd'}}
+  </ng-template>
+  <ng-template cuiColTpl="isPublished" let-row="row">
+    <span [class.text-secondary]="!row.isPublished" [class.text-success]="row.isPublished" >
+      {{row.isPublished ? '已发布' : '未发布'}}
+    </span>
+  </ng-template>
+  <ng-template cuiColTpl="auditStatus" let-row="row">
+    <ng-container *ngTemplateOutlet="auditStatus; context: {$implicit: row}"></ng-container>
+  </ng-template>
+  <ng-template cuiColTpl="actions" let-row="row">
+      <ng-container *ngTemplateOutlet="rowActions; context: {$implicit: row}"></ng-container>
+  </ng-template>
+</cui-data-table>
+
+<ng-template #auditStatus let-row>
+  <!-- 'INITIAL' | 'WAIT' | 'PASS' | 'REFUSED' -->
+  <ng-container [ngSwitch]="row.auditStatus">
+    <span *ngSwitchCase="'INITIAL'" class="text-secondary">未提交</span>
+    <span *ngSwitchCase="'WAIT'" class="text-warning">待审核</span>
+    <span *ngSwitchCase="'PASS'" class="text-success">已通过</span>
+    <span *ngSwitchCase="'REFUSED'" class="text-danger">已拒绝</span>
+    <span *ngSwitchDefault>--</span>
+  </ng-container>
+</ng-template>
+
+<ng-template #rowActions let-row>
+  <a class="text-primary">管理</a>
+  <span nz-table-divider></span>
+  <a class="text-danger">删除</a>
+  <span nz-table-divider></span>
+  <nz-dropdown [nzPlacement]="'bottomRight'">
+      <a class="ant-dropdown-link" nz-dropdown>
+          更多 <i class="anticon anticon-down"></i>
+      </a>
+      <ul nz-menu>
+          <li nz-menu-item><a>复制</a></li>
+          <li nz-menu-item><a>修改</a></li>
+      </ul>
+  </nz-dropdown>
+</ng-template>
+
+<ng-template #simpleSearchBox>
+    <form nz-form [formGroup]="_searchForm" (ngSubmit)="_submitForm($event, _searchForm.value)" [nzLayout]="'inline'">
+      <div nz-form-item>
+          <div nz-form-control style="width: 200px;">
+              <input nz-input formControlName="name" placeholder="请输入计划名称搜索">
+          </div>
+      </div>
+      <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> 搜索</button>
+      <button type="button" class="btn btn-link" (click)="tableHandle.isComplexSearch=true">高级搜索</button>
+    </form>
+</ng-template>
+
+<ng-template #complexSearchBox>
+  <form nz-form [formGroup]="_searchForm" (ngSubmit)="_submitForm($event, _searchForm.value)" [nzLayout]="'horizontal'">
+      <div nz-row [nzGutter]="8">
+          <div nz-col [nzSpan]="8">
+              <div nz-form-item nz-row>
+                  <div nz-form-label nz-col [nzSpan]="6"><label>计划名称</label></div>
+                  <div nz-form-control nz-col [nzSpan]="18">
+                      <input nz-input formControlName="name">
+                  </div>
+              </div>
+          </div>
+          <div nz-col [nzSpan]="8">
+              <div nz-form-item nz-row>
+                  <div nz-form-label nz-col [nzSpan]="6"><label>提交人</label></div>
+                  <div nz-form-control nz-col [nzSpan]="18">
+                      <input nz-input formControlName="submitedBy">
+                  </div>
+              </div>
+          </div>
+          <div nz-col [nzSpan]="8">
+              <div nz-form-item nz-row>
+                  <div nz-form-label nz-col [nzSpan]="6"><label>提交单位</label></div>
+                  <div nz-form-control nz-col [nzSpan]="18">
+                      <input nz-input formControlName="submitGroup">
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div nz-row [nzGutter]="8">
+          <div nz-col [nzSpan]="8">
+              <div nz-form-item nz-row>
+                  <div nz-form-label nz-col [nzSpan]="6"><label>培训地点</label></div>
+                  <div nz-form-control nz-col [nzSpan]="18">
+                      <input nz-input formControlName="trainingAddress">
+                  </div>
+              </div>
+          </div>
+          <div nz-col [nzSpan]="8">
+              <div nz-form-item nz-row>
+                  <div nz-form-label nz-col [nzSpan]="6"><label>计划类型</label></div>
+                  <div nz-form-control nz-col [nzSpan]="18">
+                      <input nz-input formControlName="planType">
+                  </div>
+              </div>
+          </div>
+          <div nz-col [nzSpan]="8">
+              <div nz-form-item nz-row>
+                  <div nz-form-label nz-col [nzSpan]="6"><label>执行状态</label></div>
+                  <div nz-form-control nz-col [nzSpan]="18">
+                      <input nz-input formControlName="excuteStatus">
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div nz-row [nzGutter]="8">
+          <div nz-col [nzSpan]="8">
+              <div nz-row>
+                  <div nz-col [nzSpan]="18" [nzOffset]="6">
+                      <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> 搜索</button>
+                      <button type="button" class="btn btn-link" (click)="tableHandle.isComplexSearch=false">简单搜索</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </form>
+</ng-template>
