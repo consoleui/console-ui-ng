@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class DataTablePaginationDemoComponent implements OnInit {
 
   data: any;
+  selection;
 
   columns: Column[] = [
     { title: '姓名', data: 'name' },

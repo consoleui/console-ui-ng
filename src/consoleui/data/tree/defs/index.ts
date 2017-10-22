@@ -1,2 +1,3 @@
 
-export { CuiTreeConfig, CuiTreeModel, CuiTreeNode, defaultTreeConfig } from './defs';
+export { CuiTreeConfig, CuiTreeModel, CuiTreeNode } from './defs';
+export { defaultTreeConfig } from './default-config';
