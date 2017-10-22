@@ -59,6 +59,11 @@ let globals = {
   'rxjs/operator/reduce': 'Rx.Observable.prototype',
   'rxjs/observable/from': 'Rx.Observable',
   'rxjs/util/EmptyError': 'Rx.Util',
+  'rxjs/add/operator/map': 'Rx.Observable.prototype',
+  'rxjs/add/operator/catch': 'Rx.Observable.prototype',
+  'rxjs/add/observable/of': 'Rx.Observable.prototype',
+  'rxjs/add/operator/do': 'Rx.Observable.prototype',
+  'rxjs/add/operator/delay': 'Rx.Observable.prototype',
   'object-path': 'ObjectPath',
   'lodash': 'lodash'
 }
