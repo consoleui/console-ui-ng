@@ -9,5 +9,5 @@ import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 })
 
 export class LayoutContentComponent {
-  @HostBinding('class.cui-layout-content') _cuiLayoutContent = true;
+  @HostBinding('class.cui-layout-nz-content') _cuiLayoutContent = true;
 }

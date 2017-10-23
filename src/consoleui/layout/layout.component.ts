@@ -10,6 +10,6 @@ import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 })
 
 export class LayoutComponent  {
-    @HostBinding('class.cui-layout') _nzLayout = true;
-    @HostBinding('class.cui-layout-has-sider') hasSider = false;
+    @HostBinding('class.cui-layout-nz') _nzLayout = true;
+    @HostBinding('class.cui-layout-nz-has-sider') hasSider = false;
 }

@@ -9,5 +9,5 @@ import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
 })
 
 export class LayoutFooterComponent {
-    @HostBinding('class.cui-layout-footer') _cuiLayoutFooter = true;
+    @HostBinding('class.cui-layout-nz-footer') _cuiLayoutFooter = true;
 }

@@ -8,5 +8,5 @@ import { Component, HostBinding } from '@angular/core';
 })
 
 export class LayoutHeaderComponent {
-    @HostBinding('class.cui-layout-header') _cuiLayoutHeader = true;
+    @HostBinding('class.cui-layout-nz-header') _cuiLayoutHeader = true;
 }

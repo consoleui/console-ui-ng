@@ -5,9 +5,9 @@ import { Component, OnInit, Input, HostBinding, Output, EventEmitter, HostListen
     selector: 'cui-layout-sider',
     template: `
         <ng-content></ng-content>
-        <div class="cui-layout-sider-zero-width-trigger" *ngIf="_isZeroTrigger" (click)="toggleCollapse()">
+        <div class="cui-layout-nz-sider-zero-width-trigger" *ngIf="_isZeroTrigger" (click)="toggleCollapse()">
         </div>
-        <div class="cui-layout-sider-trigger" *ngIf="_isSiderTrigger" (click)="toggleCollapse()">
+        <div class="cui-layout-nz-sider-trigger" *ngIf="_isSiderTrigger" (click)="toggleCollapse()">
 
         </div>
     `
@@ -18,7 +18,7 @@ export class LayoutSiderComponent {
     @Input() width = 200;
     @Input() trigger = true;
     @Input() collapsedWidth = 64;
-    @Input() @HostBinding('class.cui-layout-sider-collapsed') collapsed = false;
+    @Input() @HostBinding('class.cui-layout-nz-sider-collapsed') collapsed = false;
 
     _collapsable = false;
     @Input() set collapsable(value: boolean | string) {
@@ -34,9 +34,9 @@ export class LayoutSiderComponent {
     }
 
     @Output() collapsedChange = new EventEmitter();
-    @HostBinding('class.cui-layout-sider') _cuiLayoutSider = true;
+    @HostBinding('class.cui-layout-nz-sider') _cuiLayoutSider = true;
 
-    @HostBinding('class.cui-layout-sider-zero-width')
+    @HostBinding('class.cui-layout-nz-sider-zero-width')
     get setZeroClass() {
         return this.collapsed && (this.collapsedWidth === 0);
     }
