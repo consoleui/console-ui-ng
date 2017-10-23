@@ -83,7 +83,7 @@ export class TreeNodeComponent implements OnInit {
       this.tree.nodeCollapse.emit({ originalEvent: event, node: this.node });
     } else {
       if (!this.node.children && this.node.hasChildren && this.tree.config.async && this.tree.config.async.enable) {
-        this.node.loadChildren();
+        this.node.loadChildNodes();
       }
       this.tree.nodeExpand.emit({ originalEvent: event, node: this.node });
     }
