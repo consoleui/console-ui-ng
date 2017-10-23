@@ -1,5 +1,4 @@
 import { FormsModule } from '@angular/forms';
-import { CuiFormsModule } from './../../forms/forms.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -13,7 +12,6 @@ import { ColTplDirective } from './col-tpl.directive';
     CommonModule,
     FormsModule,
     CuiCoreModule,
-    CuiFormsModule,
     PaginationModule
   ],
   declarations: [DataTableComponent, ColTplDirective],
