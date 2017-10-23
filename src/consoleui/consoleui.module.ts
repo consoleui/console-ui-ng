@@ -1,4 +1,4 @@
-// import { CuiMessagesModule } from './messages/messages.module';
+import { CuiMessagesModule } from './messages/messages.module';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -28,7 +28,7 @@ const CUI_MODULES = [
   CuiNavigationModule,
   CuiUeditorModule,
   CuiTreeModule,
-  // CuiMessagesModule,
+  CuiMessagesModule,
 ];
 
 @NgModule({
