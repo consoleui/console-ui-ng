@@ -19,9 +19,10 @@ export ROLLUP_FORMAT=es
 $(npm bin)/rollup -c rollup.config.js
 rm -rf publish/src/*.js
 rm -rf publish/src/**/*.js
-# sed -e "s/from '.\//from '.\/src\//g" publish/src/index.d.ts > publish/index.d.ts
+sed -e "s/from '.\//from '.\/src\//g" publish/src/index.d.ts > publish/index.d.ts
 # sed -e "s/\":\".\//\":\".\/src\//g" publish/src/index.metadata.json > publish/index.metadata.json
-# rm publish/src/index.d.ts publish/src/index.metadata.json
+cp publish/src/index.metadata.json publish/index.metadata.json
+rm publish/src/index.d.ts publish/src/index.metadata.json
 
 echo 'Transpiling es module to es5'
 $(npm bin)/tsc --allowJs --importHelpers --target es5 --module es2015 --outDir publish/esm5 publish/esm15/index.js
