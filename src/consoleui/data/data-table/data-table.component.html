@@ -20,8 +20,8 @@
     <tr>
       <th *ngIf="!!selectType" style="width: 40px;" class="align-middle">
         <!-- <input *ngIf="selectType=='checkbox'" type="checkbox" name="toggleSelect" value="" [checked]="isSelectAll" (change)="selectAll()"/> -->
-        <cui-checkbox *ngIf="selectType=='checkbox'" name="toggleSelect" [binary]="true" [(ngModel)]="isSelectAll" (change)="selectAll()"></cui-checkbox>
-        <span *ngIf="selectType=='radio'"></span>
+        <!-- <cui-checkbox *ngIf="selectType=='checkbox'" name="toggleSelect" [binary]="true" [(ngModel)]="isSelectAll" (change)="selectAll()"></cui-checkbox>
+        <span *ngIf="selectType=='radio'"></span> -->
       </th>
       <th *ngFor="let col of columnsVisible" [style]="col.style" [ngClass]="col.styleClass">{{col.title || col.name || col.data | uppercase}}</th>
       <th *ngIf="!!rowActions" class="text-right tb-nowrap">{{ rowActionTitle || '操作'}}</th>
@@ -48,7 +48,7 @@
     <tr>
       <td *ngIf="!!selectType" class="align-middle">
         <!-- <input *ngIf="selectType=='checkbox'" type="checkbox" class="my-2" name="toggleSelect" value="" [checked]="isSelectAll" (change)="selectAll()"/> -->
-        <cui-checkbox *ngIf="selectType=='checkbox'" name="toggleSelect" [binary]="true" [(ngModel)]="isSelectAll" (change)="selectAll()"></cui-checkbox>
+        <!-- <cui-checkbox *ngIf="selectType=='checkbox'" name="toggleSelect" [binary]="true" [(ngModel)]="isSelectAll" (change)="selectAll()"></cui-checkbox> -->
       </td>
       <td [attr.colspan]='columnsVisible.length + (!!rowActions ? 1 : 0)'>
         <!-- <ng-content select=".action-group"></ng-content> -->
