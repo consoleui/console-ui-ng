@@ -26,7 +26,7 @@ export interface CuiTreeNode {
     collapsedIcon?: string;
     data?: any;
     partialSelected?: boolean;
-    loadChildNodes?: () => any;
+    loadChildren?: () => any;
     loading?: boolean;
 }
 
@@ -39,7 +39,7 @@ export interface CuiTreeConfig {
     async?: {
         enable?: boolean;
         dataFilter?: (response, parentNode) => any;
-        loadChildNodes?: (node: CuiTreeNode) => Observable<any>
+        loadChildren?: (node: CuiTreeNode) => Observable<any>
     };
     data?: {
         keep?: {

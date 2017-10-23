@@ -20,7 +20,7 @@ export class TreeNode implements CuiTreeNode {
         } else {
             if (this.getField('hasChildren') && this.getField('expanded')
                 && this.treeModel.config.async && this.treeModel.config.async.enable) {
-                this.loadChildNodes();
+                this.loadChildren();
             }
         }
     }
@@ -104,12 +104,12 @@ export class TreeNode implements CuiTreeNode {
         this.data[this.config.data.key[key] || key] = value;
     }
 
-    loadChildNodes() {
+    loadChildren() {
         let dataChildren = this.getField('children');
         if (!dataChildren) {
             if (this.config.async && this.config.async.enable && this.hasChildren && !this.loading) {
                 this.loading = true;
-                this.config.async.loadChildNodes(this).subscribe(data => {
+                this.config.async.loadChildren(this).subscribe(data => {
                     if (this.config.async.dataFilter) {
                         data = this.config.async.dataFilter(data, this);
                     }
