@@ -88,18 +88,27 @@ export class TreeNodeComponent implements OnInit {
       this.tree.nodeExpand.emit({ originalEvent: event, node: this.node });
     }
 
-    this.node.expanded = !this.node.expanded
+    this.node.expanded = !this.node.expanded;
   }
 
   onNodeClick(event: MouseEvent) {
+    if (this.node.disabled) {
+      return;
+    }
     this.tree.onNodeClick(event, this.node);
   }
 
   onNodeRightClick(event: MouseEvent) {
+    if (this.node.disabled) {
+      return;
+    }
     this.tree.onNodeRightClick(event, this.node);
   }
 
   onNodeTouchEnd() {
+    if (this.node.disabled) {
+      return;
+    }
     this.tree.onNodeTouchEnd();
   }
 

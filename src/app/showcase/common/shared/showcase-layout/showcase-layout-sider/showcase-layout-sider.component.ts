@@ -8,6 +8,17 @@ import { Component, OnInit } from '@angular/core';
 export class ShowcaseLayoutSiderComponent implements OnInit {
 
   navComps = [
+    {title: 'Layout', children: [
+      {title: 'Grid 栅格', routerLink: ['/showcase', 'grid']},
+      {title: 'Layout 布局', routerLink: ['/showcase', 'layout']},
+    ]},
+    {title: 'Data Display', children: [
+      {title: 'Table 表格', routerLink: ['/showcase', 'data', 'data-table']},
+      {title: 'Tree 树', routerLink: ['/showcase', 'data', 'tree']},
+    ]}
+  ];
+
+  _navComps = [
     {title: 'General', children: [
       {title: 'Button 按钮', routerLink: ['/showcase', '']},
       {title: 'Icon 图标', routerLink: ['/showcase', '']},

@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShowcaseLayoutMainComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+  ) { }
 
   ngOnInit() {
+
+    this.router.events.subscribe((event) => {
+      // see also
+      if (event instanceof NavigationEnd) {
+        document.body.scrollTop = 0;
+        let contentDiv = document.getElementById('cui-layout-workbench');
+        // console.log('contentDiv', contentDiv);
+        if (contentDiv) {
+          contentDiv.scrollTop = 0;
+        }
+      }
+    });
   }
 
 }

@@ -38,6 +38,21 @@
         }
 
     }
+    
+    &.cui-treenode-disabled {
+        .cui-treenode-chkbox, .cui-chkbox-box {
+            cursor: auto;
+        }
+
+        .cui-treenode-content, .cui-chkbox-box {
+            color: #cccccc;
+        }
+
+        .cui-treenode-content.selected {
+            // background-color: $brand-primary;
+            background-color: rgba(120, 200, 255, 0);
+        }
+    }
 
     .cui-treenode-chkbox {
         display: inline-block;

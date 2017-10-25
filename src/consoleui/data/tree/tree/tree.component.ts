@@ -131,7 +131,7 @@ export class TreeComponent implements OnInit, AfterContentInit, OnChanges, OnDes
         }
 
         this.selectionChange.emit(this.selection);
-        this.nodeSelect.emit({ originalEvent: event, node: node });
+        this.nodeUnselect.emit({ originalEvent: event, node: node });
       } else {
         // 事件/属性传播属性
         if (this.propagateSelectionDown) {
@@ -145,11 +145,11 @@ export class TreeComponent implements OnInit, AfterContentInit, OnChanges, OnDes
         }
 
         this.selectionChange.emit(this.selection);
-        this.nodeUnselect.emit({ originalEvent: event, node: node });
+        this.nodeSelect.emit({ originalEvent: event, node: node });
       }
 
-      this.selectionChange.emit(this.selection);
-      this.nodeSelect.emit({ originalEvent: event, node: node });
+      // this.selectionChange.emit(this.selection);
+      // this.nodeSelect.emit({ originalEvent: event, node: node });
 
       return;
     }
@@ -163,7 +163,7 @@ export class TreeComponent implements OnInit, AfterContentInit, OnChanges, OnDes
           this.selectionChange.emit(null);
         } else {
           this.selection = this.selection.filter((val, i) => i != index);
-          this.selectionChange.emit(this.selection)
+          this.selectionChange.emit(this.selection);
         }
 
         this.nodeUnselect.emit({ originalEvent: event, node: node });

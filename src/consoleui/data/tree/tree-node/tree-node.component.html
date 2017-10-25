@@ -1,7 +1,7 @@
 <ng-template [ngIf]="node">
-  <div class="cui-treenode" [class]="node.styleClass" [ngClass]="{'cui-treenode-leaf': isLeaf()}">
+  <div class="cui-treenode" [class]="node.styleClass" [ngClass]="{'cui-treenode-leaf': isLeaf(), 'cui-treenode-disabled': node.disabled}">
     <div class="cui-treenode-content" (click)="onNodeClick($event)" (contextmenu)="onRightClick($event)" (touchend)="onNodeTouchEnd()"
-        [ngClass]="{'cui-treenode-selectable':tree.selectionMode && node.selectable !== false, 'selected': isSelected}">
+        [ngClass]="{'cui-treenode-selectable':tree.selectionMode && node.selectable !== false && !node.disabled, 'selected': isSelected}">
       <span class="cui-treenode-toggler fa fa-fw" [ngClass]="{'fa-caret-right': node.hasChildren, 'fa-rotate-45': node.expanded}" (click)="toggle($event)"></span>
       <span class="cui-treenode-chkbox" *ngIf="tree.selectionMode == 'checkbox'">
         <!-- <input type="checkbox" [checked]="isSelected"/> -->

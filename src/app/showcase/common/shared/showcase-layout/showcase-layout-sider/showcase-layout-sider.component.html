@@ -2,7 +2,7 @@
     <li nz-menu-item [routerLink]="['/intro']">介绍</li>
     <li nz-menu-item [routerLink]="['/intro/getting-started']">快速上手</li>
     <li nz-menu-item [routerLink]="['/intro/changelog']">更新日志</li>
-    <li nz-submenu [nzOpen]="true" >
+    <li nz-menu-group>
         <span title>Components</span>
         <ul>
             <li nz-submenu [nzOpen]="true" *ngFor="let mg of navComps">

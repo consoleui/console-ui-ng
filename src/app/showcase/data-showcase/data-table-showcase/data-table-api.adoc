@@ -1,1 +1,45 @@
 == API
+
+=== 属性
+
+.Properties
+[width="100%",options="header"]
+|====================
+| 名称 | 类型 | 默认值 | 说明
+| columns | Column[] |  |
+| data | any[] |  |
+| pagination | CuiPagination |  |
+| selectType | string |  |
+| loading | boolean |  |
+| isComplexSearch | boolean |  |
+| dynamicColumns | boolean |  |
+| selection | any[] |  |
+|====================
+
+=== 事件
+
+.Events
+[width="100%",options="header"]
+|====================
+| 名称 | 参数 | 说明
+| reload |  |
+| select |  |
+| selectionChange |  |
+|====================
+
+=== 方法
+
+.Methods
+[width="100%",options="header"]
+|====================
+| 名称 | 参数 | 说明
+| 无 |  |
+|====================
+
+=== 样式
+
+暂未实现 主题（Theming Style） 支持
+
+== 依赖
+
+暂无

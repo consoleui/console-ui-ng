@@ -2,8 +2,17 @@
 
 
 <section class="">
-  <h2>示例</h2>
+  <article class="asciidoc">
+    <h2>示例</h2>
+  </article>
 
+  <ng-container *ngTemplateOutlet="demos"></ng-container>
+</section>
+
+<cui-asciidoc [content]="apiDoc"></cui-asciidoc>
+
+
+<ng-template #demos>
   <cui-code-box id="data-table-synthesize-demo" title="综合示例" [code]="codes['synthesize']">
     <cui-data-table-synthesize-demo demo></cui-data-table-synthesize-demo>
     <div intro>
@@ -67,6 +76,4 @@
       <p></p>
     </div>
   </cui-code-box> -->
-</section>
-
-<cui-asciidoc [content]="apiDoc"></cui-asciidoc>
+</ng-template>

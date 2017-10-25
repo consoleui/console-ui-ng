@@ -96,6 +96,14 @@ export class TreeNode implements CuiTreeNode {
         return this._children;
     }
 
+    get disabled(): boolean {
+        return this.getField('disabled');
+    }
+
+    set disabled(val) {
+        this.setField('disabled', val);
+    }
+
     getField(key) {
         return this.data[this.config.data.key[key] || key];
     }

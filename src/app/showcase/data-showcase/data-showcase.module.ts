@@ -8,7 +8,11 @@ const routes: Routes = [
             {
                 path: 'data-table',
                 loadChildren: 'app/showcase/data-showcase/data-table-showcase/data-table-showcase.module#DataTableShowcaseModule'
-            }
+            },
+            {
+                path: 'tree',
+                loadChildren: 'app/showcase/data-showcase/tree-showcase/tree-showcase.module#TreeShowcaseModule'
+            },
         ]
     }
 ];

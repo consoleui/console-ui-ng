@@ -28,6 +28,7 @@ export interface CuiTreeNode {
     partialSelected?: boolean;
     loadChildren?: () => any;
     loading?: boolean;
+    disabled?: boolean;
 }
 
 export interface CuiTreeConfig {
