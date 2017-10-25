@@ -1,6 +1,10 @@
 {
   "name": "console-ui-ng",
+<<<<<<< HEAD
   "version": "0.0.20",
+=======
+  "version": "0.0.25",
+>>>>>>> origin/master
   "license": "MIT",
   "description": "An enterprise-class UI components based on Ant Design and Angular",
   "scripts": {

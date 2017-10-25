@@ -19,7 +19,7 @@
     "annotateForClosureCompiler": true,
     "strictMetadataEmit": true,
     "flatModuleOutFile": "index.js",
-    "flatModuleId": "consoleui",
+    "flatModuleId": "console-ui-ng",
     "skipTemplateCodegen": true
   }
 }
