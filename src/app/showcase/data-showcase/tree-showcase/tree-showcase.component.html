@@ -1,0 +1,46 @@
+<cui-asciidoc [content]="introDoc"></cui-asciidoc>
+
+
+<section class="">
+  <article class="asciidoc">
+    <h2>示例</h2>
+  </article>
+
+  <ng-container *ngTemplateOutlet="demos"></ng-container>
+</section>
+
+<cui-asciidoc [content]="apiDoc"></cui-asciidoc>
+
+
+<ng-template #demos>
+    <cui-code-box id="tree-dynamic-node-demo" title="动态添加节点" [code]="codes['dynamic-node']">
+      <cui-tree-dynamic-node-demo demo></cui-tree-dynamic-node-demo>
+      <div intro>
+        <p></p>
+      </div>
+    </cui-code-box>
+    <cui-code-box id="tree-single-select-demo" title="单选" [code]="codes['single-select']">
+      <cui-tree-single-select-demo demo></cui-tree-single-select-demo>
+      <div intro>
+        <p></p>
+      </div>
+    </cui-code-box>
+    <cui-code-box id="tree-multiple-select-demo" title="多选" [code]="codes['multiple-select']">
+      <cui-tree-multiple-select-demo demo></cui-tree-multiple-select-demo>
+      <div intro>
+        <p></p>
+      </div>
+    </cui-code-box>
+    <cui-code-box id="tree-checkbox-select-demo" title="复选框" [code]="codes['checkbox-select']">
+      <cui-tree-checkbox-select-demo demo></cui-tree-checkbox-select-demo>
+      <div intro>
+        <p></p>
+      </div>
+    </cui-code-box>
+    <cui-code-box id="tree-intercept-select-demo" title="复选框2" [code]="codes['intercept-select']">
+      <cui-tree-intercept-select-demo demo></cui-tree-intercept-select-demo>
+      <div intro>
+        <p></p>
+      </div>
+    </cui-code-box>
+</ng-template>

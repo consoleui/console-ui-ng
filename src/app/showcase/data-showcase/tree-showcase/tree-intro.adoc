@@ -1,0 +1,126 @@
+= 树 / Tree
+
+== 导入
+
+[source, js]
+----
+import { CuiTreeModule } from 'consoleui';
+----
+
+== 使用
+
+[source, html]
+----
+<cui-tree id="2" [value]="nodes2" selectionMode="single"></cui-tree>
+----
+
+[source, js]
+----
+export class TreeDemo {
+    
+    nodes2: CuiTreeNode[];
+
+    constructor(private treeNodeService: TreeNodesService) { }
+
+    ngOnInit() {
+        this.treeNodeService.getNodes().subscribe(nodes => this.nodes2 = nodes);
+    }
+
+}
+----
+
+== 改进
+
+TODO:: 
+- [ ] 选择节点回显
+- [ ] 简化配置
+- [ ] 优化选择节点接口，区分单选/复选
+- [ ] 节点状态（选择、禁用等）传递策略
+- [ ] 添加 Radio 选择按钮
+- [ ] Custom Template 支持
+- [ ] 规范生命周期事件及回调
+
+== 特性
+
+=== Model Driven Forms
+
+暂无
+
+=== 自定义模板
+
+暂无
+
+=== 单选
+
+[source, html]
+----
+<cui-tree id="2" [value]="nodes2" selectionMode="single"></cui-tree>
+----
+
+=== 多选
+
+[source, html]
+----
+<cui-tree id="3" [value]="nodes3" selectionMode="multiple"></cui-tree>
+----
+
+=== 复选框
+
+[source, html]
+----
+<cui-tree id="4" [value]="nodes4" selectionMode="checkbox"></cui-tree>
+----
+
+=== 操作节点
+
+待完成
+
+=== 延迟加载
+
+[source, html]
+----
+<cui-tree id="1" [value]="nodes1" [config]="treeConf1"></cui-tree>
+----
+
+[source, js]
+----
+export class TreeDemo {
+
+    nodes1;
+    treeConf1;
+    
+    constructor(private ugService: UserGroupService) { }
+
+    ngOnInit() {
+        this.nodes1 = [{id: '', name: 'Root Node', selected: true, expanded: true, hasChildren: true}];
+        this.treeConf1 = {
+            async: {
+                enable: true,
+                loadChildren: (node: CuiTreeNode): Observable<any> => {
+                    return this.ugService.groups(node.data.id).catch(() => {
+                        this.growl.warning('树加载失败');
+                        return Observable.of(null);
+                    });
+                },
+                dataFilter: (data, node: CuiTreeNode) => {
+                    if (!node.parent && node.data.virtual) {
+                        if (data && data.length > 0) {
+                        data[0]['selected'] = true;
+                        // data[0]['expanded'] = true;
+                        }
+                    }
+                    return data;
+                }
+            },
+            data: {
+                key: {
+                id: 'id',
+                label: 'name',
+                children: 'children'
+                }
+            }
+        };
+    }
+    
+}
+----
