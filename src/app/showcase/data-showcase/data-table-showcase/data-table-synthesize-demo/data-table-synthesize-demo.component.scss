@@ -42,14 +42,14 @@
             }
             .ant-input {
                 height: 30px !important;
-                width: 130px !important;
+                // width: 130px !important;
                 font-size: 12px !important;
                 line-height: 30px !important;
                 padding-top: 2px !important;
             }
             .ant-select {
                 height: 30px !important;
-                width: 130px !important;
+                // width: 130px !important;
                 font-size: 12px !important;
                 padding-top: 2px !important;
                 .ant-select-selection {
@@ -64,15 +64,14 @@
             .search-btn {
                 background-color: #007bff;
                 border-color: #007bff;
-                width: 60px;
-                height: 24px;
+                min-width: 80px;
                 font-size: 12px;
             }
             .cui-dropdown {
                 height: 30px !important;
                 min-width: 130px !important;
                 font-size: 12px !important;
-                width: 130px !important;
+                // width: 130px !important;
                 padding-top: 2px !important;
                 .cui-dropdown-label {
                     text-overflow: ellipsis;

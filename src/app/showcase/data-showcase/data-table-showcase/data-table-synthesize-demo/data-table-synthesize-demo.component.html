@@ -103,10 +103,10 @@
     <form nz-form [formGroup]="_searchForm" (ngSubmit)="_submitForm($event, _searchForm.value)" [nzLayout]="'inline'" class="cui-data-table-form-box">
         <div nz-row class="cui-data-table-form-body">
             <div nz-form-control>
-                <nz-input formControlName="name" [nzPlaceHolder]="'请输入年度计划名称'" [nzSize]="'large'"> </nz-input>
+                <nz-input formControlName="name" [nzPlaceHolder]="'请输入年度计划名称'"> </nz-input>
             </div>
             <div class='simple-search-bar-search-box'>
-                <button type="submit" nz-button [nzType]="'primary'" [nzSize]="'large'" class='search-btn'><i class="fa fa-search"></i>查询</button>
+                <button type="submit" nz-button [nzType]="'primary'" class='search-btn'><i class="fa fa-search"></i>查询</button>
                 <button type="button" class="btn btn-link" (click)="tableHandle.isComplexSearch=true">高级查询</button>
             </div>
         </div>
@@ -118,61 +118,61 @@
         <div nz-row class="cui-data-table-form-body">
             <div nz-col [nzSpan]="8" class="cui-data-table-form-row">
                 <div nz-form-item nz-row>
-                    <div nz-form-label nz-col [nzSpan]="10">
+                    <div nz-form-label nz-col [nzSpan]="6">
                         <label for="name">计划名称</label>
                     </div>
-                    <div nz-col [nzSpan]="12">
-                        <nz-input formControlName="name" [nzPlaceHolder]="'请输入年度计划名称'" [nzSize]="'large'"></nz-input>
+                    <div nz-col [nzSpan]="18">
+                        <nz-input formControlName="name" [nzPlaceHolder]="'请输入年度计划名称'"></nz-input>
                     </div>
                 </div>
             </div>
             <div nz-col [nzSpan]="8" class="cui-data-table-form-row">
                 <div nz-form-item nz-row>
-                    <div nz-form-label nz-col [nzSpan]="10">
+                    <div nz-form-label nz-col [nzSpan]="6">
                         <label for="submitedBy">提交人</label>
                     </div>
-                    <div nz-col [nzSpan]="12">
-                        <nz-input formControlName="submitedBy" [nzPlaceHolder]="'请输入提交人名称'" [nzSize]="'large'"></nz-input>
+                    <div nz-col [nzSpan]="18">
+                        <nz-input formControlName="submitedBy" [nzPlaceHolder]="'请输入提交人名称'"></nz-input>
                     </div>
                 </div>
             </div>
             <div nz-col [nzSpan]="8" class="cui-data-table-form-row">
                 <div nz-form-item nz-row>
-                    <div nz-form-label nz-col [nzSpan]="10">
+                    <div nz-form-label nz-col [nzSpan]="6">
                         <label for="submitGroup">提交单位</label>
                     </div>
-                    <div nz-col [nzSpan]="12">
-                        <nz-input formControlName="submitGroup" [nzPlaceHolder]="'请输入提交单位'" [nzSize]="'large'"></nz-input>
+                    <div nz-col [nzSpan]="18">
+                        <nz-input formControlName="submitGroup" [nzPlaceHolder]="'请输入提交单位'"></nz-input>
                     </div>
                 </div>
             </div>
             <div nz-col [nzSpan]="8" class="cui-data-table-form-row">
                 <div nz-form-item nz-row>
-                    <div nz-form-label nz-col [nzSpan]="10">
+                    <div nz-form-label nz-col [nzSpan]="6">
                         <label for="trainingAddress">培训地点</label>
                     </div>
-                    <div nz-col [nzSpan]="12">
-                        <nz-input formControlName="trainingAddress" [nzPlaceHolder]="'请输入培训地点'" [nzSize]="'large'"></nz-input>
+                    <div nz-col [nzSpan]="18">
+                        <nz-input formControlName="trainingAddress" [nzPlaceHolder]="'请输入培训地点'"></nz-input>
                     </div>
                 </div>
             </div>
             <div nz-col [nzSpan]="8" class="cui-data-table-form-row">
                 <div nz-form-item nz-row>
-                    <div nz-form-label nz-col [nzSpan]="10">
+                    <div nz-form-label nz-col [nzSpan]="6">
                         <label for="trainingAddress">计划类型</label>
                     </div>
-                    <div nz-col [nzSpan]="12">
-                        <nz-input formControlName="trainingAddress" [nzPlaceHolder]="'请输入计划类型'" [nzSize]="'large'"></nz-input>
+                    <div nz-col [nzSpan]="18">
+                        <nz-input formControlName="trainingAddress" [nzPlaceHolder]="'请输入计划类型'"></nz-input>
                     </div>
                 </div>
             </div>
             <div nz-col [nzSpan]="8" class="cui-data-table-form-row">
                 <div nz-form-item nz-row>
-                    <div nz-form-label nz-col [nzSpan]="10">
+                    <div nz-form-label nz-col [nzSpan]="6">
                         <label for="excuteStatus">执行状态</label>
                     </div>
-                    <div nz-col [nzSpan]="12">
-                        <nz-input formControlName="excuteStatus" [nzPlaceHolder]="'请输入执行状态'" [nzSize]="'large'"></nz-input>
+                    <div nz-col [nzSpan]="18">
+                        <nz-input formControlName="excuteStatus" [nzPlaceHolder]="'请输入执行状态'"></nz-input>
                     </div>
                 </div>
             </div>
