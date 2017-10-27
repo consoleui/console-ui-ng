@@ -55,12 +55,23 @@
   <ng-template cuiColTpl="name" let-row="row">
     <a class="text-primary">{{row.name}}</a>
   </ng-template>
-  <ng-template cuiColTpl="budget" let-row="row">
+  <!-- <ng-template cuiColTpl="budget" let-row="row">
     {{row.budget ? row.budget : '--'}}
+  </ng-template> -->
+  <ng-template cuiColTpl="budget" let-row="row">
+    <nz-tooltip  [nzPlacement]="'right'" [nzOverlayClassName]="'customTip'">
+        <a nz-tooltip>{{row.budget ? row.budget : '--'}}</a>
+        <ng-template #nzTemplate>
+            <p>培训机动预算：{{row.budget ? row.budget : '--'}}</p>
+            <p>研发预算：{{row.budget ? row.budget : '--'}}</p>
+        </ng-template>
+    </nz-tooltip>
   </ng-template>
   <ng-template cuiColTpl="createdDate" let-row="row">
     {{row.createdDate | date: 'yyyy-MM-dd'}}
   </ng-template>
+  
+  <ng-template cuiColTpl="createdDate" let-row="row"></ng-template>
   <ng-template cuiColTpl="isPublished" let-row="row">
     <span [class.text-secondary]="!row.isPublished" [class.text-success]="row.isPublished" >
       {{row.isPublished ? '已发布' : '未发布'}}
