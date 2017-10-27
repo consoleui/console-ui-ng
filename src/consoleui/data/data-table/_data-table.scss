@@ -1,27 +1,22 @@
-
 .table {
     border: 1px solid #eceeef;
-
     th {
-      background: #f8fbfd;
+        background: #f8fbfd;
     }
-
-    th, td {
+    th,
+    td {
         border-top: 1px solid #e9ecef;
         padding: 0.5rem;
         vertical-align: top;
     }
-
     tbody tr {
         &:hover {
             background: #fbfbfd;
         }
     }
-    
     .action-group {
         display: inline-block;
     }
-
     .emtpy-info {
         background-color: #eceeef;
         // text-align: center;
@@ -32,16 +27,13 @@
         justify-content: center;
         align-items: center;
     }
-
     cui-checkbox {
         label {
-            margin-top: 0.25rem; 
+            margin-top: 0.25rem;
             margin-bottom: 0;
         }
-
         .custom-control {
             min-height: 1.125rem;
-
             &-indicator {
                 top: 0;
             }
@@ -49,13 +41,11 @@
     }
     cui-radio {
         label {
-            margin-top: 0.25rem; 
+            margin-top: 0.25rem;
             margin-bottom: 0;
         }
-
         .custom-control {
             min-height: 1.15rem;
-
             &-indicator {
                 top: 0;
             }
@@ -67,7 +57,6 @@
     position: relative;
     margin-bottom: 0.75rem;
     min-height: 2.5rem;
-
     .list-tool-bar {
         position: absolute;
         bottom: 0;
@@ -78,7 +67,6 @@
 .search-bar {
     padding-left: 2rem;
     padding-right: 2rem;
-    
     .form-group {
         .col-form-label {
             text-align: right;
@@ -92,7 +80,6 @@
 
 .cui-data-table-wrap {
     position: relative;
-
     .loading {
         position: absolute;
         width: 100%;
@@ -103,4 +90,39 @@
         padding-top: 5rem;
         color: theme-color("primary");
     }
+    .cui-pagination {
+        font-size: 12px;
+        .cui-pagination-btns {
+            height: 30px;
+            width: 60px;
+            font-size: 14px;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 0 10px;
+            outline: none;
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+        }
+        .gobox {
+            position: relative;
+            .gobtn {
+                position: absolute;
+                right: 8px;
+                line-height: 30px;
+                font-size: 14px;
+                &:hover {
+                    color: #108ee9;
+                }
+            }
+            .cursor {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+button {
+    height: 30px;
 }

@@ -12,6 +12,7 @@ export class PaginationComponent implements OnInit {
   @Input() pagination: CuiPagination;
   @Output('paginationChange') paginationChange = new EventEmitter();
   @Output('goto') goto = new EventEmitter();
+  totalPagesNumber = null;
 
   @ContentChild('paginationTemplate') paginationTemplate: TemplateRef<any>;
 
@@ -23,7 +24,7 @@ export class PaginationComponent implements OnInit {
 
   prev() {
     if (!this.pagination.first
-        && this.pagination.number >= 0 ) {
+      && this.pagination.number >= 0) {
       this.pagination.number -= 1;
     }
     this.paginationChange.emit(this.pagination);
@@ -32,7 +33,7 @@ export class PaginationComponent implements OnInit {
 
   next() {
     if (!this.pagination.last
-        && this.pagination.number + 1 < this.pagination.totalPages) {
+      && this.pagination.number + 1 < this.pagination.totalPages) {
       this.pagination.number += 1;
     }
     this.paginationChange.emit(this.pagination);
@@ -58,5 +59,27 @@ export class PaginationComponent implements OnInit {
   gotoPage() {
     this.goto.emit(this.pagination.number);
   }
+  gotoTotalPages($event, page: number) {
+    if ($event.keyCode) {
+      if ($event.keyCode == 13) {
+        this.validation(page);
+      }
+    } else {
+      this.validation(page);
+    }
 
+  }
+  validation(page) {
+    const reg = new RegExp("^[0-9]*$");
+    if (!reg.test(page.toString())) {
+      this.totalPagesNumber = null;
+    } else {
+      if (page > 0 && page <= this.pagination.totalPages) {
+        this.pagination.number = page - 1;
+        this.paginationChange.emit(this.pagination);
+      } else {
+        this.totalPagesNumber = null;
+      }
+    }
+  }
 }

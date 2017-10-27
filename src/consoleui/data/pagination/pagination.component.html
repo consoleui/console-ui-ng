@@ -25,13 +25,26 @@
 <div class="cui-pagination" *ngIf='!paginationTemplate'>
     <span>共 {{pagination.totalElements}} 条记录，</span>
     <!-- <a >每页 {{pagination.size}} 条 <i class="fa fa-caret-up"></i></a> -->
-    <span>每页 <select #pageSize name="pageSize" [(ngModel)]="pagination.size" (change)="gotoPage()">
-        <option value="10">10</option>
-        <option value="20">20</option>
-        <option value="50">50</option>
-        <option value="100">100</option>
-        <option value="10000">1000</option>
-      </select> 条</span>
+    <span>
+      每页
+      <span class='gobox'>
+        <select id='pageSize' #pageSize name="pageSize" [(ngModel)]="pagination.size" (change)="gotoPage()" class='cui-pagination-btns'>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="10000">1000</option>
+        </select>
+        <i class='fa fa-angle-down gobtn ' ></i>
+      </span> 条，
+    </span>
+    <span>
+      跳转至第
+      <span class='gobox'>
+        <input #totalPages class='cui-pagination-btns' [(ngModel)]="totalPagesNumber" (keydown)="gotoTotalPages($event,totalPages.value)" />
+        <i class='fa  fa-angle-right gobtn cursor' (click)="gotoTotalPages($event,totalPages.value)" ></i>
+      </span>页
+    </span>
     <a href="javascript:;" class="page-action-item" [class.disabled]="pagination.first" (click)="first()"><i class="fa fa-lg fa-angle-double-left"></i> </a>
     <a href="javascript:;" class="page-action-item" [class.disabled]="pagination.first" (click)="prev()"><i class="fa fa-lg fa-angle-left"></i> </a>
     <span>{{pagination.number + 1}}/{{pagination.totalPages}}</span>
@@ -40,5 +53,5 @@
 </div>
 
 <div class="cui-pagination" *ngIf="paginationTemplate">
-  <ng-container [ngTemplateOutlet]="paginationTemplate" [ngOutletContext]="{pagination: pagination}"></ng-container>
+    <ng-container [ngTemplateOutlet]="paginationTemplate" [ngOutletContext]="{pagination: pagination}"></ng-container>
 </div>
