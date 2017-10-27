@@ -12,6 +12,7 @@ import { DataTableSortDemoComponent } from './data-table-sort-demo/data-table-so
 import { DataTablePaginationDemoComponent } from './data-table-pagination-demo/data-table-pagination-demo.component';
 import { DataTableExpandedDemoComponent } from './data-table-expanded-demo/data-table-expanded-demo.component';
 import { DataTableSynthesizeDemoComponent } from './data-table-synthesize-demo/data-table-synthesize-demo.component';
+import { DataTableTipsDemoComponent } from './data-table-tips-demo/data-table-tips-demo.component';
 
 const routes: Routes = [
   { path: '', component: DataTableShowcaseComponent }
@@ -25,7 +26,7 @@ const routes: Routes = [
   declarations: [DataTableShowcaseComponent, DataTableSimpleDemoComponent,
     DataTableSelectionDemoComponent, DataTableSelectionPropsDemoComponent,
     DataTableFilterDemoComponent, DataTableSortDemoComponent,
-    DataTablePaginationDemoComponent, DataTableExpandedDemoComponent, DataTableSynthesizeDemoComponent],
+    DataTablePaginationDemoComponent, DataTableExpandedDemoComponent, DataTableSynthesizeDemoComponent, DataTableTipsDemoComponent],
   providers: [DataTableApiMockService]
 })
 export class DataTableShowcaseModule { }

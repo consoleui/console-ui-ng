@@ -20,7 +20,7 @@ export class DataTableShowcaseComponent implements OnInit {
   }
 
   initCodes() {
-    let demos = ['expanded', 'filter', 'pagination', 'selection', 'selection-props', 'simple', 'sort', 'synthesize'];
+    let demos = ['expanded', 'filter', 'pagination', 'selection', 'selection-props', 'simple', 'sort', 'synthesize', 'tips'];
     // demos = demos.map(it => `data-table-${it}-demo`);
     demos.forEach(demo => {
       let key = demo;
