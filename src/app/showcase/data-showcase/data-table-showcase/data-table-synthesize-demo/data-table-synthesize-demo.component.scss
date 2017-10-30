@@ -4,6 +4,10 @@
         margin-bottom: 15px;
         position: inherit;
         z-index: 999;
+        top: 0 !important;
+        button {
+            height: 30px !important;
+        }
     }
     .simple-search-bar {
         display: inline-block;
@@ -32,6 +36,7 @@
             }
             .ant-form-item {
                 margin: 0;
+                margin-bottom: 10px;
             }
             .ant-form-item-control-wrapper {
                 display: inline-block;
@@ -66,6 +71,7 @@
                 border-color: #007bff;
                 min-width: 80px;
                 font-size: 12px;
+                height: 30px !important;
             }
             .cui-dropdown {
                 height: 30px !important;
