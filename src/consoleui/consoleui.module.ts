@@ -1,3 +1,4 @@
+import { CropperModule } from './cropper/cropper.module';
 import { CuiMessagesModule } from './messages/messages.module';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -29,6 +30,7 @@ const CUI_MODULES = [
   CuiUeditorModule,
   CuiTreeModule,
   CuiMessagesModule,
+  CropperModule
 ];
 
 @NgModule({
