@@ -36,10 +36,10 @@ export class ImageCropperComponent {
   @Output() ready = new EventEmitter();
   @Output() origin = new EventEmitter();
 
-  private cropper: Cropper;
-  private isLoading = true;
-  private imageElement: HTMLImageElement;
-  private loadError;
+  cropper: Cropper;
+  isLoading = true;
+  imageElement: HTMLImageElement;
+  loadError;
 
   constructor() { }
 
