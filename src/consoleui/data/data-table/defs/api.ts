@@ -9,7 +9,7 @@ export interface Column {
     type?: string;
     visible?: boolean;
     width?: number | string;
-    style?: string;
+    style?: Object;
     styleClass?: string;
 }
 

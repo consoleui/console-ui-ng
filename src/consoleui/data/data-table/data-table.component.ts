@@ -1,7 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter,
+import {
+  Component, OnInit, Input, Output, EventEmitter,
   Directive,
   ContentChild, ContentChildren, TemplateRef, AfterContentInit,
-  QueryList } from '@angular/core';
+  QueryList
+} from '@angular/core';
 
 import { CuiPagination } from '../pagination';
 
@@ -41,7 +43,6 @@ export class DataTableComponent implements OnInit, AfterContentInit {
   columnsVisible: Column[];
 
   colTpls = {};
-
   constructor() { }
 
   get isMultipleSelect() {
