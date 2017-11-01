@@ -1,29 +1,44 @@
-
+<div class="top-bread">
+    <nz-breadcrumb class="bread">
+        <nz-breadcrumb-item>
+            您所在位置：
+        </nz-breadcrumb-item>
+        <nz-breadcrumb-item>
+            组织考试
+        </nz-breadcrumb-item>
+        <nz-breadcrumb-item>
+            考试管理
+        </nz-breadcrumb-item>
+    </nz-breadcrumb>
+    <div class="page-header">
+        <h5 class="page-title"><small>考试列表</small></h5>
+    </div>
+</div>
 <cui-data-table [columns]="columns" [data]="data">
     <ng-template cuiColTpl="name" let-row="row">
-      <nz-tooltip  [nzPlacement]="'right'">
-          <a nz-tooltip>{{row.name}}</a>
-          <ng-template #nzTemplate>
-              <p>{{row.name}}</p>
-          </ng-template>
-      </nz-tooltip>
+        <nz-tooltip [nzPlacement]="'right'">
+            <a nz-tooltip>{{row.name}}</a>
+            <ng-template #nzTemplate>
+                <p>{{row.name}}</p>
+            </ng-template>
+        </nz-tooltip>
     </ng-template>
     <ng-template cuiColTpl="budget" let-row="row">
-        <nz-tooltip  [nzPlacement]="'right'">
+        <nz-tooltip [nzPlacement]="'right'">
             <a nz-tooltip>{{row.budget}}</a>
             <ng-template #nzTemplate>
                 <p>培训机动预算：{{row.budget}}</p>
                 <p>研发预算：{{row.budget}}</p>
             </ng-template>
         </nz-tooltip>
-      </ng-template>
+    </ng-template>
     <ng-template cuiColTpl="address" let-row="row">
-        <nz-tooltip  [nzPlacement]="'right'">
+        <nz-tooltip [nzPlacement]="'right'">
             <a nz-tooltip>{{row.address}}</a>
             <ng-template #nzTemplate>
                 <p>旧地址：{{row.address}}</p>
                 <p>新地址：{{row.address}}</p>
             </ng-template>
         </nz-tooltip>
-      </ng-template>
-  </cui-data-table>
+    </ng-template>
+</cui-data-table>

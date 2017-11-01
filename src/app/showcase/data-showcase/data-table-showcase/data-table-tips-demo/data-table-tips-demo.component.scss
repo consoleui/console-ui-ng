@@ -1,0 +1,16 @@
+// 面包屑样式，，，，，添加进入全局 style.scss内看看有没有，如果有就不用添加了
+$comColor:#007bff;
+.top-bread {
+    .bread {
+        background: #f2f0f0;
+        line-height: 46px;
+        padding: 0 15px;
+    }
+    .page-header {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+    .page-title {
+        border-left-color: $comColor !important;
+    }
+}
