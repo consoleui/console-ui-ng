@@ -139,5 +139,13 @@ export class DataTableSynthesizeDemoComponent implements OnInit {
     console.log(value);
     console.log(this.selection);
   }
+  resetForm($event: MouseEvent) {
+    $event.preventDefault();
+    this._searchForm.reset();
+    // tslint:disable-next-line:forin
+    for (const key in this._searchForm.controls) {
+      this._searchForm.controls[key].markAsPristine();
+    }
+  }
 
 }
