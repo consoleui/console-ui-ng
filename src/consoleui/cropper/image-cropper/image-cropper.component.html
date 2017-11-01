@@ -1,0 +1,7 @@
+<div ng-class="ngcrop-wrapper">
+	<div ng-class="loading-block" *ngIf="isLoading">
+		<div ng-class="spinner"></div>
+	</div>
+	<div class="alert alert-warning" *ngIf="loadError">{{loadImageErrorText}}</div>
+	<div class="cropper"><img id="image" [src]="imageUrl" alt="image" (load)="imageLoaded($event)" crossorigin="anonymous" (error)="imageLoadError($event)"></div>
+</div>
