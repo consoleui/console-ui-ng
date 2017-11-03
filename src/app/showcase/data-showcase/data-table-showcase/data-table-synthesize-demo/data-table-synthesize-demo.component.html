@@ -107,7 +107,7 @@
             </div>
             <div class='simple-search-bar-search-box'>
                 <button type="submit" nz-button [nzType]="'primary'" class='search-btn'><i class="fa fa-search"></i>查询</button>
-                <button type="button" class="btn btn-link" (click)="tableHandle.isComplexSearch=true">高级查询</button>
+                <button type="button" class="btn btn-link" (click)="resetForm($event);tableHandle.isComplexSearch=true">高级查询</button>
             </div>
         </div>
     </form>
@@ -179,7 +179,7 @@
             <div class="cui-data-table-form-row">
                 <div class='complex-search-bar-search-box'>
                     <button nz-button [nzType]="'primary'" [nzSize]="'large'" class='search-btn'><i class="fa fa-search"></i>查询</button>
-                    <button type="button" class="btn btn-link" (click)="tableHandle.isComplexSearch=false">简单查询</button>
+                    <button type="button" class="btn btn-link" (click)="resetForm($event);tableHandle.isComplexSearch=false">简单查询</button>
                 </div>
             </div>
         </div>
