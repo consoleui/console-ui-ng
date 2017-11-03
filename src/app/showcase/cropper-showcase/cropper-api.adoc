@@ -1,0 +1,47 @@
+== API
+
+=== 属性
+
+.Properties
+[width="100%",options="header"]
+|====================
+| 名称 | 类型 | 默认值 | 说明
+| setting | {} | {} |ueditor自定义配置，参考 http://fex.baidu.com/ueditor/#start-config[start-config]
+| autoHeight | boolean | false | 对应autoHeightEnable
+| initialFrameHeight | number | 450 |
+| topOffset | number | 0 |
+| fontsize | number | 14 | 默认字体大小
+| toolbarMode | string | 'default' | 可选'um'
+|====================
+
+
+=== 事件
+
+.Events
+[width="100%",options="header"]
+|====================
+| 名称 | 参数 | 说明
+| onReady |  |
+| onValueChange |  | 
+| onFocus |  |
+|====================
+
+=== 方法
+
+.Methods
+[width="100%",options="header"]
+|====================
+| 名称 | 参数 | 说明
+| getContent |  |
+| getPlainTxt |  |
+| getContentTxt |  |
+| hasContents |  |
+|====================
+
+=== 样式
+
+Ueditor 默认样式
+
+== 依赖
+
+需要加载ueditor.js
