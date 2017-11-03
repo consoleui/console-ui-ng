@@ -1,7 +1,18 @@
-<div ng-class="ngcrop-wrapper">
-	<div ng-class="loading-block" *ngIf="isLoading">
-		<div ng-class="spinner"></div>
-	</div>
-	<div class="alert alert-warning" *ngIf="loadError">{{loadImageErrorText}}</div>
-	<div class="cropper"><img id="image" [src]="imageUrl" alt="image" (load)="imageLoaded($event)" crossorigin="anonymous" (error)="imageLoadError($event)"></div>
+<div class="ngcrop-wrapper">
+  <div class="loading-block" *ngIf="isLoading">
+    <div class="spinner"></div>
+  </div>
+  <div class="cropper-miss-image" *ngIf="loadError">
+    <div class="loader">
+      <p>
+        <label class="browse">
+          browse...
+          <input type="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff"  (change)="loadImageFile($event)" class="sr-only">
+        </label>
+      </p>
+    </div>
+  </div>
+  <div class="cropper" >
+    <img #image [src]="imageUrl" alt="image" (load)="imageLoaded($event)" crossorigin="anonymous" (error)="imageLoadError($event)">
+  </div>
 </div>
