@@ -4,7 +4,7 @@
     <div class="col-md-9">
       <!-- <h3>Demo:</h3> -->
       <div class="img-container">
-        <cui-cropper [imageUrl]="imageUrl"  [cropperOptions]="options" (export)="export($event)"></cui-cropper>
+        <cui-cropper [imageUrl]="imageUrl"  [cropperOptions]="options" (origin)="origin($event)"></cui-cropper>
       </div>
     </div>
     <div class="col-md-3">
@@ -165,7 +165,7 @@
           </span>
         </button>
         <label class="btn btn-primary btn-upload" for="inputImage" title="Upload image file">
-          <input type="file" class="sr-only" (change)="inputImage(e)" name="file1" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
+          <input type="file" class="sr-only" (change)="inputImage($event)" name="file1" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
           <span class="docs-tooltip" data-toggle="tooltip" title="Import image with Blob URLs">
             <span class="fa fa-upload"></span>
           </span>
@@ -173,6 +173,13 @@
         <button type="button" class="btn btn-primary" (click)="destroy()" data-method="destroy" title="Destroy">
           <span class="docs-tooltip" data-toggle="tooltip" title="cropper.destroy()">
             <span class="fa fa-power-off"></span>
+          </span>
+        </button>
+      </div>
+      <div class="btn-group">
+        <button type="button" class="btn btn-primary" (click)="cropImage()" data-method="reset" title="Reset">
+          <span class="docs-tooltip" data-toggle="tooltip" title="crop">
+            <span class="fa fa-window-restore"></span>
           </span>
         </button>
       </div>
