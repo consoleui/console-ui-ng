@@ -59,7 +59,17 @@ export class ImageCropDemoComponent implements OnInit {
   }
 
   cropImage() {
-    
+    this.cropper.getCroppedCanvas({
+      width: 160,
+      height: 90,
+      minWidth: 256,
+      minHeight: 256,
+      maxWidth: 4096,
+      maxHeight: 4096,
+      fillColor: '#fff',
+      imageSmoothingEnabled: false,
+      imageSmoothingQuality: 'high',
+    }).toDataURL();
   }
   setDragMode(mode) {
     this.cropper.setDragMode(mode);
