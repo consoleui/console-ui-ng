@@ -31,10 +31,9 @@ export class ImageCropperComponent {
   @Input() cropbox: Cropper.CropBoxData;
   @Input() cropperOptions: Cropper.CropperOptions;
   @ViewChild('image') image: ElementRef;
-  @Output() export = new EventEmitter();
-  @Output() cropperResult = new EventEmitter<IImageCropperResult>();
+  @Output() export = new EventEmitter<IImageCropperResult>();
   @Output() ready = new EventEmitter();
-  @Output() origin = new EventEmitter();
+  @Output() origin = new EventEmitter(); // Cropper object
 
   private cropper: Cropper;
   private isLoading = true;
@@ -58,7 +57,7 @@ export class ImageCropperComponent {
     });
 
     this.cropper = new Cropper(image, this.cropperOption());
-    this.export.emit(this.cropper);
+    this.origin.emit(this.cropper);
   }
 
   read(files) {
@@ -127,8 +126,7 @@ export class ImageCropperComponent {
     });
 
     promise.then(res => {
-      this.cropperResult.emit(Object.assign(data, res));
-      this.origin.emit(this.cropper);
+      this.export.emit(Object.assign(data, res));
     });
   }
 

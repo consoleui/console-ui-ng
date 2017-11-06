@@ -37,9 +37,6 @@ export class ImageCropDemoComponent implements OnInit {
     },
     crop: (e) => {
       let data = e.detail;
-
-      console.log(e.type);
-      console.log("data", data);
       this.dataX = Math.round(data.x);
       this.dataY = Math.round(data.y);
       this.dataHeight = Math.round(data.height);
@@ -53,7 +50,7 @@ export class ImageCropDemoComponent implements OnInit {
     }
   };
 
-  export(event) {
+  origin(event) {
     this.cropper = event;
   }
   constructor() { }
@@ -61,6 +58,19 @@ export class ImageCropDemoComponent implements OnInit {
   ngOnInit() {
   }
 
+  cropImage() {
+    this.cropper.getCroppedCanvas({
+      width: 160,
+      height: 90,
+      minWidth: 256,
+      minHeight: 256,
+      maxWidth: 4096,
+      maxHeight: 4096,
+      fillColor: '#fff',
+      imageSmoothingEnabled: false,
+      imageSmoothingQuality: 'high',
+    }).toDataURL();
+  }
   setDragMode(mode) {
     this.cropper.setDragMode(mode);
   }
