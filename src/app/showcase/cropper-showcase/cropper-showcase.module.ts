@@ -4,7 +4,8 @@ import { CuiCoreModule } from './../../../consoleui/core/core.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CropperShowcaseComponent } from './cropper-showcase.component';
-import { ImageCropDemoComponent } from './image-crop-demo/image-crop-demo.component';
+import { ImageCropModalDemoComponent } from './image-crop-modal-demo/image-crop-modal-demo.component';
+import { ImageCropSimpleDemoComponent } from './image-crop-simple-demo/image-crop-simple-demo.component';
 
 const routes: Routes = [
   { path: '', component: CropperShowcaseComponent }
@@ -15,6 +16,6 @@ const routes: Routes = [
     SharedModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [CropperShowcaseComponent, ImageCropDemoComponent]
+  declarations: [CropperShowcaseComponent,  ImageCropModalDemoComponent, ImageCropSimpleDemoComponent]
 })
 export class CropperShowcaseModule { }
