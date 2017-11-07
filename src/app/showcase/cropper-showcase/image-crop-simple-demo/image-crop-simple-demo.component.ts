@@ -1,15 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as Cropper from "cropperjs";
+
 @Component({
-  selector: 'cui-image-crop-demo',
-  templateUrl: './image-crop-demo.component.html',
-  styleUrls: ['./image-crop-demo.component.scss']
+  selector: 'cui-image-crop-simple-demo',
+  templateUrl: './image-crop-simple-demo.component.html',
+  styleUrls: ['./image-crop-simple-demo.component.scss']
 })
-export class ImageCropDemoComponent implements OnInit {
+export class ImageCropSimpleDemoComponent implements OnInit {
 
   URL = window.URL;
   private cropper: Cropper;
-  imageUrl: any = "/assets/picture.jpg";
+  imageUrl: any;
   download = document.getElementById('download');
   actions = document.getElementById('actions');
   dataX: number;
@@ -59,17 +60,15 @@ export class ImageCropDemoComponent implements OnInit {
   }
 
   cropImage() {
-    this.cropper.getCroppedCanvas({
-      width: 160,
-      height: 90,
-      minWidth: 256,
-      minHeight: 256,
+    let url = this.cropper.getCroppedCanvas({
       maxWidth: 4096,
       maxHeight: 4096,
       fillColor: '#fff',
       imageSmoothingEnabled: false,
       imageSmoothingQuality: 'high',
     }).toDataURL();
+    console.log(url);
+    this.imageUrl = url;
   }
   setDragMode(mode) {
     this.cropper.setDragMode(mode);
@@ -151,3 +150,5 @@ export class ImageCropDemoComponent implements OnInit {
     }
   }
 }
+
+

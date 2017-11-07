@@ -6,13 +6,13 @@
     <div class="loader">
       <p>
         <label class="browse">
-          browse...
+          选择图片
           <input type="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff"  (change)="loadImageFile($event)" class="sr-only">
         </label>
       </p>
     </div>
   </div>
-  <div class="cropper" >
-    <img #image [src]="imageUrl" alt="image" (load)="imageLoaded($event)" crossorigin="anonymous" (error)="imageLoadError($event)">
+  <div class="cropper" [ngClass]="{'invisible': loadError, 'visible': !loadError}">
+    <img #image [src]="imageUrl" alt="image" (load)="imageLoaded($event)" (haschange)="imageLoaded($event)" crossorigin="anonymous" (error)="imageLoadError($event)">
   </div>
 </div>
