@@ -39,6 +39,39 @@
     },
     {
       "root": "src",
+      "outDir": "preview",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main-preview.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "cui",
+      "styles": [
+        "../node_modules/font-awesome/scss/font-awesome.scss",
+        "styles/bootstrap/bootstrap.scss",
+        "styles/consoleui/consoleui.scss",
+        "styles/preview/preview.scss",
+        "styles/styles.scss"
+      ],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/popper.js/dist/umd/popper.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.js",
+        "../node_modules/asciidoctor.js/dist/asciidoctor.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    },
+    {
+      "root": "src",
       "outDir": "dist",
       "assets": [
         "assets",
