@@ -90,4 +90,36 @@ export class TreeModel implements CuiTreeModel {
 
         return index;
     }
+
+    filter(filterFn: (node: CuiTreeNode) => boolean, startNodes?: CuiTreeNode[] | CuiTreeNode): CuiTreeNode[] {
+        let startWith: CuiTreeNode[] = [];
+        if (startNodes) {
+            if (Array.isArray(startNodes)) {
+                startWith = startNodes;
+            } else {
+                startWith = [startNodes];
+            }
+        }
+        startWith = startWith.filter(it => !it.data['virtual']);
+        startWith = startWith && startWith.length > 0 ? startWith : this.roots;
+
+        return this._filter(filterFn, startWith);
+    }
+
+    private _filter(filterFn: (node: CuiTreeNode) => boolean, startWith: CuiTreeNode[]): CuiTreeNode[] {
+        let result = [];
+        if (!startWith || startWith.length == 0) {
+            return result;
+        }
+        result = startWith.filter(it => filterFn);
+
+        startWith.forEach(it => {
+            if (it.hasChildren && it.children && it.children.length > 0) {
+                let sr = this._filter(filterFn, it.children);
+                result = result ? [...result, ...sr] : sr;
+            }
+        });
+
+        return result;
+    }
 }
