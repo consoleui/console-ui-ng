@@ -1,3 +1,4 @@
+import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import { Component, Input, Output } from '@angular/core';
 import * as Cropper from 'cropperjs';
 import { NzModalService } from 'ng-zorro-antd';
@@ -16,15 +17,16 @@ export class ModalImageCropperComponent {
     @Input() maskClosable: boolean = false;
     // 上传接口地址
     @Input() uploadUrl;
+    @Input() uploadParamName = 'file';
     // 回传结果中表示期望获取数据的属性名
-    @Input() property;
+    @Input() property = "relativePath";
     @Input() modalWidth: number = 740;
     @Input() modalHeight: number = 480;
     // 裁剪后的结果，可以是base64格式的图片数据或者是服务器返回文件路径
     @Output() result: any;
     currentModal;
 
-    constructor(private modalService: NzModalService) { }
+    constructor(private modalService: NzModalService, private http: Http) { }
 
     showModalForTemplate(contentTpl, footerTpl) {
         this.currentModal = this.modalService.open({
@@ -45,10 +47,15 @@ export class ModalImageCropperComponent {
 
     crop(event) {
         if (this.uploadUrl && this.property) {
-            this.cropper.getCroppedCanvas().toBlob(function (blob) {
+            this.cropper.getCroppedCanvas().toBlob((blob) => {
                 let formData = new FormData();
-                formData.append('croppedImage', blob);
-                // TODO上传服务器代码
+                formData.append(this.uploadParamName, blob, 'croped.png');
+                this.http.post(this.uploadUrl, formData)
+                .subscribe((r: Response) => {
+                    console.log(r);
+                    this.result = r.json()[this.property];
+                    console.log(this.result);
+                });
               });
         } else {
             let url = this.cropper.getCroppedCanvas({
