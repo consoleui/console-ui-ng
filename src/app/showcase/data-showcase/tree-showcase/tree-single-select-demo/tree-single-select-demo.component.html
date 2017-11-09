@@ -1,4 +1,5 @@
 <div style="width: 300px;">
-    <cui-tree id="2" [value]="nodes" selectionMode="single"></cui-tree>
+    <cui-tree #tree [value]="nodes" selectionMode="single"></cui-tree>
 
+    <button type="button" (click)="getNode('3-1')">GetNode</button>
 </div>
