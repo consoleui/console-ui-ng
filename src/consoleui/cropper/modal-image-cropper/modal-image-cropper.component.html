@@ -1,5 +1,5 @@
 <button nz-button [nzType]="'primary'" (click)="showModalForTemplate(modalContent,cropperModalFooter)">
-  <span>显示对话框</span>
+  <span>{{title}}</span>
 </button>
 <ng-template #modalContent>
   <div [ngStyle]="{'height.px':modalHeight}" style="position: relative;">
