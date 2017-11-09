@@ -85,7 +85,13 @@ export class TreeComponent implements OnInit, AfterContentInit, OnChanges, OnDes
     this.treeModel.setData({
       nodes: changes.value && changes.value.currentValue,
       config: changes.config && changes.config.currentValue,
-      events: { 'selectionChange': this.selectionChange }
+      events: {
+        'selectionChange': this.selectionChange,
+        'nodeSelect': this.nodeSelect,
+        'nodeUnselect': this.nodeUnselect,
+        'nodeExpand': this.nodeExpand,
+        'nodeCollapse': this.nodeCollapse,
+      }
     });
     // console.log('changes', changes)
     // console.log('treeModel', this.treeModel);
