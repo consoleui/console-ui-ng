@@ -111,7 +111,7 @@ export class TreeModel implements CuiTreeModel {
         if (!startWith || startWith.length == 0) {
             return result;
         }
-        result = startWith.filter(it => filterFn);
+        result = startWith.filter(it => filterFn(it));
 
         startWith.forEach(it => {
             if (it.hasChildren && it.children && it.children.length > 0) {

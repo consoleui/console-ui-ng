@@ -286,7 +286,9 @@ export class TreeComponent implements OnInit, AfterContentInit, OnChanges, OnDes
   }
 
   getNodeByParam(key: string, value: any, parentNode?: CuiTreeNode): CuiTreeNode {
-    let results = this.treeModel.filter(node => node[key] == value || node.data[key] == value, parentNode);
+    let results = this.treeModel.filter(node => {
+      return node[key] == value || node.data[key] == value;
+    }, parentNode);
 
     if (results && results.length > 0) {
       return results[0];
@@ -301,5 +303,9 @@ export class TreeComponent implements OnInit, AfterContentInit, OnChanges, OnDes
 
   selectNode(node: CuiTreeNode) {
     this.treeModel.addSelection(node);
+  }
+
+  removeSelection(node: CuiTreeNode) {
+    this.treeModel.removeSelection(node);
   }
 }
