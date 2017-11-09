@@ -33,16 +33,18 @@ export class TreeModel implements CuiTreeModel {
         }
     }
 
-    addSelection(node: CuiTreeNode) {
+    addSelection(node: CuiTreeNode, event?) {
         if (!this.isSelected(node)) {
             this.selection = [...this.selection || [], node];
+            this.fireEvent({name: 'nodeSelect', data: {originalEvent: event, node: node}});
         }
         this.fireEvent({name: 'selectionChange', data: this.selection});
     }
 
-    removeSelection(node: CuiTreeNode) {
+    removeSelection(node: CuiTreeNode, event?) {
         if (this.isSelected(node)) {
             this.selection = this.selection.filter((v, i) => v != node);
+            this.fireEvent({name: 'nodeUnselect', data: {originalEvent: event, node: node}});
         }
         this.fireEvent({name: 'selectionChange', data: this.selection});
     }
