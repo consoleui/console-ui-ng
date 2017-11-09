@@ -44,7 +44,7 @@ export class TreeComponent implements OnInit, AfterContentInit, OnChanges, OnDes
   }
 
   @Input() set value(value: any) { }
-  @Input() set config(config: CuiTreeConfig) {}
+  @Input() set config(config: CuiTreeConfig) { }
 
   get config(): CuiTreeConfig {
     return this.treeModel.config;
@@ -85,7 +85,7 @@ export class TreeComponent implements OnInit, AfterContentInit, OnChanges, OnDes
     this.treeModel.setData({
       nodes: changes.value && changes.value.currentValue,
       config: changes.config && changes.config.currentValue,
-      events: {'selectionChange': this.selectionChange}
+      events: { 'selectionChange': this.selectionChange }
     });
     // console.log('changes', changes)
     // console.log('treeModel', this.treeModel);
@@ -224,58 +224,58 @@ export class TreeComponent implements OnInit, AfterContentInit, OnChanges, OnDes
 
   propagateUp(node: CuiTreeNode, select: boolean) {
     if (node.children && node.children.length) {
-            let selectedCount: number = 0;
-            let childPartialSelected: boolean = false;
-            for (let child of node.children) {
-                if (this.isSelected(child)) {
-                    selectedCount++;
-                } else if (child.partialSelected) {
-                    childPartialSelected = true;
-                }
-            }
-
-            if (select && selectedCount == node.children.length) {
-                this.selection = [...this.selection || [], node];
-                node.partialSelected = false;
-            } else {
-                if (!select) {
-                    let index = this.findIndexInSelection(node);
-                    if (index >= 0) {
-                        this.selection = this.selection.filter((val, i) => i != index);
-                    }
-                }
-
-                if (childPartialSelected || selectedCount > 0 && selectedCount != node.children.length) {
-                    node.partialSelected = true;
-                } else {
-                    node.partialSelected = false;
-                }
-            }
+      let selectedCount: number = 0;
+      let childPartialSelected: boolean = false;
+      for (let child of node.children) {
+        if (this.isSelected(child)) {
+          selectedCount++;
+        } else if (child.partialSelected) {
+          childPartialSelected = true;
         }
+      }
 
-        let parent = node.parent;
-        if (parent) {
-            this.propagateUp(parent, select);
-        }
-    }
-
-    propagateDown(node: CuiTreeNode, select: boolean) {
-        let index = this.findIndexInSelection(node);
-
-        if (select && index == -1) {
-            this.selection = [...this.selection || [], node];
-        } else if (!select && index > -1) {
-            this.selection = this.selection.filter((val, i) => i != index);
-        }
-
+      if (select && selectedCount == node.children.length) {
+        this.selection = [...this.selection || [], node];
         node.partialSelected = false;
-
-        if (node.children && node.children.length) {
-            for (let child of node.children) {
-                this.propagateDown(child, select);
-            }
+      } else {
+        if (!select) {
+          let index = this.findIndexInSelection(node);
+          if (index >= 0) {
+            this.selection = this.selection.filter((val, i) => i != index);
+          }
         }
+
+        if (childPartialSelected || selectedCount > 0 && selectedCount != node.children.length) {
+          node.partialSelected = true;
+        } else {
+          node.partialSelected = false;
+        }
+      }
     }
+
+    let parent = node.parent;
+    if (parent) {
+      this.propagateUp(parent, select);
+    }
+  }
+
+  propagateDown(node: CuiTreeNode, select: boolean) {
+    let index = this.findIndexInSelection(node);
+
+    if (select && index == -1) {
+      this.selection = [...this.selection || [], node];
+    } else if (!select && index > -1) {
+      this.selection = this.selection.filter((val, i) => i != index);
+    }
+
+    node.partialSelected = false;
+
+    if (node.children && node.children.length) {
+      for (let child of node.children) {
+        this.propagateDown(child, select);
+      }
+    }
+  }
 
   isSelected(node: CuiTreeNode) {
     return this.findIndexInSelection(node) != -1;
@@ -285,4 +285,21 @@ export class TreeComponent implements OnInit, AfterContentInit, OnChanges, OnDes
 
   }
 
+  getNodeByParam(key: string, value: any, parentNode?: CuiTreeNode): CuiTreeNode {
+    let results = this.treeModel.filter(node => node[key] == value || node.data[key] == value, parentNode);
+
+    if (results && results.length > 0) {
+      return results[0];
+    }
+
+    return null;
+  }
+
+  getNodeById(id: any): CuiTreeNode {
+    return this.getNodeByParam('id', id);
+  }
+
+  selectNode(node: CuiTreeNode) {
+    this.treeModel.addSelection(node);
+  }
 }
