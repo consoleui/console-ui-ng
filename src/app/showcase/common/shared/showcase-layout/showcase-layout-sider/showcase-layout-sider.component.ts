@@ -15,6 +15,10 @@ export class ShowcaseLayoutSiderComponent implements OnInit {
     {title: 'Data Display', children: [
       {title: 'Table 表格', routerLink: ['/showcase', 'data', 'data-table']},
       {title: 'Tree 树', routerLink: ['/showcase', 'data', 'tree']},
+    ]},
+    {title: 'Utils', children: [
+      {title: 'Cropper 图片裁剪', routerLink: ['/showcase', 'cropper']},
+      {title: 'Editor 富文本编辑器', routerLink: ['/showcase', 'ueditor']},
     ]}
   ];
 

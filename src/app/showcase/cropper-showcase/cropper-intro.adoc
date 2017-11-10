@@ -1,0 +1,9 @@
+= Cropper 图片裁剪
+
+感谢fengyuanchen编写的 https://github.com/fengyuanchen/cropper[Cropper] ，
+在此基础上封装了ng2的图片裁剪组件。
+
+== 使用场景
+
+- 所有需要调整上传图片大小的功能。
+

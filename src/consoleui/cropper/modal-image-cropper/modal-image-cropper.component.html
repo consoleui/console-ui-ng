@@ -1,0 +1,23 @@
+<button nz-button [nzType]="'primary'" (click)="showModalForTemplate(modalContent,cropperModalFooter)">
+  <span>{{title}}</span>
+</button>
+<ng-template #modalContent>
+  <div [ngStyle]="{'height.px':modalHeight}" style="position: relative;">
+    <cui-cropper [imageUrl]="imageUrl" [cropperOptions]="options" (origin)="getCropper($event)"></cui-cropper>
+  </div>
+</ng-template>
+<ng-template #cropperModalFooter>
+  <div class="customize-footer">
+    <label class="btn btn-primary"  title="Upload image file">
+      重新选择
+        <input type="file" class="sr-only" (change)="selectImage($event)" name="file1" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
+      
+    </label>
+    <label class="btn btn-success " (click)="crop($event)">
+      {{cropText}}
+    </label>
+    <label class="btn btn-warning " (click)="handleCancel($event)">
+      取消
+    </label>
+  </div>
+</ng-template>

@@ -1,0 +1,35 @@
+<cui-asciidoc [content]="introDoc"></cui-asciidoc>
+
+
+<section class="">
+  <article class="asciidoc">
+    <h2>示例</h2>
+  </article>
+
+  <ng-container *ngTemplateOutlet="demos"></ng-container>
+</section>
+
+<cui-asciidoc [content]="apiDoc"></cui-asciidoc>
+
+
+<ng-template #demos>
+  <cui-code-box id="ueditor-default-demo" title="默认风格" [code]="codes['default']">
+    <cui-ueditor-default-demo demo></cui-ueditor-default-demo>
+    <div intro>
+      <p>工具栏使用UE默认风格，显示全部功能按钮</p>
+    </div>
+  </cui-code-box>
+  <cui-code-box id="ueditor-um-demo" title="UM风格" [code]="codes['um']">
+    <cui-ueditor-um-demo demo></cui-ueditor-um-demo>
+    <div intro>
+      <p>工具栏使用UM风格，显示常用功能按钮</p>
+    </div>
+  </cui-code-box>
+  <cui-code-box id="ueditor-custom-demo" title="自定义" [code]="codes['custom']">
+    <cui-ueditor-custom-demo demo></cui-ueditor-custom-demo>
+    <div intro>
+      <p>自定义Ueditor</p>
+    </div>
+  </cui-code-box>
+
+</ng-template>
