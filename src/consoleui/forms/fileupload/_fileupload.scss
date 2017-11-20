@@ -24,3 +24,17 @@
         color: #eee;
     }
 }
+
+.file-list {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+
+    .file-item {
+        padding: 0.75rem;
+
+        i.fa-file-* {
+            font-size: 1.25rem;
+        }
+    }
+}

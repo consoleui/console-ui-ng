@@ -1,0 +1,48 @@
+= 文件上传组件
+
+表单中文件选择和上传的组件，对于已知文件类型做交互的优化，比如文档类型用图标提示文件类型，图片直接回显选择或上传的图片。
+
+== 导入
+
+[source, js]
+----
+import { FileuploadModule } from 'consoleui';
+----
+
+== 使用
+
+.普通
+[source, html]
+----
+<cui-fileupload mode="file" name="files" url="/api/upload/files" [auto]="false" (uploadComplete)="onFileUpload($event)"></cui-fileupload>
+----
+
+.输入框
+[source, html]
+----
+<cui-fileupload mode="video" name="files" url="/api/upload/files" [auto]="true" (uploadComplete)="onVideoUpload($event)"></cui-fileupload>
+----
+
+.图片
+[source, html]
+----
+<cui-fileupload mode="image" name="files" url="/api/upload/files" [auto]="true" (uploadComplete)="onImageUpload($event)"></cui-fileupload>
+----
+
+== 改进
+
+暂无
+
+== 特性
+
+=== Model Driven Forms
+
+暂无
+
+=== 自定义模板
+
+暂无
+
+=== 表单验证
+
+暂无

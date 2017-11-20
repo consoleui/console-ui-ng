@@ -1,9 +1,21 @@
 
-<div class="btn btn-primary cui-fileupload-choose" *ngIf="mode == 'file'">
-  <span class="fa fa-plus"></span>
-  <span>选择文件</span>
-  <input type="file" class="form-control-file" name="file" [multiple]="multiple" (change)="fileSelected($event)">
-</div>
+<ng-container *ngIf="mode == 'file'">
+  <div class="btn btn-primary cui-fileupload-choose">
+    <span class="fa fa-plus"></span>
+    <span>选择文件...</span>
+    <input type="file" class="form-control-file" name="file" [multiple]="multiple" (change)="fileSelected($event)">
+  </div>
+  <button type="button" *ngIf="!auto" [disabled]="!hasFiles()" (click)="upload()" class="btn btn-info">开始上传</button>
+  <button type="button" class="btn btn-warning">取消上传</button>
+  <button type="button" class="btn btn-danger">移除</button>
+
+  <ul *ngIf="hasFiles" class="file-list">
+    <li *ngFor="let f of files" class="file-item">
+      <i [class]="'fa fa-file-'+getIcon(f)"></i>
+      <span>{{f.name}}</span>
+    </li>
+  </ul>
+</ng-container>
 
 <div class="input-group cui-fileupload-choose" *ngIf="mode == 'video'">
   <!-- <input type="text" class="form-control" [value]="hasFiles() ? files[0].name : ''" placeholder="Search for..." aria-label="Search for..."> -->
@@ -46,7 +58,7 @@
 </div>
 
 
-<button type="button" *ngIf="!auto" [disabled]="!hasFiles()" (click)="upload()" class="btn btn-primary">上传</button>
+<!-- <button type="button" *ngIf="!auto" [disabled]="!hasFiles()" (click)="upload()" class="btn btn-primary">上传</button> -->
 <!--
 <div *ngIf="hasFiles()">
   <div *ngFor="let file of files; let i = index;">

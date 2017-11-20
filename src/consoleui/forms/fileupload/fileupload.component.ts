@@ -52,6 +52,8 @@ export class FileuploadComponent implements OnInit {
         file.objectURL = this.getSafeUrl(file);
       }
 
+      // file.icon = this.getIcon(file);
+
       this.files.push(file);
     }
 
@@ -136,5 +138,51 @@ export class FileuploadComponent implements OnInit {
 
   getSafeUrl(file: File): SafeUrl {
     return this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file));
+  }
+
+  getIcon(file: File) {
+    // TODO 改成正则匹配表
+    const iconMap = {
+      // 'file-o': [],
+      'zip-o': ['zip', 'rar', 'tar'],
+      'excel-o': ['xls', 'xlsx'],
+      'image-o': ['jpg', 'jpeg', 'png', 'gif', 'bmp'],
+      'pdf-o': ['pdf'],
+      'word-o': ['doc', 'docx'],
+      'text-o': ['txt', 'md', 'adoc'],
+      'audio-o': ['mp3'],
+      'vedio-o': ['mp4', 'rm'],
+      'code-o': ['html', 'java', 'js'],
+    };
+    let defaultIcon = 'o';
+
+    let iconMapFlat = {};
+    for (let key of Object.keys(iconMap)) {
+      iconMap[key].forEach(type => {
+        iconMapFlat[type] = key;
+      });
+    }
+
+    let ext = this.getExpandedName(file).toLowerCase();
+    let icon = iconMapFlat[ext] || defaultIcon;
+    return icon;
+  }
+
+  getExpandedName(file: File | string): string {
+    let fileName = '';
+    if (file instanceof File) {
+      fileName = file.name;
+    } else {
+      fileName = file;
+    }
+
+    if (fileName.includes('\\') || fileName.includes('/')) {
+      fileName = fileName.substring(fileName.lastIndexOf('\\') + 1).substring(fileName.lastIndexOf('/') + 1);
+    }
+
+    if (fileName && fileName.indexOf('.') > 0) {
+      return fileName.substring(fileName.lastIndexOf('.') + 1);
+    }
+    return null;
   }
 }

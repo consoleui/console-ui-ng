@@ -11,7 +11,7 @@ const routes: Routes = [
       {path: 'layout', loadChildren: 'app/showcase/layout-showcase/layout-showcase.module#LayoutShowcaseModule'},
       {path: 'data', loadChildren: 'app/showcase/data-showcase/data-showcase.module#DataShowcaseModule'},
       {path: 'cropper', loadChildren: 'app/showcase/cropper-showcase/cropper-showcase.module#CropperShowcaseModule'},
-      {path: 'ueditor', loadChildren: 'app/showcase/ueditor-showcase/ueditor-showcase.module#UeditorShowcaseModule'},
+      {path: 'forms', loadChildren: 'app/showcase/forms-showcase/forms-showcase.module#FormsShowcaseModule'},
     ]},
   ]}
 ,
