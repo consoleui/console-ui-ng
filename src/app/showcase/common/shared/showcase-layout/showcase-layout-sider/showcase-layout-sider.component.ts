@@ -16,10 +16,13 @@ export class ShowcaseLayoutSiderComponent implements OnInit {
       {title: 'Table 表格', routerLink: ['/showcase', 'data', 'data-table']},
       {title: 'Tree 树', routerLink: ['/showcase', 'data', 'tree']},
     ]},
+    {title: 'Forms', children: [
+      {title: 'Editor 富文本编辑器', routerLink: ['/showcase', 'forms', 'ueditor']},
+      {title: 'FileUpload 文件上传', routerLink: ['/showcase', 'forms', 'fileupload']},
+    ]},
     {title: 'Utils', children: [
       {title: 'Cropper 图片裁剪', routerLink: ['/showcase', 'cropper']},
-      {title: 'Editor 富文本编辑器', routerLink: ['/showcase', 'ueditor']},
-    ]}
+    ]},
   ];
 
   _navComps = [

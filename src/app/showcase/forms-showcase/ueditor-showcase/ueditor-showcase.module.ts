@@ -1,5 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
-import { SharedModule } from './../common/shared/shared.module';
+import { SharedModule } from './../../common/shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UeditorShowcaseComponent } from './ueditor-showcase.component';

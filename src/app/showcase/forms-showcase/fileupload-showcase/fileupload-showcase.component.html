@@ -1,0 +1,52 @@
+<cui-asciidoc [content]="introDoc"></cui-asciidoc>
+
+
+<section class="">
+  <article class="asciidoc">
+    <h2>示例</h2>
+  </article>
+
+  <ng-container *ngTemplateOutlet="demos"></ng-container>
+</section>
+
+<cui-asciidoc [content]="apiDoc"></cui-asciidoc>
+
+
+<ng-template #demos>
+    <cui-code-box id="fileupload-simple-demo" title="简单示例" [code]="codes['simple']">
+      <cui-fileupload-simple-demo demo></cui-fileupload-simple-demo>
+      <div intro>
+        <p></p>
+      </div>
+    </cui-code-box>
+    <cui-code-box id="fileupload-multiple-demo" title="多个文件上传" [code]="codes['multiple']">
+      <cui-fileupload-multiple-demo demo></cui-fileupload-multiple-demo>
+      <div intro>
+        <p>附件上传</p>
+      </div>
+    </cui-code-box>
+    <cui-code-box id="fileupload-single-demo" title="单个文件上传" [code]="codes['single']">
+      <cui-fileupload-single-demo demo></cui-fileupload-single-demo>
+      <div intro>
+        <p></p>
+      </div>
+    </cui-code-box>
+    <cui-code-box id="fileupload-custom-demo" title="自定义" [code]="codes['custom']">
+      <cui-fileupload-custom-demo demo></cui-fileupload-custom-demo>
+      <div intro>
+        <p>自定义模板，自定义文件类型</p>
+      </div>
+    </cui-code-box>
+    <cui-code-box id="fileupload-custom-demo" title="封面图片" [code]="codes['custom']">
+      <!-- <cui-fileupload-custom-demo demo></cui-fileupload-custom-demo> -->
+      <div intro>
+        <p></p>
+      </div>
+    </cui-code-box>
+    <cui-code-box id="fileupload-custom-demo" title="头像和裁剪" [code]="codes['custom']">
+      <!-- <cui-fileupload-custom-demo demo></cui-fileupload-custom-demo> -->
+      <div intro>
+        <p></p>
+      </div>
+    </cui-code-box>
+</ng-template>
