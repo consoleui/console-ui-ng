@@ -15,7 +15,7 @@
 | multiple | boolean | false |
 | auto | boolean | false |
 | accept | string |  |
-| mode | "'advanced' \| 'doc' \| 'video' \| 'image' \| 'zip' \| 'file'" | 'advanced' |
+| mode | 'advanced' , 'doc' , 'video' , 'image' , 'zip' , 'file' | 'advanced' | 
 | imageHolder | string |  |
 |====================
 

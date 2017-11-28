@@ -1,1 +1,5 @@
-<cui-fileupload mode="file" name="files" url="/api/upload/files" [auto]="false" [multiple]="true" (uploadComplete)="onFileUpload($event)"></cui-fileupload>
+<div nz-row>
+    <div nz-col [nzSpan]="8">
+        <cui-fileupload mode="file" name="files" url="/api/upload/files" [auto]="false" [multiple]="true" (uploadComplete)="onFileUpload($event)"></cui-fileupload>
+    </div>
+</div>
