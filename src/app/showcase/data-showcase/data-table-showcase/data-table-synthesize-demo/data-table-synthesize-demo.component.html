@@ -12,14 +12,17 @@
         <div class="btn-group">
             <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i> 创建计划</button>
             <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
-        <span class="sr-only">Toggle Dropdown</span>
-      </button>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
             <div class="dropdown-menu dropdown-menu-right">
                 <a class="dropdown-item">复制历史计划</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item">批量创建</a>
                 <a class="dropdown-item">批量导入</a>
             </div>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-outline-primary" (click)="openModal()">修改发起人</button>
         </div>
         <button type="button" class="btn btn-outline-primary"><i class="fa fa-download"></i> 导出</button>
         <div class="btn-group">
@@ -52,6 +55,9 @@
     <!-- 自定义列显示 -->
     <ng-template cuiColTpl="name" let-row="row">
         <a class="text-primary">{{row.name}}</a>
+    </ng-template>
+    <ng-template cuiColTpl="submitedBy.displayName" let-row="row">
+        <a class="text-primary">{{row.submitedBy.displayName}}</a>
     </ng-template>
     <ng-template cuiColTpl="budget" let-row="row">
         {{row.budget ? row.budget : '--'}}
@@ -185,3 +191,16 @@
         </div>
     </form>
 </ng-template>
+
+<nz-modal [nzVisible]="isVisible" [nzTitle]="'第一个 Modal'" [nzContent]="modalContent" (nzOnCancel)="handleCancel($event)" (nzOnOk)="handleOk($event)">
+    <ng-template #modalContent>
+        <div style="width:80%;height:100px;margin:0 auto;">
+            <div nz-form-label nz-col [nzSpan]="6">
+                <label for="excuteStatus">发起人</label>
+            </div>
+            <div nz-col [nzSpan]="18">
+                <nz-input [(ngModel)]="inputValue" [nzPlaceHolder]="'请输入发起人名称'"></nz-input>
+            </div>
+        </div>
+    </ng-template>
+</nz-modal>

@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { NzMessageService } from 'ng-zorro-antd';
 
 class Pagination<T> implements CuiPagination {
   first: boolean;
@@ -85,15 +86,14 @@ export class PlanApiService {
 })
 export class DataTableSynthesizeDemoComponent implements OnInit {
 
-  data: Pagination<Plan>;
+  data: any;
   selection: Plan[];
   loading: boolean = false;
-
   columns: Column[] = [
     { title: '计划名称', tpl: 'name', style: { 'max-width': '100px', width: '100px' }, styleClass: 'add' },
     { title: '预算', tpl: 'budget' },
     { title: '发起单位', data: 'submitedGroup.name' },
-    { title: '发起人', data: 'submitedBy.displayName' },
+    { title: '发起人', tpl: 'submitedBy.displayName' },
     { title: '创建时间', tpl: 'createdDate' },
     { title: '发布状态', tpl: 'isPublished', styleClass: 'text-center' },
     { title: '审核状态', tpl: 'auditStatus', styleClass: 'text-center' },
@@ -102,8 +102,10 @@ export class DataTableSynthesizeDemoComponent implements OnInit {
 
   _searchForm: FormGroup;
   _isComplexSearch: boolean = false;
+  isVisible: boolean = false;
+  inputValue: any;
 
-  constructor(private fb: FormBuilder, private planApi: PlanApiService) { }
+  constructor(private fb: FormBuilder, private planApi: PlanApiService, private _message: NzMessageService) { }
 
   ngOnInit() {
     this.initSearchForm();
@@ -145,6 +147,28 @@ export class DataTableSynthesizeDemoComponent implements OnInit {
     // tslint:disable-next-line:forin
     for (const key in this._searchForm.controls) {
       this._searchForm.controls[key].markAsPristine();
+    }
+  }
+  handleOk = (e) => {
+    console.log('点击了确定');
+    let newData = this.data.content.filter(data => this.filterId(data.id));
+    newData[0].submitedBy.displayName = this.inputValue;
+    this.isVisible = false;
+  }
+
+  filterId(id) {
+    return this.selection.filter(obj => id == obj.id).length > 0;
+  }
+
+  handleCancel = (e) => {
+    console.log(e);
+    this.isVisible = false;
+  }
+  openModal() {
+    if (this.selection) {
+      this.isVisible = true;
+    } else {
+      this._message.error('请选择列数据');
     }
   }
 
