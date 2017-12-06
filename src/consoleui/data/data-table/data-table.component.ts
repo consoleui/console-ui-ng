@@ -75,7 +75,8 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
     }
 
     let chgData: SimpleChange = changes['data'];
-    if (chgData && chgData.isFirstChange()) {
+    // if (chgData && chgData.isFirstChange()) {
+      if (chgData) {
       this._refreshSel();
     }
   }
