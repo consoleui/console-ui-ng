@@ -71,6 +71,17 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
     // throw new Error("Method not implemented.");
     let chgSelection: SimpleChange = changes['selection'];
     if (chgSelection && chgSelection.isFirstChange()) {
+      this._refreshSel();
+    }
+
+    let chgData: SimpleChange = changes['data'];
+    if (chgData && chgData.isFirstChange()) {
+      this._refreshSel();
+    }
+  }
+
+  _refreshSel() {
+    if (this.data && this.data.length > 0) {
       this.data.forEach(row => {
         row.checked = this.rowChecked(row);
       });
