@@ -6,13 +6,15 @@
     <input type="file" class="form-control-file" name="file" [multiple]="multiple" (change)="fileSelected($event)">
   </div>
   <button type="button" *ngIf="!auto" [disabled]="!hasFiles()" (click)="upload()" class="btn btn-info">开始上传</button>
-  <button type="button" class="btn btn-warning">取消上传</button>
-  <button type="button" class="btn btn-danger">移除</button>
+  <button type="button" class="btn btn-warning" [disabled]="!uploading">取消上传</button>
+  <button type="button" class="btn btn-danger" [disabled]="!hasFiles()" (click)="removeAll()">移除全部</button>
 
-  <ul *ngIf="hasFiles" class="file-list">
+  <ul *ngIf="hasFiles()" class="file-list">
     <li *ngFor="let f of files" class="file-item">
       <i [class]="'fa fa-file-'+getIcon(f)"></i>
       <span>{{f.name}}</span>
+
+      <span class="item-remove" (click)="removeItem(f)">✕</span>
     </li>
   </ul>
 </ng-container>

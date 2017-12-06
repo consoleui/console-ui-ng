@@ -1,5 +1,5 @@
-import {
-  Component, OnInit, Input, Output, EventEmitter,
+import { Component, OnInit, Input, Output, EventEmitter,
+  OnChanges, SimpleChanges, SimpleChange,
   Directive,
   ContentChild, ContentChildren, TemplateRef, AfterContentInit,
   QueryList
@@ -15,7 +15,7 @@ import { ColTplDirective } from './col-tpl.directive';
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.scss']
 })
-export class DataTableComponent implements OnInit, AfterContentInit {
+export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
   @Input() columns: Column[];
   @Input() data: any[];
   @Input() pagination: CuiPagination;
@@ -43,6 +43,10 @@ export class DataTableComponent implements OnInit, AfterContentInit {
   columnsVisible: Column[];
 
   colTpls = {};
+
+  _allChecked;
+  _indeterminate;
+
   constructor() { }
 
   get isMultipleSelect() {
@@ -62,10 +66,23 @@ export class DataTableComponent implements OnInit, AfterContentInit {
     });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    // console.log(changes);
+    // throw new Error("Method not implemented.");
+    let chgSelection: SimpleChange = changes['selection'];
+    if (chgSelection && chgSelection.isFirstChange()) {
+      this.data.forEach(row => {
+        row.checked = this.rowChecked(row);
+      });
+      this._refreshStatus(false);
+    }
+  }
+
   fireReload() {
     this.reload.emit(this.pagination);
   }
 
+  // 过时的
   selectAll() {
     if (!this.isMultipleSelect) {
       return;
@@ -84,6 +101,7 @@ export class DataTableComponent implements OnInit, AfterContentInit {
     this.select.emit(this.selection.map(it => it['id']));
   }
 
+  // 过时的
   selectItem(item, checked) {
     if (this.isMultipleSelect) {
       let selection = [];
@@ -121,6 +139,31 @@ export class DataTableComponent implements OnInit, AfterContentInit {
       return this.selection.findIndex(it => it == row) >= 0;
     }
     return false;
+  }
+
+  _refreshStatus(emit: boolean = true) {
+    const allChecked = this.data.every(value => value.checked === true);
+    const allUnChecked = this.data.every(value => !value.checked);
+    this._allChecked = allChecked;
+    this._indeterminate = (!allChecked) && (!allUnChecked);
+    // this._disabledButton = !this._dataSet.some(value => value.checked);
+    // this._checkedNumber = this._dataSet.filter(value => value.checked).length;
+
+    this.selection = this.data.filter(value => value.checked);
+    if (emit) {
+      this.selectionChange.emit(this.selection);
+      // 过时的
+      this.select.emit(this.selection.map(it => it['id']));
+    }
+  }
+
+  checkAll(value) {
+    if (value) {
+      this.data.forEach(data => data.checked = true);
+    } else {
+      this.data.forEach(data => data.checked = false);
+    }
+    this._refreshStatus();
   }
 
 }

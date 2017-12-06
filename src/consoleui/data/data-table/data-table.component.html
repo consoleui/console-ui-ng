@@ -14,51 +14,54 @@
     </div>
 </div>
 <div class="cui-data-table-wrap">
-    <table class="table">
-        <thead>
-            <tr>
-                <th *ngIf="!!selectType" style="width: 40px;" class="align-middle">
-                    <!-- <input *ngIf="selectType=='checkbox'" type="checkbox" name="toggleSelect" value="" [checked]="isSelectAll" (change)="selectAll()"/> -->
-                    <cui-checkbox *ngIf="selectType=='checkbox'" name="toggleSelect" [binary]="true" [(ngModel)]="isSelectAll" (change)="selectAll()"></cui-checkbox>
-                    <span *ngIf="selectType=='radio'"></span>
-                </th>
-                <th *ngFor="let col of columnsVisible" [ngStyle]="col.style" [ngClass]="col.styleClass">{{col.title || col.name || col.data | uppercase}}</th>
-                <th *ngIf="!!rowActions" class="text-right tb-nowrap">{{ rowActionTitle || '操作'}}</th>
-            </tr>
-        </thead>
-        <tbody *ngIf="data && data.length > 0">
-            <tr *ngFor="let row of data">
-                <!-- *ngIf="data && data.length > 0" -->
-                <td *ngIf="!!selectType" class="align-middle">
-                    <!-- <input type="{{selectType}}" name="ids" value="{{row['id']}}" #ids [checked]="isSelectAll || rowChecked(row)" (change)="selectItem(row, ids.checked)"/> -->
-                    <cui-checkbox *ngIf="selectType=='checkbox'" name="ids" [value]="row['id']" #ids [binary]="true" [checked]="isSelectAll || rowChecked(row)" (change)="selectItem(row, ids.checked)"></cui-checkbox>
-                    <cui-radio *ngIf="selectType=='radio'" name="ids" value="{{row['id']}}" #ids (change)="selectItem(row, ids.checked)"></cui-radio>
-                </td>
-                <td *ngFor="let col of columnsVisible" [ngStyle]="col.style" [ngClass]="col.styleClass">
-                    <div *ngIf="!!col.data && !colTpls[col.tpl]">{{row | objectPath: col.data}}</div>
-                    <ng-container *ngIf="!!colTpls[col.tpl]" [ngTemplateOutlet]="colTpls[col.tpl]" [ngOutletContext]="{row: row}"></ng-container>
-                </td>
-                <td class="text-right tb-nowrap" *ngIf="!!rowActions">
-                    <ng-container [ngTemplateOutlet]="rowActions" [ngOutletContext]="{row: row}"></ng-container>
-                </td>
-            </tr>
-        </tbody>
-        <tfoot *ngIf="data && data.length > 0">
-            <tr>
-                <td *ngIf="!!selectType" class="align-middle">
-                    <!-- <input *ngIf="selectType=='checkbox'" type="checkbox" class="my-2" name="toggleSelect" value="" [checked]="isSelectAll" (change)="selectAll()"/> -->
-                    <cui-checkbox *ngIf="selectType=='checkbox'" name="toggleSelect" [binary]="true" [(ngModel)]="isSelectAll" (change)="selectAll()"></cui-checkbox>
-                </td>
-                <td [attr.colspan]='columnsVisible.length + (!!rowActions ? 1 : 0)'>
-                    <!-- <ng-content select=".action-group"></ng-content> -->
-                    <div class="action-group" *ngIf="actionGroup">
-                        <ng-container [ngTemplateOutlet]="actionGroup"></ng-container>
-                    </div>
-                    <cui-pagination class="pull-right datatables-pagination my-2" *ngIf="pagination" [pagination]="pagination" (goto)="fireReload()"></cui-pagination>
-                </td>
-            </tr>
-        </tfoot>
-    </table>
+<table class="table">
+  <thead>
+    <tr>
+      <th *ngIf="!!selectType" style="width: 40px;" class="align-middle">
+        <!-- <input *ngIf="selectType=='checkbox'" type="checkbox" name="toggleSelect" value="" [checked]="isSelectAll" (change)="selectAll()"/> -->
+        <!-- <cui-checkbox *ngIf="selectType=='checkbox'" name="toggleSelect" [binary]="true" [(ngModel)]="isSelectAll" (change)="selectAll()"></cui-checkbox> -->
+        <label nz-checkbox [(ngModel)]="_allChecked" [nzIndeterminate]="_indeterminate" (ngModelChange)="checkAll($event)"></label>
+        <span *ngIf="selectType=='radio'"></span>
+      </th>
+      <th *ngFor="let col of columnsVisible" [ngStyle]="col.style" [ngClass]="col.styleClass">{{col.title || col.name || col.data | uppercase}}</th>
+      <th *ngIf="!!rowActions" class="text-right tb-nowrap">{{ rowActionTitle || '操作'}}</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="data && data.length > 0">
+    <tr *ngFor="let row of data" > <!-- *ngIf="data && data.length > 0" -->
+      <td *ngIf="!!selectType" class="align-middle">
+        <!-- <input type="{{selectType}}" name="ids" value="{{row['id']}}" #ids [checked]="isSelectAll || rowChecked(row)" (change)="selectItem(row, ids.checked)"/> -->
+        <!-- <cui-checkbox *ngIf="selectType=='checkbox'" name="ids" [value]="row['id']" #ids [binary]="true" [checked]="isSelectAll || rowChecked(row)"
+          (change)="selectItem(row, ids.checked)"></cui-checkbox> -->
+        <label nz-checkbox [(ngModel)]="row.checked" (ngModelChange)="_refreshStatus($event)"></label>
+        <cui-radio *ngIf="selectType=='radio'" name="ids" value="{{row['id']}}" #ids  (change)="selectItem(row, ids.checked)"></cui-radio>
+      </td>
+      <td *ngFor="let col of columnsVisible" [ngStyle]="col.style" [ngClass]="col.styleClass">
+        <div *ngIf="!!col.data && !colTpls[col.tpl]">{{row | objectPath: col.data}}</div>
+        <ng-container *ngIf="!!colTpls[col.tpl]" [ngTemplateOutlet]="colTpls[col.tpl]" [ngOutletContext]="{row: row}"></ng-container>
+      </td>
+      <td class="text-right tb-nowrap" *ngIf="!!rowActions">
+        <ng-container [ngTemplateOutlet]="rowActions" [ngOutletContext]="{row: row}"></ng-container>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot *ngIf="data && data.length > 0">
+    <tr>
+      <td *ngIf="!!selectType" class="align-middle">
+        <!-- <input *ngIf="selectType=='checkbox'" type="checkbox" class="my-2" name="toggleSelect" value="" [checked]="isSelectAll" (change)="selectAll()"/> -->
+        <!-- <cui-checkbox *ngIf="selectType=='checkbox'" name="toggleSelect" [binary]="true" [(ngModel)]="isSelectAll" (change)="selectAll()"></cui-checkbox> -->
+        <label nz-checkbox [(ngModel)]="_allChecked" [nzIndeterminate]="_indeterminate" (ngModelChange)="checkAll($event)"></label>
+      </td>
+      <td [attr.colspan]='columnsVisible.length + (!!rowActions ? 1 : 0)'>
+        <!-- <ng-content select=".action-group"></ng-content> -->
+        <div class="action-group" *ngIf="actionGroup">
+          <ng-container [ngTemplateOutlet]="actionGroup"></ng-container>
+        </div>
+        <cui-pagination class="pull-right datatables-pagination my-2" *ngIf="pagination" [pagination]="pagination" (goto)="fireReload()"></cui-pagination>
+      </td>
+    </tr>
+  </tfoot>
+</table>
 
     <div class="data-table-no-data-wrap" *ngIf="!loading && (!data || data.length == 0)">
         <div class="data-table-no-data py-4 my-4 text-center">

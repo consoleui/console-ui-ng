@@ -21,9 +21,10 @@ export class FileuploadComponent implements OnInit {
 
   @Output() uploadComplete = new EventEmitter();
 
-  public files: File[] = [];
-  public progress: number = 0;
-  public speed: number = 0;
+  files: File[] = [];
+  progress: number = 0;
+  speed: number = 0;
+  uploading: boolean = false;
 
   msgs;
   img;
@@ -117,12 +118,14 @@ export class FileuploadComponent implements OnInit {
         }
 
         // clear
+        this.uploading = false;
       }
     };
 
     xhr.open(this.method, this.url, true);
     xhr.withCredentials = this.withCredentials;
 
+    this.uploading = true;
     xhr.send(formData);
   }
 
@@ -184,5 +187,13 @@ export class FileuploadComponent implements OnInit {
       return fileName.substring(fileName.lastIndexOf('.') + 1);
     }
     return null;
+  }
+
+  removeItem(item) {
+    this.files = this.files.filter(it => it != item);
+  }
+
+  removeAll() {
+    this.files = [];
   }
 }
