@@ -7,6 +7,7 @@ import { CuiCoreModule } from '../../core/core.module';
 import { DataTableComponent } from './data-table.component';
 import { PaginationModule } from '../pagination/pagination.module';
 import { ColTplDirective } from './col-tpl.directive';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { ColTplDirective } from './col-tpl.directive';
     FormsModule,
     CuiCoreModule,
     CuiFormsModule,
-    PaginationModule
+    PaginationModule,
+    NgZorroAntdModule,
   ],
   declarations: [DataTableComponent, ColTplDirective],
   exports: [DataTableComponent, ColTplDirective]
