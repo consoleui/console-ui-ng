@@ -17,4 +17,7 @@ export class TreeCheckboxSelectDemoComponent implements OnInit {
     this.treeDataApi.getNodes().subscribe(nodes => this.nodes = nodes);
   }
 
+  selectionChange(nodes) {
+    console.log(nodes);
+  }
 }
