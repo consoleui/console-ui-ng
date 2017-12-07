@@ -1,199 +1,101 @@
+import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
+import { FileItem } from './file-upload/file-item.class';
+import { FileUploader, ParsedResponseHeaders } from './file-upload/file-uploader.class';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
-  selector: 'cui-fileupload',
-  templateUrl: './fileupload.component.html',
-  styleUrls: ['./fileupload.component.scss']
+    selector: 'cui-fileupload',
+    templateUrl: './fileupload.component.html',
+    styleUrls: ['./fileupload.component.scss']
 })
+
 export class FileuploadComponent implements OnInit {
-  @Input() name: string;
-  @Input() url: string;
-  @Input() method: string = 'POST';
-  @Input() withCredentials: boolean = true;
-  @Input() multiple: boolean;
-  @Input() auto: boolean;
-  // @Input() type: 'doc' | 'video' | 'image' | 'file';
-  @Input() accept: string; // 'image/*'
-  @Input() mode: 'advanced' | 'doc' | 'video' | 'image' | 'zip' | 'file' = 'advanced';
+    @Input() name: string;
+    @Input() url: string;
+    @Input() method: string = 'POST';
+    @Input() withCredentials: boolean = true;
+    @Input() multiple: boolean;
+    @Input() auto: boolean;
+    // @Input() type: 'doc' | 'video' | 'image' | 'file';
+    @Input() accept: string; // 'image/*'
+    @Input() mode: 'advanced' | 'doc' | 'video' | 'image' | 'zip' | 'file' = 'advanced';
 
-  @Input() imageHolder: string;
+    @Input() imageHolder: string;
 
-  @Output() uploadComplete = new EventEmitter();
+    @Output() uploadComplete = new EventEmitter();
 
-  files: File[] = [];
-  progress: number = 0;
-  speed: number = 0;
-  uploading: boolean = false;
+    public uploader: FileUploader; // = new FileUploader({url: URL});
+    public results: any[];
 
-  msgs;
-  img;
+    constructor(private sanitizer: DomSanitizer) { }
 
-  constructor(private sanitizer: DomSanitizer) { }
+    ngOnInit() {
+        this.uploader = new FileUploader({
+            url: this.url,
+            itemAlias: this.name,
+            autoUpload: this.auto,
+        });
 
-  ngOnInit() {
-  }
+        // this.uploader.
 
-  fileSelected(event) {
-    let msgs = [];
-    if (!this.multiple) {
-      this.files = [];
-    }
+        this.uploader.onSuccessItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => {
+            // console.log(JSON.parse(response));
+        };
 
-    console.log('fileupload selected event:', event);
+        this.uploader.onCompleteAll = () => {
+            this.refreshResult();
+        };
 
-    let files = event.dataTransfer ? event.dataTransfer.files : event.target.files;
-    for (let file of files) {
-      // validate file
-      console.log('selected file:', file);
-      /*this.readBlobAsDataURL(file, (url) => {
-        this.img = url;
-      });*/
-      if (this.isImage(file)) {
-        file.objectURL = this.getSafeUrl(file);
-      }
-
-      // file.icon = this.getIcon(file);
-
-      this.files.push(file);
-    }
-
-    if (this.hasFiles() && this.auto) {
-      this.upload();
-    }
-  }
-
-  hasFiles(): boolean {
-    return this.files && this.files.length > 0;
-  }
-
-  upload() {
-    this.uploadFile();
-  }
-
-  private uploadFile() {
-    let msgs = [];
-    let xhr = new XMLHttpRequest();
-    let formData = new FormData();
-
-    for (let file of this.files) {
-      formData.append(this.name, file, file.name);
-    }
-
-    let ol = 0;
-    let ot = new Date().getTime();
-    xhr.upload.addEventListener('progress', (e: ProgressEvent) => {
-      if (e.lengthComputable) {
-        this.progress = Math.round(e.loaded * 100 / e.total);
-
-        let perLoaded = e.loaded - ol;
-        ol = e.loaded;
-
-        let nt = new Date().getTime();
-        let perTime = (nt - ot) / 1000;
-        ot = nt;
-
-        this.speed = perLoaded / perTime;
-      }
-    }, false);
-
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState === 4) {
-        // this.progress = 0;
-
-        if (xhr.status >= 200 && xhr.status < 300) {
-          // upload ok
-          try {
-            let result = JSON.parse(xhr.response);
-            console.log('file upload result', result);
-            this.msgs = JSON.stringify(result);
-            this.uploadComplete.emit(result);
-          } catch (e) {
-
-          }
-          // console.log('Upload success');
-        } else {
-          // upload error
-          console.error('Upload error');
+        if (!this.multiple) {
+            this.uploader.onAfterAddingFile = (fileItem: FileItem) => {
+                let ofs = this.uploader.queue.filter(it => it != fileItem);
+                ofs.forEach(it => {
+                    this.uploader.removeFromQueue(it);
+                });
+            };
         }
-
-        // clear
-        this.uploading = false;
-      }
-    };
-
-    xhr.open(this.method, this.url, true);
-    xhr.withCredentials = this.withCredentials;
-
-    this.uploading = true;
-    xhr.send(formData);
-  }
-
-  /* readBlobAsDataURL(blob, callback) {
-    let a = new FileReader();
-    a.onload = function(e: Event) {callback((e.target as FileReader).result); };
-    a.readAsDataURL(blob);
-  } */
-
-  isImage(file: File): boolean {
-    return /^image\//.test(file.type);
-  }
-
-  getSafeUrl(file: File): SafeUrl {
-    return this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file));
-  }
-
-  getIcon(file: File) {
-    // TODO 改成正则匹配表
-    const iconMap = {
-      // 'file-o': [],
-      'zip-o': ['zip', 'rar', 'tar'],
-      'excel-o': ['xls', 'xlsx'],
-      'image-o': ['jpg', 'jpeg', 'png', 'gif', 'bmp'],
-      'pdf-o': ['pdf'],
-      'word-o': ['doc', 'docx'],
-      'text-o': ['txt', 'md', 'adoc'],
-      'audio-o': ['mp3'],
-      'vedio-o': ['mp4', 'rm'],
-      'code-o': ['html', 'java', 'js'],
-    };
-    let defaultIcon = 'o';
-
-    let iconMapFlat = {};
-    for (let key of Object.keys(iconMap)) {
-      iconMap[key].forEach(type => {
-        iconMapFlat[type] = key;
-      });
     }
 
-    let ext = this.getExpandedName(file).toLowerCase();
-    let icon = iconMapFlat[ext] || defaultIcon;
-    return icon;
-  }
-
-  getExpandedName(file: File | string): string {
-    let fileName = '';
-    if (file instanceof File) {
-      fileName = file.name;
-    } else {
-      fileName = file;
+    hasFiles() {
+        return this.uploader && this.uploader.queue.length > 0;
     }
 
-    if (fileName.includes('\\') || fileName.includes('/')) {
-      fileName = fileName.substring(fileName.lastIndexOf('\\') + 1).substring(fileName.lastIndexOf('/') + 1);
+    hasNotUploadFiles() {
+        return this.uploader && this.uploader.getNotUploadedItems().length > 0;
     }
 
-    if (fileName && fileName.indexOf('.') > 0) {
-      return fileName.substring(fileName.lastIndexOf('.') + 1);
+    isImage(file: File): boolean {
+        return /^image\//.test(file.type);
     }
-    return null;
-  }
 
-  removeItem(item) {
-    this.files = this.files.filter(it => it != item);
-  }
+    getSafeUrl(file: File): SafeUrl {
+        return this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file));
+    }
 
-  removeAll() {
-    this.files = [];
-  }
+    removeFromQueue(item: FileItem) {
+        this.uploader.removeFromQueue(item);
+        this.refreshResult();
+    }
+
+    clearQueue() {
+        this.uploader.clearQueue();
+        this.refreshResult();
+    }
+
+    refreshResult() {
+        this.results = this.uploader.queue.filter(item => item.isSuccess)
+            .map(item => {
+                if (item._xhr && item._xhr.response) {
+                    try {
+                        return JSON.parse(item._xhr.response);
+                    } catch (e) {
+                        return null;
+                    }
+                } else {
+                    return null;
+                }
+            }).filter(item => item !== null);
+
+        this.uploadComplete.emit(this.multiple ? this.results : (this.results && this.results.length > 0 ? this.results[0] : undefined));
+    }
 }

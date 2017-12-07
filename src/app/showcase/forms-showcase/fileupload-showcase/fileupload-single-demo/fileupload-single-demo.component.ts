@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FileuploadSingleDemoComponent implements OnInit {
 
+  result;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  onFileUpload(result) {
+    this.result = result;
+  }
 }

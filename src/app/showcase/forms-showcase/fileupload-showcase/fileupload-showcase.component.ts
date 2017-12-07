@@ -20,7 +20,7 @@ export class FileuploadShowcaseComponent implements OnInit {
   }
 
   initCodes() {
-    let demos = ['custom', 'multiple', 'simple', 'single'];
+    let demos = ['cover', 'custom', 'multiple', 'simple', 'single'];
     demos.forEach(demo => {
       let key = demo;
       demo = `fileupload-${demo}-demo`;

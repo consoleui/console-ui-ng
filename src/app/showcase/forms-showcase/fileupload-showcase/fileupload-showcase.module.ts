@@ -7,6 +7,7 @@ import { FileuploadSimpleDemoComponent } from './fileupload-simple-demo/fileuplo
 import { FileuploadMultipleDemoComponent } from './fileupload-multiple-demo/fileupload-multiple-demo.component';
 import { FileuploadSingleDemoComponent } from './fileupload-single-demo/fileupload-single-demo.component';
 import { FileuploadCustomDemoComponent } from './fileupload-custom-demo/fileupload-custom-demo.component';
+import { FileuploadCoverDemoComponent } from './fileupload-cover-demo/fileupload-cover-demo.component';
 
 const routes: Routes = [
   { path: '', component: FileuploadShowcaseComponent }
@@ -22,7 +23,8 @@ const routes: Routes = [
     FileuploadSimpleDemoComponent,
     FileuploadMultipleDemoComponent,
     FileuploadSingleDemoComponent,
-    FileuploadCustomDemoComponent
+    FileuploadCustomDemoComponent,
+    FileuploadCoverDemoComponent
   ]
 })
 export class FileuploadShowcaseModule { }

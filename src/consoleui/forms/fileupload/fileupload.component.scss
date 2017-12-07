@@ -2,7 +2,6 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    
     .file-item {
         margin: 0.125rem 0;
         padding: 0.5rem 0.75rem;
@@ -16,5 +15,59 @@
             top: 0.5rem;
             cursor: pointer;
         }
+
+        .progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            -moz-opacity: 0.5;
+            opacity: 0.5;
+        }
+
+        &.upload-error {
+            border: 1px dashed #cc6666;
+        }
+
+        &.upload-success {
+            border: 1px dashed #28a745;
+        }
+    }
+}
+
+.input-progress {
+    width: 100%;
+    height: 100%;
+    background: none;
+    filter: alpha(Opacity=80);
+    -moz-opacity: 0.5;
+    opacity: 0.5;
+}
+
+.input-placeholder {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 0.5rem 0.75rem;
+}
+
+.image-holder-wrapper {
+    width: 160px;
+    height: 90px;
+    border: 1px dashed #ccc;
+
+    .image-holder {
+        width: 160px;
+        height: 90px;
+        font-size: 90px;
+        overflow: hidden;
+    }
+
+    .progress {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        -moz-opacity: 0.5;
+        opacity: 0.5;
     }
 }

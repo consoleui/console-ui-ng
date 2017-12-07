@@ -1,81 +1,73 @@
+<ng-container *ngIf="mode == 'file' && multiple">
+    <div class="btn btn-primary cui-fileupload-choose">
+        <span class="fa fa-plus"></span>
+        <span>选择文件...</span>
+        <input type="file" class="form-control-file" name="file" [multiple]="multiple" cuiFileSelect [uploader]="uploader">
+    </div>
+    <ng-container *ngIf="!auto">
+        <button type="button" [disabled]="!hasNotUploadFiles()" (click)="uploader.uploadAll()" class="btn btn-info">开始上传</button>
+        <button type="button" class="btn btn-warning" [disabled]="!uploader.isUploading" (click)="uploader.cancelAll()">取消上传</button>
+        <button type="button" class="btn btn-danger" [disabled]="!hasFiles()" (click)="clearQueue()">移除全部</button>
+    </ng-container>
 
-<ng-container *ngIf="mode == 'file'">
-  <div class="btn btn-primary cui-fileupload-choose">
-    <span class="fa fa-plus"></span>
-    <span>选择文件...</span>
-    <input type="file" class="form-control-file" name="file" [multiple]="multiple" (change)="fileSelected($event)">
-  </div>
-  <button type="button" *ngIf="!auto" [disabled]="!hasFiles()" (click)="upload()" class="btn btn-info">开始上传</button>
-  <button type="button" class="btn btn-warning" [disabled]="!uploading">取消上传</button>
-  <button type="button" class="btn btn-danger" [disabled]="!hasFiles()" (click)="removeAll()">移除全部</button>
+    <ul *ngIf="hasFiles()" class="file-list">
+        <li *ngFor="let item of uploader.queue" [ngClass]="{'file-item': true, 'upload-error': item.isError, 'upload-success': item.isSuccess}">
+            <!-- <i [class]="'fa fa-file-'+getIcon(f)"></i> -->
+            <span><strong>{{ item?.file?.name }}</strong></span>
 
-  <ul *ngIf="hasFiles()" class="file-list">
-    <li *ngFor="let f of files" class="file-item">
-      <i [class]="'fa fa-file-'+getIcon(f)"></i>
-      <span>{{f.name}}</span>
-
-      <span class="item-remove" (click)="removeItem(f)">✕</span>
-    </li>
-  </ul>
+            <span *ngIf="item.isError">上传失败</span>
+            <span *ngIf="item.isSuccess"><!-- 上传成功 --></span>
+            <div class="progress" style="height: 3px;">
+                <div class="progress-bar progress-bar-striped" [ngClass]="{'bg-success': item.isSuccess, 'bg-danger': item.isError}" [style.width]="item.progress+'%'"></div>
+            </div>
+            <span class="item-remove" (click)="removeFromQueue(item)">✕</span>
+        </li>
+    </ul>
 </ng-container>
 
-<div class="input-group cui-fileupload-choose" *ngIf="mode == 'video'">
-  <!-- <input type="text" class="form-control" [value]="hasFiles() ? files[0].name : ''" placeholder="Search for..." aria-label="Search for..."> -->
-  <div class="form-control p-0" style="position: relative;">
-    <div *ngIf="hasFiles()" class="progress rounded-0" style="width: 100%; height: 100%; background: none;filter:alpha(Opacity=80);-moz-opacity:0.5;opacity: 0.5;">
-      <div class="progress-bar progress-bar-striped" [ngClass]="{'bg-success': progress==100}" [style.width]="progress+'%'"></div>
+<ng-container *ngIf="mode == 'file' && !multiple">
+    <div class="input-group cui-fileupload-choose">
+        <div class="form-control p-0" style="position: relative;">
+            <div *ngIf="hasFiles()" class="progress rounded-0 input-progress">
+                <div *ngIf="!uploader.queue[0]?.isError" class="progress-bar progress-bar-striped" [ngClass]="{'bg-success': uploader.queue[0]?.isSuccess}" [style.width]="uploader.queue[0]?.progress+'%'"></div>
+                <div *ngIf="uploader.queue[0]?.isError" class="progress-bar progress-bar-striped" [ngClass]="{'bg-danger': uploader.queue[0]?.isError}" [style.width]="'100%'"></div>
+            </div>
+            <div class="input-placeholder">
+                <span *ngIf="!hasFiles()">请选择文件...</span>
+                <span *ngIf="hasFiles()">{{uploader.queue[0]?.file?.name}}</span>
+            </div>
+        </div>
+        <span class="input-group-btn">
+            <div class="btn btn-primary">
+            <span class="fa fa-plus"></span>
+            <span>选择文件</span>
+            </div>
+        </span>
+        <input type="file" class="form-control-file" name="file" cuiFileSelect [uploader]="uploader">
     </div>
-    <div style="position: absolute; width: 100%; height: 100%; padding: 0.5rem 0.75rem;">
-      <span *ngIf="!hasFiles()">请选择文件...</span>
-      <span *ngIf="hasFiles()">{{files[0].name}}</span>
+    <div *ngIf="hasFiles()">
+        <span class="mr-3">文件大小: <strong>{{uploader.queue[0]?.file?.size | cuiFilesizeFormat}}</strong></span>
+        <span class="mr-3">进度: <strong>{{uploader.queue[0]?.progress}}%</strong></span>
+        <!-- <span class="mr-3">速度: <strong>{{speed | cuiFilesizeFormat}}/s</strong></span> -->
+        <span *ngIf="uploader.queue[0]?.isError" class="mr-3">状态: <strong>上传失败</strong></span>
+        <span *ngIf="uploader.queue[0]?.isUploading" class="mr-3">状态: <strong>正在上传</strong></span>
+        <span *ngIf="uploader.queue[0]?.isSuccess" class="mr-3">状态: <strong>上传成功</strong></span>
     </div>
-  </div>
-  <span class="input-group-btn">
-    <div class="btn btn-primary">
-      <span class="fa fa-plus"></span>
-      <span>选择文件</span>
+</ng-container>
+
+<ng-container *ngIf="mode == 'image' && !multiple">
+    <div class="cui-fileupload-choose image-holder-wrapper">
+        <span *ngIf="!hasFiles() && !imageHolder" class="fa fa-image image-holder text-center"></span>
+        <span *ngIf="!hasFiles() && imageHolder">
+            <img [src]="imageHolder" [alt]="imageHolder" width="100%">
+        </span>
+        <span *ngIf="hasFiles() && isImage(uploader.queue[0]?._file)">
+            <!-- {{log(uploader.queue)}} -->
+            <img [src]="getSafeUrl(uploader.queue[0]?._file)" [alt]="uploader.queue[0]?.file?.name" width="100%">
+        </span>
+        <div *ngIf="hasFiles()" class="progress" style="height: 3px;">
+            <div class="progress-bar progress-bar-striped" [ngClass]="{'bg-success': uploader.progress==100}" [style.width]="uploader.progress+'%'"></div>
+        </div>
+        <input accept="image/*" type="file" class="form-control-file" name="files" cuiFileSelect [uploader]="uploader">
     </div>
-  </span>
-  <input type="file" class="form-control-file" name="file" [multiple]="multiple" (change)="fileSelected($event)">
-</div>
-<!-- <div class="d-flex justify-content-between" *ngIf="mode == 'video'"> -->
-<div *ngIf="mode == 'video' && hasFiles()">
-  <span class="mr-3">文件大小: <strong>{{files[0].size | cuiFilesizeFormat}}</strong></span>
-  <span class="mr-3">进度: <strong>{{progress}}%</strong></span>
-  <span class="mr-3">速度: <strong>{{speed | cuiFilesizeFormat}}/s</strong></span>
-</div>
-
-<div class="cui-fileupload-choose" *ngIf="mode == 'image'" style="width: 160px; height: 90px; border: 1px solid #ccc;">
-  <span *ngIf="!hasFiles() && !imageHolder" class="fa fa-image image-holder text-center"></span>
-  <span *ngIf="!hasFiles() && imageHolder">
-      <img [src]="imageHolder" [alt]="imageHolder" width="100%">
-  </span>
-  <span *ngIf="hasFiles()">
-      <img *ngIf="isImage(files[0])" [src]="files[0].objectURL" [alt]="files[0].name" width="100%">
-  </span>
-  <div *ngIf="hasFiles()" class="progress" style="height: 3px;">
-    <div class="progress-bar progress-bar-striped" [ngClass]="{'bg-success': progress==100}" [style.width]="progress+'%'"></div>
-  </div>
-  <input accept="image/*" type="file" class="form-control-file" name="file" [multiple]="multiple" (change)="fileSelected($event)">
-</div>
-
-
-<!-- <button type="button" *ngIf="!auto" [disabled]="!hasFiles()" (click)="upload()" class="btn btn-primary">上传</button> -->
-<!--
-<div *ngIf="hasFiles()">
-  <div *ngFor="let file of files; let i = index;">
-    <dl>
-      <dt>{{i}}</dt>
-      <dd>{{file.name}}</dd>
-      <dd>{{file.size}}</dd>
-      <dd>{{progress}}</dd>
-      <dd><img *ngIf="isImage(file)" [src]="file.objectURL" [alt]="file.name" width="120"></dd>
-    </dl>
-  </div>
-</div>
-
-<div class="progress">
-  <div class="progress-bar progress-bar-striped" [style.width]="progress+'%'"></div>
-</div>
--->
-<!-- {{msgs}} -->
+</ng-container>

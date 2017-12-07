@@ -21,14 +21,14 @@ export class TreeInterceptSelectDemoComponent implements OnInit {
   }
 
   onNodeSelect(e) {
-    console.log(e.node);
+    // console.log(e.node);
     this.propagateDisabled(e.node, true);
   }
 
 
 
   onNodeUnselect(e) {
-    console.log('unselect', e.node);
+    // console.log('unselect', e.node);
     this.propagateDisabled(e.node, false);
   }
 
@@ -49,5 +49,6 @@ export class TreeInterceptSelectDemoComponent implements OnInit {
 
   onSelectionChange(selection) {
     this.selection = selection;
+    console.log(selection);
   }
 }

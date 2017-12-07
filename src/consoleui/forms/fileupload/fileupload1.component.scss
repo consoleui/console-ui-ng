@@ -1,0 +1,20 @@
+.file-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    .file-item {
+        margin: 0.125rem 0;
+        padding: 0.5rem 0.75rem;
+        border: 1px dashed #cccccc;
+        border-radius: 2px;
+        position: relative;
+
+        .item-remove {
+            position: absolute;
+            right: 0.75rem;
+            top: 0.5rem;
+            cursor: pointer;
+        }
+    }
+}
