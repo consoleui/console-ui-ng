@@ -9,7 +9,7 @@
 
   <span [ngClass]="{'cui-dropdown-label':true,'cui-dropdown-label-empty':!label}">{{label||'empty'}}</span>
   <div class="cui-dropdown-trigger dropdown-toggle"></div>
-  <div *ngIf="allowClear && value" class="cui-dropdown-clear"><i class="fa fa-close"></i></div>
+  <div *ngIf="allowClear && value" class="cui-dropdown-clear" (click)="clearValue()"><i class="fa fa-close"></i></div>
 
   <div #panel [ngClass]="'cui-dropdown-panel hidden'" [style.display]="panelVisible ? 'block' : 'none'"
       [ngStyle]="panelStyle" [class]="panelStyleClass">
@@ -19,7 +19,7 @@
       <span class="fa fa-search"></span>
     </div>
     <div #itemswrapper class="cui-dropdown-items-wrapper" [style.max-height]="scrollHeight||'auto'" (click)="onItemClick()">
-        <cui-tree [config]="config" selectionMode="single" (selectionChange)="onSelectionChange($event)"></cui-tree>
+        <cui-tree #tree [config]="config" selectionMode="single" (selectionChange)="onSelectionChange($event)"></cui-tree>
     </div>
   </div>
 
