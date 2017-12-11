@@ -71,7 +71,7 @@ export class TreeSelectComponent implements OnInit, AfterViewInit, AfterViewChec
   public selectedOptionUpdated: boolean;
   public filterValue: string;
 
-
+  isClearClick: boolean = false;
 
   defaultOptions;
   open = false;
@@ -210,6 +210,11 @@ export class TreeSelectComponent implements OnInit, AfterViewInit, AfterViewChec
 
     this.selfClick = true;
 
+    if (this.isClearClick) {
+      this.isClearClick = false;
+      return;
+    }
+
     if (!this.itemClick) {
       this.focusViewChild.nativeElement.focus();
 
@@ -315,6 +320,7 @@ export class TreeSelectComponent implements OnInit, AfterViewInit, AfterViewChec
   }
 
   clearValue() {
+    this.isClearClick = true;
     if (this.tree) {
       this.tree.selection = [];
       this.value = undefined;
