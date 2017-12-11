@@ -8,8 +8,8 @@
   </div>
 
   <span [ngClass]="{'cui-dropdown-label':true,'cui-dropdown-label-empty':!label}">{{label||'empty'}}</span>
-  <div class="cui-dropdown-trigger dropdown-toggle">
-  </div>
+  <div class="cui-dropdown-trigger dropdown-toggle"></div>
+  <div *ngIf="allowClear && value" class="cui-dropdown-clear"></div>
 
   <div #panel [ngClass]="'cui-dropdown-panel hidden'" [style.display]="panelVisible ? 'block' : 'none'"
       [ngStyle]="panelStyle" [class]="panelStyleClass">

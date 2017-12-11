@@ -37,6 +37,7 @@ export class TreeSelectComponent implements OnInit, AfterViewInit, AfterViewChec
   @Input() inputId: string;
   @Input() dataKey: string;
   @Input() filterBy: string = 'label';
+  @Input() allowClear: boolean;
 
   @Output() onChange: EventEmitter<any> = new EventEmitter();
   @Output() onFocus: EventEmitter<any> = new EventEmitter();
