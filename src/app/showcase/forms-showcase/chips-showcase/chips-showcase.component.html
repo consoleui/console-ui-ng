@@ -1,0 +1,21 @@
+<cui-asciidoc [content]="introDoc"></cui-asciidoc>
+
+
+<section class="">
+  <article class="asciidoc">
+    <h2>示例</h2>
+  </article>
+
+  <ng-container *ngTemplateOutlet="demos"></ng-container>
+</section>
+
+<cui-asciidoc [content]="apiDoc"></cui-asciidoc>
+
+<ng-template #demos>
+  <cui-code-box id="chips-simple-demo" title="简单示例" [code]="codes['simple']">
+    <cui-chips-simple-demo demo></cui-chips-simple-demo>
+    <div intro>
+      <p></p>
+    </div>
+  </cui-code-box>
+</ng-template>

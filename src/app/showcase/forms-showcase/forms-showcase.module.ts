@@ -11,6 +11,7 @@ const routes: Routes = [
         path: 'fileupload',
         loadChildren: 'app/showcase/forms-showcase/fileupload-showcase/fileupload-showcase.module#FileuploadShowcaseModule'
       },
+      { path: 'chips', loadChildren: 'app/showcase/forms-showcase/chips-showcase/chips-showcase.module#ChipsShowcaseModule' },
     ]
   }
 ];

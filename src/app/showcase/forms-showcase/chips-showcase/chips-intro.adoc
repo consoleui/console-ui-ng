@@ -1,0 +1,43 @@
+= Chips 碎片输入
+
+碎片输入，数组类型的的属性输入，如关键词。可以是对象或简单类型（一般是字符串），可以结合延迟加载和下拉选项实现更复杂的效果。
+
+== 导入
+
+[source, js]
+----
+import { CuiFormsModule } from 'consoleui';
+----
+
+== 使用
+
+.简单示例
+[source, html]
+----
+<cui-chips [(ngModel)]="arrayValues"></cui-chips>
+----
+
+.自定义模板
+[source, html]
+----
+// 待完善
+----
+
+
+== 改进
+
+暂无
+
+== 特性
+
+=== Model Driven Forms
+
+暂无
+
+=== 自定义模板
+
+暂无
+
+=== 表单验证
+
+暂无
