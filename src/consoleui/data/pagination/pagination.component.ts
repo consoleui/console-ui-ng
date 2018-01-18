@@ -77,6 +77,7 @@ export class PaginationComponent implements OnInit {
       if (page > 0 && page <= this.pagination.totalPages) {
         this.pagination.number = page - 1;
         this.paginationChange.emit(this.pagination);
+        this.gotoPage();
       } else {
         this.totalPagesNumber = null;
       }
