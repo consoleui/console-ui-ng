@@ -12,7 +12,7 @@ export const RADIO_VALUE_ACCESSOR: any = {
 };
 
 @Component({
-  selector: 'cui-radio',
+  selector: 'cui-radio, [cui-radio]',
   templateUrl: './radio.component.html',
   styleUrls: ['./radio.component.scss'],
   providers: [RADIO_VALUE_ACCESSOR]
