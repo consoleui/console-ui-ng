@@ -20,6 +20,7 @@ export class ShowcaseLayoutSiderComponent implements OnInit {
       {title: 'Editor 富文本编辑器', routerLink: ['/showcase', 'forms', 'ueditor']},
       {title: 'FileUpload 文件上传', routerLink: ['/showcase', 'forms', 'fileupload']},
       {title: 'Chips 碎片输入框', routerLink: ['/showcase', 'forms', 'chips']},
+      {title: 'Radio 单选框', routerLink: ['/showcase', 'forms', 'radio']},
     ]},
     {title: 'Utils', children: [
       {title: 'Cropper 图片裁剪', routerLink: ['/showcase', 'cropper']},

@@ -12,12 +12,12 @@
 <label class="ui-radiobutton-label" (click)="select()" *ngIf="label">{{label}}</label>
 -->
 
-<label class="custom-control custom-radio">
+<div class="custom-control custom-radio" [ngClass]="{'custom-control-inline': inline}"
+(click)="handleClick()">
   <input #rb type="radio" class="custom-control-input"
       [attr.id]="inputId" [name]="name" [value]="value" [checked]="checked"
       [ngClass]="{'focus': focused}" [disabled]="disabled" [attr.tabindex]="tabindex"
       (focus)="onFocus($event)" (blur)="onBlur($event)" (change)="onChange($event)">
-  <span class="custom-control-indicator"></span>
-  <span class="custom-control-description" *ngIf="label">{{label}}</span>
+  <span class="custom-control-label" *ngIf="label">{{label}}</span>
   <ng-content></ng-content>
-</label>
+</div>

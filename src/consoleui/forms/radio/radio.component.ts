@@ -35,6 +35,8 @@ export class RadioComponent implements ControlValueAccessor, AfterViewInit {
 
   @Input() styleClass: string;
 
+  @Input() inline: boolean = false;
+
   @Output() onClick: EventEmitter<any> = new EventEmitter();
 
   @ViewChild('rb') inputViewChild: ElementRef;

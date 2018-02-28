@@ -12,6 +12,7 @@ const routes: Routes = [
         loadChildren: 'app/showcase/forms-showcase/fileupload-showcase/fileupload-showcase.module#FileuploadShowcaseModule'
       },
       { path: 'chips', loadChildren: 'app/showcase/forms-showcase/chips-showcase/chips-showcase.module#ChipsShowcaseModule' },
+      { path: 'radio', loadChildren: 'app/showcase/forms-showcase/radio-showcase/radio-showcase.module#RadioShowcaseModule' },
     ]
   }
 ];
