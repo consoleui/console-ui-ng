@@ -18,6 +18,6 @@
       [attr.id]="inputId" [name]="name" [value]="value" [checked]="checked"
       [ngClass]="{'focus': focused}" [disabled]="disabled" [attr.tabindex]="tabindex"
       (focus)="onFocus($event)" (blur)="onBlur($event)" (change)="onChange($event)">
-  <span class="custom-control-label" *ngIf="label">{{label}}</span>
+  <label class="custom-control-label">{{label}}</label>
   <ng-content></ng-content>
 </div>
