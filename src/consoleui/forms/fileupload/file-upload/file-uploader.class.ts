@@ -12,12 +12,12 @@ export interface Headers {
   value: string;
 }
 
-export type ParsedResponseHeaders = { [ headerFieldName: string ]: string };
+export interface ParsedResponseHeaders  { [ headerFieldName: string ]: string; }
 
-export type FilterFunction = {
-  name: string,
-  fn: (item?: FileLikeObject, options?: FileUploaderOptions) => boolean
-};
+export interface FilterFunction {
+  name: string;
+  fn: (item?: FileLikeObject, options?: FileUploaderOptions) => boolean;
+}
 
 export interface FileUploaderOptions {
   allowedMimeType?: string[];
@@ -263,6 +263,7 @@ export class FileUploader {
   }
 
   public _fileTypeFilter(item: FileLikeObject): boolean {
+    let type = FileType.getMimeClass(item);
     return !(this.options.allowedFileType &&
       this.options.allowedFileType.indexOf(FileType.getMimeClass(item)) === -1);
   }

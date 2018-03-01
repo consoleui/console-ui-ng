@@ -2,7 +2,8 @@
     <div class="btn btn-primary cui-fileupload-choose">
         <span class="fa fa-plus"></span>
         <span>选择文件...</span>
-        <input type="file" class="form-control-file" name="file" [multiple]="multiple" cuiFileSelect [uploader]="uploader">
+        <input type="file" class="form-control-file" name="file" [multiple]="multiple" cuiFileSelect [uploader]="uploader"
+            [accept]="accept">
     </div>
     <ng-container *ngIf="!auto">
         <button type="button" [disabled]="!hasNotUploadFiles()" (click)="uploader.uploadAll()" class="btn btn-info">开始上传</button>
@@ -43,7 +44,8 @@
             <span>选择文件</span>
             </div>
         </span>
-        <input type="file" class="form-control-file" name="file" cuiFileSelect [uploader]="uploader">
+        <input type="file" class="form-control-file" name="file" cuiFileSelect [uploader]="uploader"
+            [accept]="accept">
     </div>
     <div *ngIf="hasFiles()">
         <span class="mr-3">文件大小: <strong>{{uploader.queue[0]?.file?.size | cuiFilesizeFormat}}</strong></span>
@@ -68,6 +70,6 @@
         <div *ngIf="hasFiles()" class="progress" style="height: 3px;">
             <div class="progress-bar progress-bar-striped" [ngClass]="{'bg-success': uploader.progress==100}" [style.width]="uploader.progress+'%'"></div>
         </div>
-        <input accept="image/*" type="file" class="form-control-file" name="files" cuiFileSelect [uploader]="uploader">
+        <input [accept]="accept" type="file" class="form-control-file" name="files" cuiFileSelect [uploader]="uploader">
     </div>
 </ng-container>
