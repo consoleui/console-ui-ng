@@ -44,20 +44,20 @@ export class FileuploadComponent implements OnInit {
         this._mode = value;
         switch (value) {
             case 'doc':
-                this.accept = '.doc, .docx, .ppt, .pptx, .xls, .xlsx, .pdf, .txt';
+                this.accept = ".doc, .docx, .ppt, .pptx, .xls, .xlsx, .pdf, .txt";
                 break;
             case 'video':
-                this.accept = 'video/*, audio/*';
+                this.accept = "video/*, audio/*";
                 break;
             case 'image':
-                this.accept = 'image/*';
+                this.accept = "image/*";
                 break;
             case 'zip':
-                this.accept = '.zip';
+                this.accept = ".zip";
                 break;
             case 'file':
                 break;
-            }
+        }
     }
     get mode() {
         return this._mode || 'advanced';
