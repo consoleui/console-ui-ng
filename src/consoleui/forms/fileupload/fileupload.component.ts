@@ -28,7 +28,7 @@ export class FileuploadComponent implements OnInit {
     @Input() accept: string; // 'image/*'
     // @Input()
     _mode: FileuploadMode = 'advanced';
-    @Input() maxFileSize: number;
+    @Input() maxFileSize: number = 1024 * 1024;
     @Input() imageHolder: string;
     @Input() showErr: boolean = true;
 
