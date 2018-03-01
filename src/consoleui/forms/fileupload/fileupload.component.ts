@@ -30,6 +30,7 @@ export class FileuploadComponent implements OnInit {
     _mode: FileuploadMode = 'advanced';
     @Input() maxFileSize: number;
     @Input() imageHolder: string;
+    @Input() showErr: boolean = true;
 
     @Output() uploadComplete = new EventEmitter();
     @Output() error = new EventEmitter();
@@ -38,11 +39,12 @@ export class FileuploadComponent implements OnInit {
     public results: any[];
 
     _addingErrors;
+    errs;
 
     _modeMapAccepts = {
         'doc': ".doc, .docx, .ppt, .pptx, .xls, .xlsx, .pdf, .txt",
-        'video': "video\/\*",
-        'image': "image\/\*",
+        'video': "video/\*",
+        'image': "image/\*",
         'zip': ".zip",
     };
 
@@ -94,11 +96,11 @@ export class FileuploadComponent implements OnInit {
             let err: ErrorMessage;
             switch (filter.name) {
                 case 'fileType': {
-                    err = { code: filter.name, message: '文件格式不支持' };
+                    err = { code: filter.name, message: `文件'${item.name}'格式不支持, 允许的格式 ${this.accept}` };
                     break;
                 }
                 case 'fileSize': {
-                    err = { code: filter.name, message: '文件大小超出限制, 最大支持' + FileSize.prettySize(options.maxFileSize) };
+                    err = { code: filter.name, message: `文件'${item.name}'大小超出限制, 最大支持 ${FileSize.prettySize(options.maxFileSize, 0)}` };
                     break;
                 }
             }
@@ -108,14 +110,14 @@ export class FileuploadComponent implements OnInit {
             return { item, filter, options };
         };
 
-        this.uploader.onAfterAddingAll = (fileItems: any): any => {
-            if (this._addingErrors) {
-                let errs = this._addingErrors;
-                this.error.emit(errs);
-                this._addingErrors = [];
-            }
-            return { fileItems };
-        };
+        // this.uploader.onAfterAddingAll = (fileItems: any): any => {
+        //     if (this._addingErrors) {
+        //         this.errs = this._addingErrors;
+        //         this.error.emit(this.errs);
+        //         this._addingErrors = [];
+        //     }
+        //     return { fileItems };
+        // };
 
         if (!this.multiple) {
             this.uploader.onAfterAddingFile = (fileItem: FileItem) => {
@@ -124,6 +126,14 @@ export class FileuploadComponent implements OnInit {
                     this.uploader.removeFromQueue(it);
                 });
             };
+        }
+    }
+
+    onSelected(files) {
+        if (this._addingErrors) {
+            this.errs = this._addingErrors;
+            this.error.emit(this.errs);
+            this._addingErrors = [];
         }
     }
 

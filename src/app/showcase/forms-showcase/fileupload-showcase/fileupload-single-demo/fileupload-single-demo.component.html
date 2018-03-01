@@ -1,6 +1,6 @@
 <div nz-row>
   <div nz-col [nzSpan]="8">
-    <cui-fileupload mode="file" name="file" url="/api/upload/file" [auto]="true" [multiple]="false" (uploadComplete)="onFileUpload($event)"></cui-fileupload>
+    <cui-fileupload mode="file" name="file" url="/api/upload/file" [auto]="true" [multiple]="false" [maxFileSize]="1024 * 1024" accept=".jpg, .png" (uploadComplete)="onFileUpload($event)"></cui-fileupload>
   </div>
   <div nz-col [nzSpan]="12" class="ml-3">
     {{result | json}}
