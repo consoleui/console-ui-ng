@@ -43,20 +43,25 @@ export class FileuploadComponent implements OnInit {
     set mode(value: FileuploadMode) {
         this._mode = value;
         switch (value) {
-            case 'doc':
+            case 'doc': {
                 this.accept = ".doc, .docx, .ppt, .pptx, .xls, .xlsx, .pdf, .txt";
                 break;
-            case 'video':
+            }
+            case 'video': {
                 this.accept = "video/*, audio/*";
                 break;
-            case 'image':
+            }
+            case 'image': {
                 this.accept = "image/*";
                 break;
-            case 'zip':
+            }
+            case 'zip': {
                 this.accept = ".zip";
                 break;
-            case 'file':
+            }
+            case 'file': {
                 break;
+            }
         }
     }
     get mode() {
@@ -98,12 +103,14 @@ export class FileuploadComponent implements OnInit {
         this.uploader.onWhenAddingFileFailed = (item: FileLikeObject, filter: any, options: any): any => {
             let err: ErrorMessage;
             switch (filter.name) {
-                case 'fileType':
+                case 'fileType': {
                     err = { code: filter.name, message: '文件格式不支持' };
                     break;
-                case 'fileSize':
+                }
+                case 'fileSize': {
                     err = { code: filter.name, message: '文件大小超出限制, 最大支持' + FileSize.prettySize(options.maxFileSize) };
                     break;
+                }
             }
             if (err) {
                 this._addingErrors = this._addingErrors ? [...this._addingErrors, err] : [err];
