@@ -48,7 +48,7 @@ export class FileuploadComponent implements OnInit {
                 break;
             }
             case 'video': {
-                this.accept = "video/*, audio/*";
+                this.accept = "video/*" + ", audio/*";
                 break;
             }
             case 'image': {
