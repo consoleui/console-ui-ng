@@ -39,29 +39,19 @@ export class FileuploadComponent implements OnInit {
 
     _addingErrors;
 
+    _modeMapAccepts = {
+        'doc': ".doc, .docx, .ppt, .pptx, .xls, .xlsx, .pdf, .txt",
+        'video': "video\/\*",
+        'image': "image\/\*",
+        'zip': ".zip",
+    };
+
     @Input()
     set mode(value: FileuploadMode) {
         this._mode = value;
-        switch (value) {
-            case 'doc': {
-                this.accept = ".doc, .docx, .ppt, .pptx, .xls, .xlsx, .pdf, .txt";
-                break;
-            }
-            case 'video': {
-                this.accept = "video/*" + ", audio/*";
-                break;
-            }
-            case 'image': {
-                this.accept = "image/*";
-                break;
-            }
-            case 'zip': {
-                this.accept = ".zip";
-                break;
-            }
-            case 'file': {
-                break;
-            }
+
+        if (!this.accept && value) {
+            this.accept = this._modeMapAccepts[value];
         }
     }
     get mode() {
