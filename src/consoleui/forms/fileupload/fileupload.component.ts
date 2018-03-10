@@ -130,10 +130,10 @@ export class FileuploadComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes['accept']) {
+        if (changes['accept'] && this.uploader) {
             this.uploader.options.allowedFileType = this.allowedFileType;
         }
-        if (changes['maxFileSize']) {
+        if (changes['maxFileSize'] && this.uploader) {
             this.uploader.options.maxFileSize = this.maxFileSize;
         }
     }
