@@ -38,4 +38,8 @@ export class FileSelectDirective {
       this.element.nativeElement.value = '';
     }
   }
+
+  clear() {
+    this.element.nativeElement.value = '';
+  }
 }

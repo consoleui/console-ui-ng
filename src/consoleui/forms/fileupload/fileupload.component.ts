@@ -3,7 +3,7 @@ import { FileItem } from './file-upload/file-item.class';
 import { FileUploader, ParsedResponseHeaders } from './file-upload/file-uploader.class';
 import {
     Component, OnInit, Input, Output, EventEmitter, OnChanges,
-    SimpleChanges, ViewChild, ViewChildren, ElementRef
+    SimpleChanges, ViewChild, ViewChildren, ElementRef, QueryList
 } from '@angular/core';
 import { FileLikeObject } from './file-upload/file-like-object.class';
 import { FileType } from './file-upload/file-type.class';
@@ -39,7 +39,7 @@ export class FileuploadComponent implements OnInit, OnChanges {
     @Output() uploadComplete = new EventEmitter();
     @Output() error = new EventEmitter();
 
-    @ViewChildren(FileSelectDirective) fileSelectors: ElementRef[];
+    @ViewChildren(FileSelectDirective) fileSelectors: QueryList<FileSelectDirective>;
 
     public uploader: FileUploader; // = new FileUploader({url: URL});
     public results: any[];
@@ -175,8 +175,8 @@ export class FileuploadComponent implements OnInit, OnChanges {
 
     clearQueue(clearFile?) {
         if (clearFile && this.fileSelectors) {
-            this.fileSelectors.forEach((it: ElementRef) => {
-                it.nativeElement.value = '';
+            this.fileSelectors.forEach((it: FileSelectDirective) => {
+                it.clear();
             });
         }
         this.uploader.clearQueue();
