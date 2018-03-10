@@ -1,7 +1,7 @@
 import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 import { FileItem } from './file-upload/file-item.class';
 import { FileUploader, ParsedResponseHeaders } from './file-upload/file-uploader.class';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { FileLikeObject } from './file-upload/file-like-object.class';
 import { FileType } from './file-upload/file-type.class';
 import { FileSize } from './file-upload/file-size.class';
@@ -17,7 +17,7 @@ export interface ErrorMessage {
     templateUrl: './fileupload.component.html',
     styleUrls: ['./fileupload.component.scss']
 })
-export class FileuploadComponent implements OnInit {
+export class FileuploadComponent implements OnInit, OnChanges {
     @Input() name: string;
     @Input() url: string;
     @Input() method: string = 'POST';
@@ -126,6 +126,15 @@ export class FileuploadComponent implements OnInit {
                     this.uploader.removeFromQueue(it);
                 });
             };
+        }
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes['accept']) {
+            this.uploader.options.allowedFileType = this.allowedFileType;
+        }
+        if (changes['maxFileSize']) {
+            this.uploader.options.maxFileSize = this.maxFileSize;
         }
     }
 
