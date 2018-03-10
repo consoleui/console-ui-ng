@@ -1,10 +1,14 @@
 import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 import { FileItem } from './file-upload/file-item.class';
 import { FileUploader, ParsedResponseHeaders } from './file-upload/file-uploader.class';
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import {
+    Component, OnInit, Input, Output, EventEmitter, OnChanges,
+    SimpleChanges, ViewChild, ViewChildren, ElementRef
+} from '@angular/core';
 import { FileLikeObject } from './file-upload/file-like-object.class';
 import { FileType } from './file-upload/file-type.class';
 import { FileSize } from './file-upload/file-size.class';
+import { FileSelectDirective } from '.';
 
 export type FileuploadMode = 'advanced' | 'doc' | 'video' | 'image' | 'zip' | 'file';
 export interface ErrorMessage {
@@ -34,6 +38,8 @@ export class FileuploadComponent implements OnInit, OnChanges {
 
     @Output() uploadComplete = new EventEmitter();
     @Output() error = new EventEmitter();
+
+    @ViewChildren(FileSelectDirective) fileSelectors: ElementRef[];
 
     public uploader: FileUploader; // = new FileUploader({url: URL});
     public results: any[];
@@ -167,7 +173,12 @@ export class FileuploadComponent implements OnInit, OnChanges {
         this.refreshResult();
     }
 
-    clearQueue() {
+    clearQueue(clearFile?) {
+        if (clearFile && this.fileSelectors) {
+            this.fileSelectors.forEach((it: ElementRef) => {
+                it.nativeElement.value = '';
+            });
+        }
         this.uploader.clearQueue();
         this.refreshResult();
     }
