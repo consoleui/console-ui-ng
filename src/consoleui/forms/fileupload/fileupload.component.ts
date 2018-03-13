@@ -8,7 +8,7 @@ import {
 import { FileLikeObject } from './file-upload/file-like-object.class';
 import { FileType } from './file-upload/file-type.class';
 import { FileSize } from './file-upload/file-size.class';
-import { FileSelectDirective } from '.';
+import { FileSelectDirective } from './file-upload/file-select.directive';
 
 export type FileuploadMode = 'advanced' | 'doc' | 'video' | 'image' | 'zip' | 'file';
 export interface ErrorMessage {
