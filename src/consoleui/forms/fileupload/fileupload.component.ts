@@ -91,6 +91,7 @@ export class FileuploadComponent implements OnInit, OnChanges {
         };
 
         this.uploader.onErrorItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any => {
+            console.log({ item, response, status, headers })
             return { item, response, status, headers };
         };
 

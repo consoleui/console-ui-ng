@@ -1,11 +1,11 @@
 import {
   Component, OnInit, AfterContentInit, OnDestroy, Input, Output,
-  EventEmitter, ContentChildren, QueryList, OnChanges
+  EventEmitter, ContentChildren, QueryList, OnChanges, TemplateRef, ContentChild
 } from '@angular/core';
 import { CuiTreeNode, CuiTreeConfig, defaultTreeConfig } from '../defs';
 import { CuiTemplateDirective } from '../../../core/template/template.directive';
 import { TreeModel } from '../model/tree-model';
-// import { DoCheck, IterableDiffer, IterableDiffers } from '@angular/core';
+// import { DoCheck, IterableDiffer, IterableDiffers, ContentChild } from '@angular/core';
 
 @Component({
   selector: 'cui-tree',
@@ -33,6 +33,7 @@ export class TreeComponent implements OnInit, AfterContentInit, OnChanges, OnDes
   @Output() nodeCollapse: EventEmitter<any> = new EventEmitter();
 
   @ContentChildren(CuiTemplateDirective) templates: QueryList<any>;
+  @ContentChild("nodeTemplate") nodeTemplate: TemplateRef<any>;
 
   nodes: CuiTreeNode[];
   nodeTouched: boolean;
