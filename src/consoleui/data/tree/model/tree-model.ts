@@ -77,9 +77,14 @@ export class TreeModel implements CuiTreeModel {
 
         this.virtualRoot = new TreeNode(virtualRootConfig, null, this, 0);
 
+        if (this.selection) {
+            this.selection = [];
+        }
+
         if (this.config.async && this.config.async.enable && !this.nodes) {
             this.virtualRoot.loadChildren();
         }
+
         // this.roots = this.virtualRoot.children;
     }
 
