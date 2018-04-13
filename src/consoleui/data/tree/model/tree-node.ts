@@ -45,6 +45,10 @@ export class TreeNode implements CuiTreeNode {
         return this.getField('hasChildren') || !!this.children;
     }
 
+    set hasChildren(val: boolean) {
+        this.setField('hasChildren', val);
+    }
+
     get leaf(): boolean {
         return !this.hasChildren;
     }
