@@ -223,7 +223,7 @@ export class TreeComponent implements OnInit, AfterContentInit, OnChanges, OnDes
     let index: number = -1;
 
     if (this.selectionMode && this.selection) {
-      index = this.selection.findIndex((n, i) => n == node);
+      index = this.selection.findIndex((n, i) => n == node || n.id == node.id);
     }
 
     return index;
