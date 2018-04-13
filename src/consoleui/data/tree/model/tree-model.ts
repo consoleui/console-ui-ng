@@ -69,6 +69,10 @@ export class TreeModel implements CuiTreeModel {
     }
 
     update() {
+        if (this.selection) {
+            this.selection = [];
+        }
+
         let virtualRootConfig = {
             virtual: true,
             [this.config.data.key.children]: this.nodes,
@@ -76,10 +80,6 @@ export class TreeModel implements CuiTreeModel {
         };
 
         this.virtualRoot = new TreeNode(virtualRootConfig, null, this, 0);
-
-        if (this.selection) {
-            this.selection = [];
-        }
 
         if (this.config.async && this.config.async.enable && !this.nodes) {
             this.virtualRoot.loadChildren();
