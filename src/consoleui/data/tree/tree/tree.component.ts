@@ -315,4 +315,32 @@ export class TreeComponent implements OnInit, AfterContentInit, OnChanges, OnDes
   removeSelection(node: CuiTreeNode) {
     this.treeModel.removeSelection(node);
   }
+
+  refresh(node: CuiTreeNode | any, mode: 'rate' | 'children' = 'rate') {
+    switch (mode) {
+      case 'children':
+        this.refreshChildren(node);
+        break;
+      case 'rate':
+      default:
+        this.refreshRate(node);
+        break;
+    }
+  }
+
+  refreshRate(node: CuiTreeNode) {
+    if (!node) {
+      return ;
+    }
+
+    let parent = node.parent || this.treeModel.virtualRoot;
+    if (parent) {
+      this.refreshChildren(parent);
+    }
+  }
+
+  refreshChildren(node: CuiTreeNode) {
+    node.loadChildren(true);
+  }
+
 }

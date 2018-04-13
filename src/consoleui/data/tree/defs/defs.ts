@@ -26,7 +26,7 @@ export interface CuiTreeNode {
     collapsedIcon?: string;
     data?: any;
     partialSelected?: boolean;
-    loadChildren?: () => any;
+    loadChildren?: (force?: boolean) => any;
     loading?: boolean;
     disabled?: boolean;
 }

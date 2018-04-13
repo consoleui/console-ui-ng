@@ -112,9 +112,9 @@ export class TreeNode implements CuiTreeNode {
         this.data[this.config.data.key[key] || key] = value;
     }
 
-    loadChildren() {
+    loadChildren(force: boolean = false) {
         let dataChildren = this.getField('children');
-        if (!dataChildren) {
+        if (!dataChildren || force) {
             if (this.config.async && this.config.async.enable && this.hasChildren && !this.loading) {
                 this.loading = true;
                 this.config.async.loadChildren(this).subscribe(data => {
