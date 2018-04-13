@@ -316,7 +316,7 @@ export class TreeComponent implements OnInit, AfterContentInit, OnChanges, OnDes
     this.treeModel.removeSelection(node);
   }
 
-  refresh(node: CuiTreeNode | any, mode: 'rate' | 'children' = 'rate') {
+  refresh(node?: CuiTreeNode, mode: 'rate' | 'children' = 'rate') {
     switch (mode) {
       case 'children':
         this.refreshChildren(node);
@@ -329,18 +329,15 @@ export class TreeComponent implements OnInit, AfterContentInit, OnChanges, OnDes
   }
 
   refreshRate(node: CuiTreeNode) {
-    if (!node) {
-      return ;
-    }
-
-    let parent = node.parent || this.treeModel.virtualRoot;
-    if (parent) {
-      this.refreshChildren(parent);
-    }
+    let parent = node && node.parent;
+    this.refreshChildren(parent);
   }
 
   refreshChildren(node: CuiTreeNode) {
-    node.loadChildren(true);
+    node = node || this.treeModel.virtualRoot;
+    if (node) {
+      node.loadChildren(true);
+    }
   }
 
 }
