@@ -92,7 +92,7 @@ export class TreeModel implements CuiTreeModel {
         let index: number = -1;
 
         if (this.selection) {
-            index = this.selection.findIndex((n, i) => n == node);
+            index = this.selection.findIndex((n, i) => n == node || n.id == node.id);
         }
 
         return index;

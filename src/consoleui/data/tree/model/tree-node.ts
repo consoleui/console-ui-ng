@@ -11,7 +11,7 @@ export class TreeNode implements CuiTreeNode {
     constructor (public data: any, public parent: CuiTreeNode, public treeModel: CuiTreeModel, index: number) {
         this.index = index;
 
-        if (this.getField('selected')) {
+        if (this.getField('selected') || treeModel.isSelected(this)) {
             this.treeModel.addSelection(this);
         }
 
