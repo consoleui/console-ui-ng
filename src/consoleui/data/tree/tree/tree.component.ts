@@ -336,6 +336,10 @@ export class TreeComponent implements OnInit, AfterContentInit, OnChanges, OnDes
   refreshChildren(node: CuiTreeNode) {
     node = node || this.treeModel.virtualRoot;
     if (node) {
+      if (!node.hasChildren) {
+        node.hasChildren = true;
+        node.expanded = true;
+      }
       node.loadChildren(true);
     }
   }
