@@ -84,16 +84,16 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
         this.selection = [];
       }
 
-      this._refreshSel();
+      this._refreshSel(!chgData.isFirstChange());
     }
   }
 
-  _refreshSel() {
+  _refreshSel(emit = false) {
     if (this.data && this.data.length > 0) {
       this.data.forEach(row => {
         row.checked = this.rowChecked(row);
       });
-      this._refreshStatus(false);
+      this._refreshStatus(emit);
     }
   }
 
