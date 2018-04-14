@@ -88,6 +88,7 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
         }, 300);
       }
 
+      console.log(this.selection);
       // this._refreshSel();
     }
   }
