@@ -80,20 +80,22 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
     let chgData: SimpleChange = changes['data'];
     // if (chgData && chgData.isFirstChange()) {
     if (chgData) {
-      if (!this.keepSelection) {
-        this.selection = [];
+      if (this.keepSelection) {
+        this._refreshSel();
+      } else if (this.selection && this.selection.length > 0) {
+        this._refreshStatus();
       }
 
-      this._refreshSel(!chgData.isFirstChange());
+      // this._refreshSel();
     }
   }
 
-  _refreshSel(emit = false) {
+  _refreshSel() {
     if (this.data && this.data.length > 0) {
       this.data.forEach(row => {
         row.checked = this.rowChecked(row);
       });
-      this._refreshStatus(emit);
+      this._refreshStatus(false);
     }
   }
 
