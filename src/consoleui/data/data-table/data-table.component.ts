@@ -31,6 +31,9 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
   isSelectAll: Boolean = false;
   // ids = [];
   @Input() selection: any[];
+  @Input() keepSelection: boolean; // 是否在加载数据后或刷新数据后 没有找到 selection 的项时，保持 selection 的项
+
+  @Input() rowId: string = 'id';
 
   @ContentChild('rowActions') rowActions: TemplateRef<any>;
   @ContentChildren(ColTplDirective) _colTpls: QueryList<ColTplDirective>;
@@ -148,7 +151,7 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
 
   rowChecked(row) {
     if (this.selection) {
-      return this.selection.findIndex(it => it == row) >= 0;
+      return this.selection.findIndex(it => this.isRowEqual(it, row)) >= 0;
     }
     return false;
   }
@@ -176,6 +179,22 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
       this.data.forEach(data => data.checked = false);
     }
     this._refreshStatus();
+  }
+
+  isRowEqual(item1, item2) {
+    if (!!item1 && !!item2) {
+      if (item1 == item2) {
+        return true;
+      }
+
+      if (item1.equal instanceof Function) {
+        return item1.equal(item2);
+      }
+
+      return !!item1[this.rowId] && item1[this.rowId] == item2[this.rowId];
+    }
+
+    return false;
   }
 
 }
