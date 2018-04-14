@@ -72,10 +72,10 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     // console.log(changes);
     // throw new Error("Method not implemented.");
-    let chgSelection: SimpleChange = changes['selection'];
-    if (chgSelection && chgSelection.isFirstChange()) {
-      this._refreshSel();
-    }
+    // let chgSelection: SimpleChange = changes['selection'];
+    // if (chgSelection && chgSelection.isFirstChange()) {
+    //   this._refreshSel();
+    // }
 
     let chgData: SimpleChange = changes['data'];
     // if (chgData && chgData.isFirstChange()) {
