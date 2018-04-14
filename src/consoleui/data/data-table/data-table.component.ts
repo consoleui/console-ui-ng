@@ -80,7 +80,7 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
     let chgData: SimpleChange = changes['data'];
     // if (chgData && chgData.isFirstChange()) {
     if (chgData) {
-      if (!this.keepSelection) {
+      if (!chgData.isFirstChange() && !this.keepSelection) {
         this.selection = [];
       }
 
