@@ -31,7 +31,7 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
   isSelectAll: Boolean = false;
   // ids = [];
   @Input() selection: any[];
-  @Input() keepSelection: boolean; // 是否在加载数据后或刷新数据后 没有找到 selection 的项时，保持 selection 的项
+  @Input() keepSelection: boolean = false; // 是否在加载数据后或刷新数据后 没有找到 selection 的项时，保持 selection 的项
 
   @Input() rowId: string = 'id';
 
@@ -79,7 +79,11 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
 
     let chgData: SimpleChange = changes['data'];
     // if (chgData && chgData.isFirstChange()) {
-      if (chgData) {
+    if (chgData) {
+      if (!this.keepSelection) {
+        this.selection = [];
+      }
+
       this._refreshSel();
     }
   }
@@ -89,7 +93,7 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
       this.data.forEach(row => {
         row.checked = this.rowChecked(row);
       });
-      this._refreshStatus(false);
+      this._refreshStatus(!this.keepSelection);
     }
   }
 
