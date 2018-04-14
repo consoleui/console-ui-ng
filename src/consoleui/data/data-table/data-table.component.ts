@@ -83,7 +83,9 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
       if (this.keepSelection) {
         this._refreshSel();
       } else if (this.selection && this.selection.length > 0) {
-        this._refreshStatus();
+        setTimeout(() => {
+          this._refreshStatus();
+        }, 300);
       }
 
       // this._refreshSel();
