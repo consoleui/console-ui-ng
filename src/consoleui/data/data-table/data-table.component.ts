@@ -173,7 +173,18 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
     // this._disabledButton = !this._dataSet.some(value => value.checked);
     // this._checkedNumber = this._dataSet.filter(value => value.checked).length;
 
-    this.selection = this.data.filter(value => value.checked);
+    if (this.keepSelection && this.selection) {
+      this.data.map(it => {
+        if (it.checked && !this.rowChecked(it)) {
+          this.selection = [...this.selection, it];
+        }
+        if (!it.checked && this.rowChecked(it)) {
+          this.selection = this.selection.filter(row => !this.isRowEqual(it, row));
+        }
+      });
+    } else {
+      this.selection = this.data.filter(value => value.checked);
+    }
     if (emit) {
       this.selectionChange.emit(this.selection);
       // 过时的
