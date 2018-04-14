@@ -72,17 +72,17 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     // console.log(changes);
     // throw new Error("Method not implemented.");
-    // let chgSelection: SimpleChange = changes['selection'];
-    // if (chgSelection && chgSelection.isFirstChange()) {
-    //   this._refreshSel();
-    // }
+    let chgSelection: SimpleChange = changes['selection'];
+    if (chgSelection && chgSelection.isFirstChange()) {
+      this._refreshSel();
+    }
 
     let chgData: SimpleChange = changes['data'];
     // if (chgData && chgData.isFirstChange()) {
     if (chgData) {
-      // if (!chgData.isFirstChange() && !this.keepSelection) {
+      if (!this.keepSelection) {
         this.selection = [];
-      // }
+      }
 
       this._refreshSel();
     }
@@ -93,7 +93,7 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
       this.data.forEach(row => {
         row.checked = this.rowChecked(row);
       });
-      this._refreshStatus(!this.keepSelection);
+      this._refreshStatus(false);
     }
   }
 
