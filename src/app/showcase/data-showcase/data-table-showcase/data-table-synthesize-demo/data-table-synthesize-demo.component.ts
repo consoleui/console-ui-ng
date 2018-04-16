@@ -69,8 +69,8 @@ export class PlanApiService {
 
     list = list.slice(pageSize * pageNum, (pageNum + 1) * pageSize);
     let data: Pagination<Plan> = {
-      first: pageNum == 0, last: false, number: pageNum, numberOfElements: 100, size: pageSize,
-      sort: null, totalElements: 100, totalPages: 10, content: list
+      first: pageNum == 0, last: false, number: pageNum, numberOfElements: 115, size: pageSize,
+      sort: null, totalElements: 115, totalPages: 12, content: list
     };
 
     return Observable.of(data);

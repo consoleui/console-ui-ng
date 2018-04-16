@@ -34,9 +34,10 @@ export class PaginationComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     let pageChange = changes['pagination'];
     if (pageChange) {
-      this.PER_PAGE_SIZES = this.PER_PAGE_SIZES.filter(it => {
+      let matched = this.PER_PAGE_SIZES.filter(it => {
         return it.value <= pageChange.currentValue.totalElements || it.value <= pageChange.currentValue.size;
       });
+      this.PER_PAGE_SIZES =  this.PER_PAGE_SIZES.slice(0, matched.length + 1);
       this.totalPagesNumber = pageChange.currentValue.number + 1;
     }
   }
