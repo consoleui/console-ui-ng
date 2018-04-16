@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ContentChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ContentChild, TemplateRef, OnChanges, SimpleChanges } from '@angular/core';
 
 import { CuiPagination } from './defs/api';
 import { PaginationModel } from './pagination.model';
@@ -8,11 +8,20 @@ import { PaginationModel } from './pagination.model';
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss']
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent implements OnInit, OnChanges {
   @Input() pagination: CuiPagination;
   @Output('paginationChange') paginationChange = new EventEmitter();
   @Output('goto') goto = new EventEmitter();
   totalPagesNumber = null;
+  PER_PAGE_SIZES: any[] = [
+    {value: 10, label: '10 / 每页'},
+    {value: 20, label: '20 / 每页'},
+    {value: 50, label: '50 / 每页'},
+    {value: 100, label: '100 / 每页'},
+    {value: 200, label: '200 / 每页'},
+    {value: 500, label: '500 / 每页'},
+    {value: 1000, label: '1000 / 每页'},
+  ];
 
   @ContentChild('paginationTemplate') paginationTemplate: TemplateRef<any>;
 
@@ -20,6 +29,16 @@ export class PaginationComponent implements OnInit {
 
   ngOnInit() {
     // this.pagination = new PaginationModel(0, 0, 0);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    let pageChange = changes['pagination'];
+    if (pageChange) {
+      this.PER_PAGE_SIZES = this.PER_PAGE_SIZES.filter(it => {
+        return it.value <= pageChange.currentValue.totalElements || it.value <= pageChange.currentValue.size;
+      });
+      this.totalPagesNumber = pageChange.currentValue.number + 1;
+    }
   }
 
   prev() {
@@ -72,14 +91,14 @@ export class PaginationComponent implements OnInit {
   validation(page) {
     const reg = new RegExp("^[0-9]*$");
     if (!reg.test(page.toString())) {
-      this.totalPagesNumber = null;
+      this.totalPagesNumber = this.pagination.number + 1;
     } else {
       if (page > 0 && page <= this.pagination.totalPages) {
         this.pagination.number = page - 1;
         this.paginationChange.emit(this.pagination);
         this.gotoPage();
       } else {
-        this.totalPagesNumber = null;
+        this.totalPagesNumber = this.pagination.number + 1;
       }
     }
   }

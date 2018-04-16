@@ -1,0 +1,10 @@
+input#pageNumberInput, nz-input#pageNumberInput {
+    width: 4rem;
+    text-align: center;
+    
+    ::ng-deep {
+        input {
+            text-align: center;
+        }
+    }
+}
