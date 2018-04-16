@@ -14,13 +14,13 @@ export class PaginationComponent implements OnInit, OnChanges {
   @Output('goto') goto = new EventEmitter();
   totalPagesNumber = null;
   PER_PAGE_SIZES: any[] = [
-    {value: 10, label: '10 / 每页'},
-    {value: 20, label: '20 / 每页'},
-    {value: 50, label: '50 / 每页'},
-    {value: 100, label: '100 / 每页'},
-    {value: 200, label: '200 / 每页'},
-    {value: 500, label: '500 / 每页'},
-    {value: 1000, label: '1000 / 每页'},
+    {value: 10, label: '10 / 页'},
+    {value: 20, label: '20 / 页'},
+    {value: 50, label: '50 / 页'},
+    {value: 100, label: '100 / 页'},
+    {value: 200, label: '200 / 页'},
+    {value: 500, label: '500 / 页'},
+    {value: 1000, label: '1000 / 页'},
   ];
 
   @ContentChild('paginationTemplate') paginationTemplate: TemplateRef<any>;
