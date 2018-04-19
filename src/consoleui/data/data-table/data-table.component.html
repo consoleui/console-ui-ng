@@ -50,7 +50,7 @@
       <td *ngIf="!!selectType" class="align-middle">
         <!-- <input *ngIf="selectType=='checkbox'" type="checkbox" class="my-2" name="toggleSelect" value="" [checked]="isSelectAll" (change)="selectAll()"/> -->
         <!-- <cui-checkbox *ngIf="selectType=='checkbox'" name="toggleSelect" [binary]="true" [(ngModel)]="isSelectAll" (change)="selectAll()"></cui-checkbox> -->
-        <label *ngIf="selectType=='checkbox'" nz-checkbox [(ngModel)]="_allChecked" [nzIndeterminate]="_indeterminate" (ngModelChange)="checkAll($event)"></label>
+        <label *ngIf="selectType=='checkbox' && actionGroup" nz-checkbox [(ngModel)]="_allChecked" [nzIndeterminate]="_indeterminate" (ngModelChange)="checkAll($event)"></label>
       </td>
       <td [attr.colspan]='columnsVisible.length + (!!rowActions ? 1 : 0)'>
         <!-- <ng-content select=".action-group"></ng-content> -->
