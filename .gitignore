@@ -16,7 +16,7 @@ src/__gen_components/
 
 # dependencies
 node_modules/
-package-lock.json
+# package-lock.json
 integration/**/package-lock.json
 yarn.lock
 
