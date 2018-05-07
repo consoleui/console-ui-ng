@@ -69,12 +69,12 @@ export class RadioComponent implements ControlValueAccessor, AfterViewInit {
     if (!this.disabled) {
       this.input.checked = true;
       this.checked = true;
-      this.onModelChange(this.value);
+      this.onModelChange(this.value || this.checked);
     }
   }
 
   writeValue(value: any): void {
-    this.checked = (value == this.value);
+    this.checked = this.value ? (value == this.value) : !!value;
 
     if (this.input) {
       this.input.checked = this.checked;
