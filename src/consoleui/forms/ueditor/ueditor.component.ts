@@ -58,6 +58,7 @@ export class UeditorComponent implements AfterViewInit, OnDestroy, ControlValueA
             autoHeightEnabled: this.autoHeight,
             initialFrameHeight: this.initialFrameHeight,
             topOffset: this.topOffset,
+            elementPathEnabled: false,
         };
         if (this.toolbarMode === 'um') {
             // debugger;
