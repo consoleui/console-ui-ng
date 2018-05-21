@@ -4,8 +4,13 @@
       <div class="col-md-9">
         <!-- <h3>Demo:</h3> -->
         <div class="img-container">
-          <cui-cropper [imageUrl]="imageUrl"  [cropperOptions]="options" (origin)="origin($event)"></cui-cropper>
+          <cui-cropper #imageCropper [imageUrl]="imageUrl"  [cropperOptions]="options" (origin)="origin($event)" [contentTpl]="contentTpl">
+            <ng-template #contentTpl>
+                <input type="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff"  (change)="imageCropper.loadImageFile($event)">
+            </ng-template>
+          </cui-cropper>
         </div>
+        <input type="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff"  (change)="imageCropper.loadImageFile($event)">
       </div>
       <div class="col-md-3">
         <!-- <h3>Preview:</h3> -->
