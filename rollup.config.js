@@ -65,7 +65,8 @@ let globals = {
   'rxjs/add/operator/do': 'Rx.Observable.prototype',
   'rxjs/add/operator/delay': 'Rx.Observable.prototype',
   'object-path': 'ObjectPath',
-  'lodash': 'lodash'
+  'lodash': 'lodash',
+  'cropperjs': 'Cropper'
 }
 
 if (format === 'es') {
