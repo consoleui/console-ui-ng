@@ -57,7 +57,7 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
   }
 
   ngOnInit() {
-    this.columnsVisible = this.columns.filter(it => it.visible !== false);
+    this.columnsVisible = this.columns ? this.columns.filter(it => it.visible !== false) : [];
   }
 
   ngAfterContentInit() {
@@ -134,8 +134,8 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
       }
       this.selection.forEach((val) => {
         if (val != item) {
-          let d = this.data.filter(it => it == item);
-          if (d.length > 0) {
+          let d = this.data && this.data.filter(it => it == item);
+          if (d && d.length > 0) {
             selection.push(val);
           }
         }
@@ -179,11 +179,11 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
           this.selection = [...this.selection, it];
         }
         if (!it.checked && this.rowChecked(it)) {
-          this.selection = this.selection.filter(row => !this.isRowEqual(it, row));
+          this.selection = this.selection && this.selection.filter(row => !this.isRowEqual(it, row));
         }
       });
     } else {
-      this.selection = this.data.filter(value => value.checked);
+      this.selection = this.data && this.data.filter(value => value.checked);
     }
     if (emit) {
       this.selectionChange.emit(this.selection);
