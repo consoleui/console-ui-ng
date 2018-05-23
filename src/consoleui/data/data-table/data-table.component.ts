@@ -166,8 +166,8 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
   }
 
   _refreshStatus(emit: boolean = true) {
-    const allChecked = this.data.every(value => value.checked === true);
-    const allUnChecked = this.data.every(value => !value.checked);
+    const allChecked = this.hasData && this.data.every(value => value.checked === true);
+    const allUnChecked = !this.hasData || this.data.every(value => !value.checked);
     this._allChecked = allChecked;
     this._indeterminate = (!allChecked) && (!allUnChecked);
     // this._disabledButton = !this._dataSet.some(value => value.checked);
@@ -215,6 +215,10 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
     }
 
     return false;
+  }
+
+  get hasData(): boolean {
+    return this.data && this.data.length > 0;
   }
 
 }
