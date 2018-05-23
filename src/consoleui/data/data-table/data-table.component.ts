@@ -122,7 +122,7 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
     this.selectionChange.emit(this.selection);
 
     // 过时的
-    this.select.emit(this.selection.map(it => it['id']));
+    this.select.emit(this.selection && this.selection.map(it => it['id']));
   }
 
   // 过时的
@@ -151,7 +151,7 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
     this.selectionChange.emit(this.selection);
 
     // 过时的
-    this.select.emit(this.selection.map(it => it['id']));
+    this.select.emit(this.selection && this.selection.map(it => it['id']));
   }
 
   toggleComplexSearch() {
@@ -173,7 +173,7 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
     // this._disabledButton = !this._dataSet.some(value => value.checked);
     // this._checkedNumber = this._dataSet.filter(value => value.checked).length;
 
-    if (this.keepSelection && this.selection) {
+    if (this.keepSelection && this.selection && this.data) {
       this.data.map(it => {
         if (it.checked && !this.rowChecked(it)) {
           this.selection = [...this.selection, it];
@@ -188,7 +188,7 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
     if (emit) {
       this.selectionChange.emit(this.selection);
       // 过时的
-      this.select.emit(this.selection.map(it => it['id']));
+      this.select.emit(this.selection && this.selection.map(it => it['id']));
     }
   }
 
