@@ -89,7 +89,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy, A
         this._config = Object.assign(this.defaultConfig, val);
     }
     get config() {
-        return this._config;
+        return this._config || this.defaultConfig;
     }
 
     /**
