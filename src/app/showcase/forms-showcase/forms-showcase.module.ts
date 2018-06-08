@@ -7,6 +7,7 @@ const routes: Routes = [
   {
     path: '', children: [
       { path: 'ueditor', loadChildren: 'app/showcase/forms-showcase/ueditor-showcase/ueditor-showcase.module#UeditorShowcaseModule' },
+      { path: 'ckeditor', loadChildren: 'app/showcase/forms-showcase/ckeditor-showcase/ckeditor-showcase.module#CkeditorShowcaseModule' },
       {
         path: 'fileupload',
         loadChildren: 'app/showcase/forms-showcase/fileupload-showcase/fileupload-showcase.module#FileuploadShowcaseModule'

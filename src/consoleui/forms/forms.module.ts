@@ -14,6 +14,7 @@ import { WizardComponent } from './wizard/wizard.component';
 import { WizardStepComponent } from './wizard/wizard-step/wizard-step.component';
 import { ValidatorsModule } from './validators/validators.module';
 import { CuiTreeModule } from '../data/tree/tree.module';
+import { CuiCKEditorModule } from './ckeditor/ckeditor.module';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { CuiTreeModule } from '../data/tree/tree.module';
     CuiTemplateModule,
     ValidatorsModule,
     CuiCoreModule,
-    CuiTreeModule
+    CuiTreeModule,
+    CuiCKEditorModule,
   ],
   declarations: [
     SelectComponent, CalendarComponent, ChipsComponent, InputSwitchComponent,
@@ -31,6 +33,8 @@ import { CuiTreeModule } from '../data/tree/tree.module';
     RadioComponent, TreeSelectComponent,
     ValidatorsModule,
     WizardComponent,
-    WizardStepComponent]
+    WizardStepComponent,
+    CuiCKEditorModule,
+  ]
 })
 export class CuiFormsModule { }

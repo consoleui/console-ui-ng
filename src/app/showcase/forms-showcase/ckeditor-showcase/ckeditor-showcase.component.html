@@ -1,0 +1,35 @@
+<cui-asciidoc [content]="introDoc"></cui-asciidoc>
+
+
+<section class="">
+  <article class="asciidoc">
+    <h2>示例</h2>
+  </article>
+
+  <ng-container *ngTemplateOutlet="demos"></ng-container>
+</section>
+
+<cui-asciidoc [content]="apiDoc"></cui-asciidoc>
+
+
+<ng-template #demos>
+  <cui-code-box id="ckeditor-full-demo" title="默认风格" [code]="codes['full']">
+    <cui-ckeditor-full-demo demo></cui-ckeditor-full-demo>
+    <div intro>
+      <p>工具栏使用UE默认风格，显示全部功能按钮</p>
+    </div>
+  </cui-code-box>
+  <cui-code-box id="ckeditor-simple-demo" title="simple风格" [code]="codes['simple']">
+    <cui-ckeditor-simple-demo demo></cui-ckeditor-simple-demo>
+    <div intro>
+      <p>工具栏使用UM风格，显示常用功能按钮</p>
+    </div>
+  </cui-code-box>
+  <cui-code-box id="ckeditor-custom-demo" title="自定义" [code]="codes['custom']">
+    <cui-ckeditor-custom-demo demo></cui-ckeditor-custom-demo>
+    <div intro>
+      <p>自定义ckeditor</p>
+    </div>
+  </cui-code-box>
+
+</ng-template>
