@@ -2,4 +2,5 @@
 
 {{content}}
 
-<div [innerHtml]="content"></div>
+<div [innerHtml]="sanitizer.bypassSecurityTrustHtml(content)"></div>
+<!-- <div [innerHtml]="content"></div> -->
