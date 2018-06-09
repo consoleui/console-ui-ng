@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'cui-ckeditor-full-demo',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CkeditorFullDemoComponent implements OnInit {
   content = '请输入内容';
-  constructor() { }
+  constructor(protected sanitizer: DomSanitizer) { }
 
   ngOnInit() {
   }

@@ -1,3 +1,5 @@
-<p>
-  ckeditor-custom-demo works!
-</p>
+<ckeditor [(ngModel)]="content" debounce="500" [config]="config"></ckeditor>
+
+{{content}}
+
+<div [innerHtml]="content"></div>

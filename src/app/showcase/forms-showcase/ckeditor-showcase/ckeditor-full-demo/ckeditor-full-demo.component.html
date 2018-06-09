@@ -1,5 +1,6 @@
-<ckeditor [(ngModel)]="content" debounce="500"></ckeditor>
+<ckeditor [(ngModel)]="content" debounce="500" [config]="{toolbar: 'full'}"></ckeditor>
 
 {{content}}
 
-<div [innerHtml]="content"></div>
+<div [innerHtml]="sanitizer.bypassSecurityTrustHtml(content)"></div>
+<!-- <div [innerHtml]="content"></div> -->

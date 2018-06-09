@@ -77,12 +77,23 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy, A
         ],
         toolbar_basic: [
             ['NewPage', 'Preview', '-', 'Undo', 'Redo'],
-            ['Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript'],
+            ['Format', '-', 'Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript'],
             ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote'],
             ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-            ['TextColor', 'BGColor']
+            ['TextColor', 'BGColor'],
+            ['Image']
         ],
-        toolbar: 'basic'
+        toolbar_simple: [
+            ['Undo', 'Redo'],
+            ['Format', '-', 'Bold', 'Italic', 'Underline', 'Strike'],
+            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['TextColor', 'BGColor'],
+            ['Image']
+        ],
+        toolbar: 'basic',
+        removePlugins: 'elementspath',
+        // filebrowserBrowseUrl: '/api/upload/file',
+        filebrowserUploadUrl: '/api/ckeditor/upload/image',
     };
     _config: any;
     @Input() set config(val) {
