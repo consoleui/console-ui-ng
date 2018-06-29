@@ -49,6 +49,7 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
 
   _allChecked;
   _indeterminate;
+  _anyCheckable;
 
   constructor() { }
 
@@ -170,6 +171,7 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
     const allUnChecked = !this.hasData || this.data.every(value => !value.checked);
     this._allChecked = allChecked;
     this._indeterminate = (!allChecked) && (!allUnChecked);
+    this._anyCheckable = this.hasData && this.data.some(it => it.checkable);
     // this._disabledButton = !this._dataSet.some(value => value.checked);
     // this._checkedNumber = this._dataSet.filter(value => value.checked).length;
 
@@ -194,9 +196,9 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
 
   checkAll(value) {
     if (value) {
-      this.data.forEach(data => data.checked = true);
+      this.data.filter(it => it.checkable).forEach(data => data.checked = true);
     } else {
-      this.data.forEach(data => data.checked = false);
+      this.data.filter(it => it.checkable).forEach(data => data.checked = false);
     }
     this._refreshStatus();
   }
