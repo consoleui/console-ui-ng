@@ -80,6 +80,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy, A
             ['Format', '-', 'Bold', 'Italic', 'Underline', 'Strike', '-', 'Subscript', 'Superscript'],
             ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', 'Blockquote'],
             ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink'],
             ['TextColor', 'BGColor'],
             ['Image']
         ],
@@ -87,13 +88,16 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy, A
             ['Undo', 'Redo'],
             ['Format', '-', 'Bold', 'Italic', 'Underline', 'Strike'],
             ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Link', 'Unlink'],
             ['TextColor', 'BGColor'],
             ['Image']
         ],
         toolbar: 'basic',
         removePlugins: 'elementspath',
         // filebrowserBrowseUrl: '/api/upload/file',
-        filebrowserUploadUrl: '/api/ckeditor/upload/image',
+        filebrowserImageUploadUrl: '/api/ckeditor/upload/image',
+        linkShowAdvancedTab: false,
+        linkShowTargetTab: false,
     };
     _config: any;
     @Input() set config(val) {
