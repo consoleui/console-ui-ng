@@ -41,6 +41,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy, A
     @Input() readonly: boolean;
     @Input() debounce: string;
     @Input() toolbarMode: string = "basic"; // for ueditor alias
+    @Input() urlWithBasePath: boolean = false;
 
     @Output() change = new EventEmitter();
     @Output() editorChange = new EventEmitter();
@@ -104,6 +105,15 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy, A
         this._config = Object.assign(this.defaultConfig, val);
     }
     get config() {
+        if (this.urlWithBasePath) {
+            if (this._config) {
+                this._config.filebrowserImageUploadUrl = this._config.filebrowserImageUploadUrl ?
+                    this._config.filebrowserImageUploadUrl + '?withBasePath=1' : null;
+            } else {
+                this.defaultConfig.filebrowserImageUploadUrl = this.defaultConfig.filebrowserImageUploadUrl ?
+                    this.defaultConfig.filebrowserImageUploadUrl + '?withBasePath=1' : null;
+            }
+        }
         return this._config || this.defaultConfig;
     }
 
