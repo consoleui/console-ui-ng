@@ -216,6 +216,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy, A
 
             // CKEditor change event
             this.instance.on('change', (evt: any) => {
+                // console.log(evt);
                 this.onTouched();
                 let value = this.instance.getData();
 
@@ -238,6 +239,35 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy, A
 
                 // Original ckeditor event dispatch
                 this.editorChange.emit(evt);
+            });
+
+            this.instance.on( 'contentDom', () => {
+                let editable = this.instance.editable();
+                editable.attachListener( this.instance.document, 'compositionend', (evt) => {
+                    console.log('contentDom')
+                    this.onTouched();
+                    let value = this.instance.getData();
+
+                    if (this.value !== value) {
+                        // Debounce update
+                        if (this.debounce) {
+                            if (this.debounceTimeout) {
+                                clearTimeout(this.debounceTimeout);
+                            }
+                            this.debounceTimeout = setTimeout(() => {
+                                this.updateValue(value);
+                                this.debounceTimeout = null;
+                            }, parseInt(this.debounce));
+
+                            // Live update
+                        } else {
+                            this.updateValue(value);
+                        }
+                    }
+
+                    // Original ckeditor event dispatch
+                    this.editorChange.emit(evt);
+                });
             });
 
             // CKEditor blur event
