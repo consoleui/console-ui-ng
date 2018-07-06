@@ -244,7 +244,6 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy, A
             this.instance.on( 'contentDom', () => {
                 let editable = this.instance.editable();
                 editable.attachListener( this.instance.document, 'compositionend', (evt) => {
-                    console.log('contentDom')
                     this.onTouched();
                     let value = this.instance.getData();
 
