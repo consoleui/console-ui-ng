@@ -22,6 +22,7 @@ export class ShowcaseLayoutSiderComponent implements OnInit {
       {title: 'FileUpload 文件上传', routerLink: ['/showcase', 'forms', 'fileupload']},
       {title: 'Chips 碎片输入框', routerLink: ['/showcase', 'forms', 'chips']},
       {title: 'Radio 单选框', routerLink: ['/showcase', 'forms', 'radio']},
+      {title: 'TreeSelect 树形选择框', routerLink: ['/showcase', 'forms', 'tree-select']},
     ]},
     {title: 'Utils', children: [
       {title: 'Cropper 图片裁剪', routerLink: ['/showcase', 'cropper']},

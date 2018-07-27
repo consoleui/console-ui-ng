@@ -14,6 +14,7 @@ const routes: Routes = [
       },
       { path: 'chips', loadChildren: 'app/showcase/forms-showcase/chips-showcase/chips-showcase.module#ChipsShowcaseModule' },
       { path: 'radio', loadChildren: 'app/showcase/forms-showcase/radio-showcase/radio-showcase.module#RadioShowcaseModule' },
+      { path: 'tree-select', loadChildren: 'app/showcase/forms-showcase/tree-select-showcase/tree-select-showcase.module#TreeSelectShowcaseModule' },
     ]
   }
 ];

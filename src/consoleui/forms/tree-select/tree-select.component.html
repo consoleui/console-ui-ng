@@ -7,9 +7,11 @@
         (blur)="onInputBlur($event)" (keydown)="onKeydown($event)" [disabled]="disabled" [attr.tabindex]="tabindex">
   </div>
 
-  <span [ngClass]="{'cui-dropdown-label':true,'cui-dropdown-label-empty':!label}">{{label||'empty'}}</span>
-  <div class="cui-dropdown-trigger dropdown-toggle"></div>
-  <div *ngIf="allowClear && value" class="cui-dropdown-clear" (click)="clearValue()"><i class="fa fa-close"></i></div>
+  <span *ngIf="!!value" [ngClass]="{'cui-dropdown-label':true,'cui-dropdown-label-empty':!label}">{{label||'empty'}}</span>
+  <span *ngIf="!value" class="ant-select-selection__placeholder">{{placeholder || '请选择...'}}</span>
+  <!-- <div class="cui-dropdown-trigger dropdown-toggle"></div> -->
+  <div class="ant-select-arrow"></div>
+  <div *ngIf="allowClear && value" class="ant-select-selection__clear" (click)="clearValue()"></div>
 
   <div #panel [ngClass]="'cui-dropdown-panel hidden'" [style.display]="panelVisible ? 'block' : 'none'"
       [ngStyle]="panelStyle" [class]="panelStyleClass">
