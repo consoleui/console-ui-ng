@@ -22,6 +22,7 @@ export interface FilterFunction {
 export interface FileUploaderOptions {
   allowedMimeType?: string[];
   allowedFileType?: string[];
+  accept?: string | string[];
   autoUpload?: boolean;
   isHTML5?: boolean;
   filters?: FilterFunction[];
@@ -87,6 +88,10 @@ export class FileUploader {
 
     if (this.options.allowedMimeType) {
       this.options.filters.unshift({ name: 'mimeType', fn: this._mimeTypeFilter });
+    }
+
+    if (this.options.accept) {
+      this.options.filters.unshift({ name: 'accept', fn: this._acceptFilter });
     }
 
     for (let i = 0; i < this.queue.length; i++) {
@@ -266,6 +271,29 @@ export class FileUploader {
     let type = FileType.getMimeClass(item);
     return !(this.options.allowedFileType &&
       this.options.allowedFileType.indexOf(FileType.getMimeClass(item)) === -1);
+  }
+
+  public _acceptFilter(file: FileLikeObject): boolean {
+    console.log('_acceptFilter')
+    const acceptedFiles = this.options.accept;
+    if (file && acceptedFiles) {
+      const acceptedFilesArray = Array.isArray(acceptedFiles) ? acceptedFiles : acceptedFiles.split(',');
+      const fileName = '' + file.name;
+      const mimeType = '' + file.type;
+      const baseMimeType = mimeType.replace(/\/.*$/, '');
+
+      return acceptedFilesArray.some(type => {
+        const validType = type.trim();
+        if (validType.charAt(0) === '.') {
+          return fileName.toLowerCase().indexOf(validType.toLowerCase(), fileName.toLowerCase().length - validType.toLowerCase().length) !== -1;
+        } else if (/\/\*$/.test(validType)) {
+          // This is something like a image/* mime type
+          return baseMimeType === validType.replace(/\/.*$/, '');
+        }
+        return mimeType === validType;
+      });
+    }
+    return true;
   }
 
   public _onErrorItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): void {

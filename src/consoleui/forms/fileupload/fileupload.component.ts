@@ -80,7 +80,8 @@ export class FileuploadComponent implements OnInit, OnChanges {
             url: this.url,
             itemAlias: this.name,
             autoUpload: this.auto,
-            allowedFileType: this.allowedFileType,
+            // allowedFileType: this.allowedFileType,
+            accept: this.accept,
             maxFileSize: this.maxFileSize
         });
 
@@ -103,6 +104,10 @@ export class FileuploadComponent implements OnInit, OnChanges {
             let err: ErrorMessage;
             switch (filter.name) {
                 case 'fileType': {
+                    err = { code: filter.name, message: `文件'${item.name}'格式不支持, 允许的格式 ${this.accept}` };
+                    break;
+                }
+                case 'accept': {
                     err = { code: filter.name, message: `文件'${item.name}'格式不支持, 允许的格式 ${this.accept}` };
                     break;
                 }
@@ -138,7 +143,8 @@ export class FileuploadComponent implements OnInit, OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['accept'] && this.uploader) {
-            this.uploader.options.allowedFileType = this.allowedFileType;
+            // this.uploader.options.allowedFileType = this.allowedFileType;
+            this.uploader.options.accept = this.accept;
         }
         if (changes['maxFileSize'] && this.uploader) {
             this.uploader.options.maxFileSize = this.maxFileSize;
