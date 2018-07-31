@@ -96,7 +96,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy, A
         toolbar: 'basic',
         removePlugins: 'elementspath',
         // filebrowserBrowseUrl: '/api/upload/file',
-        filebrowserImageUploadUrl: '/api/ckeditor/upload/image',
+        filebrowserImageUploadUrl: '/api/ckeditor/upload/image?responseType=json',
         linkShowAdvancedTab: false,
         linkShowTargetTab: false,
     };
@@ -106,12 +106,13 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy, A
     }
     get config() {
         if (this.urlWithBasePath) {
+            const separator = this._config.filebrowserImageUploadUrl && this._config.filebrowserImageUploadUrl.includes("?") ? '&' : "?";
             if (this._config) {
                 this._config.filebrowserImageUploadUrl = this._config.filebrowserImageUploadUrl ?
-                    this._config.filebrowserImageUploadUrl + '?withBasePath=1' : null;
+                    this._config.filebrowserImageUploadUrl + `${separator}withBasePath=1` : null;
             } else {
                 this.defaultConfig.filebrowserImageUploadUrl = this.defaultConfig.filebrowserImageUploadUrl ?
-                    this.defaultConfig.filebrowserImageUploadUrl + '?withBasePath=1' : null;
+                    this.defaultConfig.filebrowserImageUploadUrl + `${separator}withBasePath=1` : null;
             }
         }
         return this._config || this.defaultConfig;
