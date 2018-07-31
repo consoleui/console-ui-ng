@@ -106,11 +106,14 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy, A
     }
     get config() {
         if (this.urlWithBasePath) {
-            const separator = this._config.filebrowserImageUploadUrl && this._config.filebrowserImageUploadUrl.includes("?") ? '&' : "?";
             if (this._config) {
+                const separator = this._config.filebrowserImageUploadUrl && this._config.filebrowserImageUploadUrl.includes("?")
+                        ? '&' : "?";
                 this._config.filebrowserImageUploadUrl = this._config.filebrowserImageUploadUrl ?
                     this._config.filebrowserImageUploadUrl + `${separator}withBasePath=1` : null;
             } else {
+                const separator = this.defaultConfig.filebrowserImageUploadUrl && this.defaultConfig.filebrowserImageUploadUrl.includes("?")
+                        ? '&' : "?";
                 this.defaultConfig.filebrowserImageUploadUrl = this.defaultConfig.filebrowserImageUploadUrl ?
                     this.defaultConfig.filebrowserImageUploadUrl + `${separator}withBasePath=1` : null;
             }
