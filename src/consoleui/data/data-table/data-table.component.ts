@@ -2,13 +2,16 @@ import { Component, OnInit, Input, Output, EventEmitter,
   OnChanges, SimpleChanges, SimpleChange,
   Directive,
   ContentChild, ContentChildren, TemplateRef, AfterContentInit,
-  QueryList
+  QueryList,
+  Inject,
+  Optional
 } from '@angular/core';
 
 import { CuiPagination } from '../pagination';
 
 import { Column } from './defs/api';
 import { ColTplDirective } from './col-tpl.directive';
+import { CuiRootConfig, CUI_ROOT_CONFIG } from '../../consoleui-config';
 
 @Component({
   selector: 'cui-data-table',
@@ -51,7 +54,31 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
   _indeterminate;
   _anyCheckable;
 
-  constructor() { }
+  _showSerialNumber: boolean;
+  _serialNumberLabel: string;
+
+  constructor(
+    @Inject(CUI_ROOT_CONFIG) @Optional() private cuiRootConfig: any | undefined
+  ) { }
+
+  @Input()
+  set showSerialNumber(value) {
+    this._showSerialNumber = value;
+  }
+
+  get showSerialNumber(): boolean {
+    return this._showSerialNumber || (this.cuiRootConfig && this.cuiRootConfig.dataTable && this.cuiRootConfig.dataTable.showSerialNumber);
+  }
+
+  @Input()
+  set serialNumberLabel(value) {
+    this._serialNumberLabel = value;
+  }
+
+  get serialNumberLabel(): string {
+    return this._serialNumberLabel ||
+      (this.cuiRootConfig && this.cuiRootConfig.dataTable && this.cuiRootConfig.dataTable.serialNumberLabel) || '序号';
+  }
 
   get isMultipleSelect() {
     return this.selectType && this.selectType == 'checkbox';
