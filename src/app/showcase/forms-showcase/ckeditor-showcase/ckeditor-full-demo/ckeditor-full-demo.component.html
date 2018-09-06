@@ -1,0 +1,6 @@
+<ckeditor [(ngModel)]="content" debounce="500" [config]="{toolbar: 'full'}" [urlWithBasePath]="true"></ckeditor>
+
+{{content}}
+
+<div [innerHtml]="sanitizer.bypassSecurityTrustHtml(content)"></div>
+<!-- <div [innerHtml]="content"></div> -->

@@ -11,7 +11,7 @@ export class TreeNode implements CuiTreeNode {
     constructor (public data: any, public parent: CuiTreeNode, public treeModel: CuiTreeModel, index: number) {
         this.index = index;
 
-        if (this.getField('selected')) {
+        if (this.getField('selected') || treeModel.isSelected(this)) {
             this.treeModel.addSelection(this);
         }
 
@@ -43,6 +43,10 @@ export class TreeNode implements CuiTreeNode {
 
     get hasChildren(): boolean {
         return this.getField('hasChildren') || !!this.children;
+    }
+
+    set hasChildren(val: boolean) {
+        this.setField('hasChildren', val);
     }
 
     get leaf(): boolean {
@@ -112,9 +116,9 @@ export class TreeNode implements CuiTreeNode {
         this.data[this.config.data.key[key] || key] = value;
     }
 
-    loadChildren() {
+    loadChildren(force: boolean = false) {
         let dataChildren = this.getField('children');
-        if (!dataChildren) {
+        if (!dataChildren || force) {
             if (this.config.async && this.config.async.enable && this.hasChildren && !this.loading) {
                 this.loading = true;
                 this.config.async.loadChildren(this).subscribe(data => {

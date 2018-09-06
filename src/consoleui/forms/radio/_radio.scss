@@ -26,3 +26,39 @@
     vertical-align: middle;
     display: inline-block;
 }
+
+.custom-radio {
+    .custom-control-label::before {
+        background-color: #fff;
+    }
+
+    .custom-control-label::after {
+        border: 1px solid #d9d9d9;
+        border-radius: 50%;
+        background-color: #ffffff;
+        width: 14px;
+        height: 14px;
+    }
+
+    &:hover .custom-control-label::after {
+        border: 1px solid #007bff;
+    }
+  
+    .custom-control-input:checked ~ .custom-control-label {
+      &::before {
+        background-color: #fff;
+      }
+      &::after {
+        border: 1px solid #007bff;
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='%23007bff'/%3E%3C/svg%3E");
+        background-color: unset;
+      }
+    }
+  
+    .custom-control-input:disabled {
+      &:checked ~ .custom-control-label::before {
+        // background-color: #fff;
+      }
+    }
+  }
+  

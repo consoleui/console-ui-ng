@@ -2,18 +2,18 @@
   <div class="cui-treenode" [class]="node.styleClass" [ngClass]="{'cui-treenode-leaf': isLeaf(), 'cui-treenode-disabled': node.disabled}">
     <div class="cui-treenode-content" (click)="onNodeClick($event)" (contextmenu)="onRightClick($event)" (touchend)="onNodeTouchEnd()"
         [ngClass]="{'cui-treenode-selectable':tree.selectionMode && node.selectable !== false && !node.disabled, 'selected': isSelected}">
-      <span class="cui-treenode-toggler fa fa-fw" [ngClass]="{'fa-caret-right': node.hasChildren, 'fa-rotate-45': node.expanded}" (click)="toggle($event)"></span>
-      <span class="cui-treenode-chkbox" *ngIf="tree.selectionMode == 'checkbox'">
-        <!-- <input type="checkbox" [checked]="isSelected"/> -->
-        <div class="cui-chkbox-box">
-          <span class="cui-chkbox-icon fa" [ngClass]="{'fa-check': isSelected, 'fa-minus':node.partialSelected}"></span>
-        </div>
-      </span>
-      <span [class]="getIcon()" *ngIf="hasIcon()"></span>
-      <span class="cui-treenode-label">
-        <ng-container *ngIf="!tree.nodeTemplate">{{node.label}}</ng-container>
-        <ng-container *ngIf="tree.nodeTemplate" [ngTemplateOutlet]="nodeTemplate" [ngOutletContext]="{node: node}"></ng-container>
-      </span>
+      <ng-container *ngIf="!tree.nodeTemplate">
+        <span class="cui-treenode-toggler fa fa-fw" [ngClass]="{'fa-caret-right': node.hasChildren, 'fa-rotate-45': node.expanded}" (click)="toggle($event)"></span>
+        <span class="cui-treenode-chkbox" *ngIf="tree.selectionMode == 'checkbox'">
+          <!-- <input type="checkbox" [checked]="isSelected"/> -->
+          <div class="cui-chkbox-box">
+            <span class="cui-chkbox-icon fa" [ngClass]="{'fa-check': isSelected, 'fa-minus':node.partialSelected}"></span>
+          </div>
+        </span>
+        <span [class]="getIcon()" *ngIf="hasIcon()"></span>
+        <span class="cui-treenode-label">{{node.label}}</span>
+      </ng-container>
+      <ng-container *ngIf="tree.nodeTemplate" [ngTemplateOutlet]="tree.nodeTemplate" [ngOutletContext]="{$implicit: node, node: node, me: me}"></ng-container>
     </div>
     <div class="cui-treenode-children loading" *ngIf="node.hasChildren && node.expanded && node.loading">Loading</div>
     <div class="cui-treenode-children" style="display: none;" *ngIf="node.hasChildren && node.expanded && !node.loading" [style.display]="node.expanded ? 'block' : 'none'">

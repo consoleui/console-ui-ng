@@ -15,6 +15,7 @@ import { CuiLayerModule } from './layer/layer.module';
 import { CuiNavigationModule } from './navigation/navigation.module';
 import { CuiUeditorModule } from './forms/ueditor/ueditor.module';
 import { CuiTreeModule } from './data/tree/tree.module';
+import { CuiRootConfig, CUI_ROOT_CONFIG } from './consoleui-config';
 
 const CUI_MODULES = [
   CuiCoreModule,
@@ -44,11 +45,11 @@ const CUI_MODULES = [
 })
 export class ConsoleuiModule {
 
-    static forRoot(options?: any): ModuleWithProviders {
+    static forRoot(options?: CuiRootConfig): ModuleWithProviders {
         return {
             ngModule: ConsoleuiModule,
             providers: [
-
+              { provide: CUI_ROOT_CONFIG, useValue: options },
             ]
         };
     }
@@ -58,7 +59,7 @@ export class ConsoleuiModule {
 export * from './layer';
 export * from './data';
 export * from './navigation';
-export * from './forms/dynamic-form';
+// export * from './forms/dynamic-form';
 export * from './forms/validators';
 export * from './messages';
 export * from './forms/ueditor';

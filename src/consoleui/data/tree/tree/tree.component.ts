@@ -1,11 +1,11 @@
 import {
   Component, OnInit, AfterContentInit, OnDestroy, Input, Output,
-  EventEmitter, ContentChildren, QueryList, OnChanges
+  EventEmitter, ContentChildren, QueryList, OnChanges, TemplateRef, ContentChild
 } from '@angular/core';
 import { CuiTreeNode, CuiTreeConfig, defaultTreeConfig } from '../defs';
 import { CuiTemplateDirective } from '../../../core/template/template.directive';
 import { TreeModel } from '../model/tree-model';
-// import { DoCheck, IterableDiffer, IterableDiffers } from '@angular/core';
+// import { DoCheck, IterableDiffer, IterableDiffers, ContentChild } from '@angular/core';
 
 @Component({
   selector: 'cui-tree',
@@ -33,6 +33,7 @@ export class TreeComponent implements OnInit, AfterContentInit, OnChanges, OnDes
   @Output() nodeCollapse: EventEmitter<any> = new EventEmitter();
 
   @ContentChildren(CuiTemplateDirective) templates: QueryList<any>;
+  @ContentChild("nodeTemplate") nodeTemplate: TemplateRef<any>;
 
   nodes: CuiTreeNode[];
   nodeTouched: boolean;
@@ -222,7 +223,7 @@ export class TreeComponent implements OnInit, AfterContentInit, OnChanges, OnDes
     let index: number = -1;
 
     if (this.selectionMode && this.selection) {
-      index = this.selection.findIndex((n, i) => n == node);
+      index = this.selection.findIndex((n, i) => n == node || n.id == node.id);
     }
 
     return index;
@@ -314,4 +315,33 @@ export class TreeComponent implements OnInit, AfterContentInit, OnChanges, OnDes
   removeSelection(node: CuiTreeNode) {
     this.treeModel.removeSelection(node);
   }
+
+  refresh(node?: CuiTreeNode, mode: 'rate' | 'children' = 'rate') {
+    switch (mode) {
+      case 'children':
+        this.refreshChildren(node);
+        break;
+      case 'rate':
+      default:
+        this.refreshRate(node);
+        break;
+    }
+  }
+
+  refreshRate(node: CuiTreeNode) {
+    let parent = node && node.parent;
+    this.refreshChildren(parent);
+  }
+
+  refreshChildren(node: CuiTreeNode) {
+    node = node || this.treeModel.virtualRoot;
+    if (node) {
+      if (!node.hasChildren) {
+        node.hasChildren = true;
+        node.expanded = true;
+      }
+      node.loadChildren(true);
+    }
+  }
+
 }

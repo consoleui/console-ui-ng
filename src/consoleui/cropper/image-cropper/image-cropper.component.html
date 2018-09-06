@@ -2,7 +2,16 @@
   <div class="loading-block" *ngIf="isLoading">
     <div class="spinner"></div>
   </div>
-  <div class="cropper-miss-image" *ngIf="loadError">
+  <div *ngIf="loadError">
+    <ng-container [ngTemplateOutlet]="contentTpl || defaultContentTpl"></ng-container>
+  </div>
+  <div class="cropper" [ngClass]="{'invisible': loadError, 'visible': !loadError}">
+    <img #image [src]="imageUrl" alt="image" (load)="imageLoaded($event)" (haschange)="imageLoaded($event)" crossorigin="anonymous" (error)="imageLoadError($event)">
+  </div>
+</div>
+
+<ng-template #defaultContentTpl>
+  <div class="cropper-miss-image">
     <div class="loader">
       <p>
         <label class="browse">
@@ -12,7 +21,4 @@
       </p>
     </div>
   </div>
-  <div class="cropper" [ngClass]="{'invisible': loadError, 'visible': !loadError}">
-    <img #image [src]="imageUrl" alt="image" (load)="imageLoaded($event)" (haschange)="imageLoaded($event)" crossorigin="anonymous" (error)="imageLoadError($event)">
-  </div>
-</div>
+</ng-template>

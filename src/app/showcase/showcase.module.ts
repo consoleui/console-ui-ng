@@ -7,6 +7,7 @@ import { HttpModule } from "@angular/http";
 
 import { ShowcaseRoutingModule } from './showcase-routing.module';
 import { ShowcaseComponent } from './showcase.component';
+import { ConsoleuiModule } from 'consoleui';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { ShowcaseComponent } from './showcase.component';
     NgZorroAntdModule.forRoot(),
     SharedModule,
     ShowcaseRoutingModule,
+    ConsoleuiModule.forRoot({dataTable: {showSerialNumber: false}})
   ],
   declarations: [ShowcaseComponent],
   bootstrap: [ShowcaseComponent]

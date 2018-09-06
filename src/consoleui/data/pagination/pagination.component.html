@@ -22,9 +22,9 @@
   </li>
 </ul> -->
 
-<div class="cui-pagination" *ngIf='!paginationTemplate'>
+<!-- <div class="cui-pagination" *ngIf='!paginationTemplate'>
     <span>共 {{pagination.totalElements}} 条记录，</span>
-    <!-- <a >每页 {{pagination.size}} 条 <i class="fa fa-caret-up"></i></a> -->
+    <!- <a >每页 {{pagination.size}} 条 <i class="fa fa-caret-up"></i></a> ->
     <span>
       每页
       <span class='gobox'>
@@ -50,7 +50,33 @@
     <span>{{pagination.number + 1}}/{{pagination.totalPages}}</span>
     <a href="javascript:;" class="page-action-item" [class.disabled]="pagination.last" (click)="next()"><i class="fa fa-lg fa-angle-right"></i> </a>
     <a href="javascript:;" class="page-action-item" [class.disabled]="pagination.last" (click)="last()"><i class="fa fa-lg fa-angle-double-right"></i> </a>
-</div>
+</div> -->
+<!-- ant-pagination-prev ant-pagination-disabled
+  ant-pagination-item-link
+ant-pagination-item ant-pagination-item-active
+ant-pagination-next -->
+<!-- <ul class="ant-pagination">
+  <li class="ant-pagination-prev" [class.ant-pagination-disabled]="pagination.first" (click)="first()">
+    <a class="ant-pagination-item-link">首页</a>
+  </li>
+</ul> -->
+<span>共 {{pagination.totalElements}} 条记录，</span>
+<button nz-button [nzType]="'default'" (click)="first()" [disabled]="pagination.first"><i class="anticon anticon-verticle-right"></i></button>
+<button nz-button [nzType]="'default'" (click)="prev()" [disabled]="pagination.first"><i class="anticon anticon-left"></i></button>
+<input nz-input #totalPages [(ngModel)]="totalPagesNumber" name="totalPagesNumber" id="pageNumberInput" (keydown)="gotoTotalPages($event, totalPagesNumber)" />
+<span>/</span>
+<span>{{pagination.totalPages}}</span>
+<button nz-button [nzType]="'default'" (click)="next()" [disabled]="pagination.last"><i class="anticon anticon-right"></i></button>
+<button nz-button [nzType]="'default'" (click)="last()" [disabled]="pagination.last"><i class="anticon anticon-verticle-left"></i></button>
+<nz-select #pageSize name="pageSize" [(ngModel)]="pagination.size" (ngModelChange)="first()">
+  <nz-option
+    *ngFor="let option of PER_PAGE_SIZES"
+    [nzLabel]="option.label"
+    [nzValue]="option.value"
+    [nzDisabled]="option.disabled">
+  </nz-option>
+</nz-select>
+
 
 <div class="cui-pagination" *ngIf="paginationTemplate">
     <ng-container [ngTemplateOutlet]="paginationTemplate" [ngOutletContext]="{pagination: pagination}"></ng-container>

@@ -27,30 +27,6 @@
         justify-content: center;
         align-items: center;
     }
-    cui-checkbox {
-        label {
-            margin-top: 0.25rem;
-            margin-bottom: 0;
-        }
-        .custom-control {
-            min-height: 1.125rem;
-            &-indicator {
-                top: 0;
-            }
-        }
-    }
-    cui-radio {
-        label {
-            margin-top: 0.25rem;
-            margin-bottom: 0;
-        }
-        .custom-control {
-            min-height: 1.15rem;
-            &-indicator {
-                top: 0;
-            }
-        }
-    }
 }
 
 .list-search-bar {
@@ -121,10 +97,6 @@
             }
         }
     }
-}
-
-button {
-    height: 30px;
 }
 
 // .ant-input{

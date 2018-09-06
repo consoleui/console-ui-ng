@@ -18,7 +18,7 @@ export class TreeNodeComponent implements OnInit {
   @Input() isRoot: boolean;
   @Input() isFirst: boolean;
   @Input() isLast: boolean;
-
+  me = this;
   // path, level
   // dataDiffer: KeyValueDiffer<any, any>;
   // node: TreeNode;

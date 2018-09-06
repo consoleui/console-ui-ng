@@ -1,0 +1,6 @@
+<ckeditor [(ngModel)]="content" debounce="500" [config]="config"></ckeditor>
+
+{{content}}
+
+<div [innerHtml]="sanitizer.bypassSecurityTrustHtml(content)"></div>
+<!-- <div [innerHtml]="content"></div> -->

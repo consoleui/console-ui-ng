@@ -69,6 +69,10 @@ export class TreeModel implements CuiTreeModel {
     }
 
     update() {
+        if (this.selection) {
+            this.selection = [];
+        }
+
         let virtualRootConfig = {
             virtual: true,
             [this.config.data.key.children]: this.nodes,
@@ -80,6 +84,7 @@ export class TreeModel implements CuiTreeModel {
         if (this.config.async && this.config.async.enable && !this.nodes) {
             this.virtualRoot.loadChildren();
         }
+
         // this.roots = this.virtualRoot.children;
     }
 
@@ -87,7 +92,7 @@ export class TreeModel implements CuiTreeModel {
         let index: number = -1;
 
         if (this.selection) {
-            index = this.selection.findIndex((n, i) => n == node);
+            index = this.selection.findIndex((n, i) => n == node || n.id == node.id);
         }
 
         return index;

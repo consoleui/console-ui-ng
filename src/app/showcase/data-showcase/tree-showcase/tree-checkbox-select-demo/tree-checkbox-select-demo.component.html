@@ -1,3 +1,8 @@
 <div style="width: 300px;">
-    <cui-tree id="4" [value]="nodes" selectionMode="checkbox" (selectionChange)="selectionChange($event)"></cui-tree>
+    <cui-tree id="4" [value]="nodes" selectionMode="checkbox" (selectionChange)="selectionChange($event)">
+        <ng-template #nodeTemplate let-node="node">
+            <i class="fa fa-fw" [ngClass]="{'fa-book text-primary': node.leaf, 'fa-folder': !node.leaf && !node.expanded, 'fa-folder-open': !node.leaf && node.expanded, 'text-warning': !node.leaf}"></i>
+            {{node.label}}
+        </ng-template>
+    </cui-tree>
 </div>
