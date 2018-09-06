@@ -17,7 +17,7 @@ import { ConsoleuiModule } from 'consoleui';
     NgZorroAntdModule.forRoot(),
     SharedModule,
     ShowcaseRoutingModule,
-    ConsoleuiModule.forRoot()
+    ConsoleuiModule.forRoot({dataTable: {showSerialNumber: false}})
   ],
   declarations: [ShowcaseComponent],
   bootstrap: [ShowcaseComponent]
