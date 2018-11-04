@@ -11,6 +11,10 @@ export interface Column {
     width?: number | string;
     style?: Object;
     styleClass?: string;
+    showSort?: boolean;
+    sortKey?: string;
+    sort?: 'descend' | 'ascend' | null;
+    sortChange?: Function;
 }
 
 export interface DataTebleConfig {
