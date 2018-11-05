@@ -157,6 +157,7 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
         }
       }
     });
+    pagination.sort = undefined;
   }
 
   _refreshSel() {
