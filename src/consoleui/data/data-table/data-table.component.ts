@@ -128,9 +128,9 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
           .map(it => it.trim())
           .map(it => {
             const sortVals = it.split(/,|, /);
-            if (sortVals.length == 1) {
+            if (!!sortVals && sortVals.length == 1) {
               return {sortKey: sortVals[0], sort: undefined};
-            } else if (sortVals.length == 2) {
+            } else if (!!sortVals && sortVals.length == 2) {
               return {sortKey: sortVals[0], sort: sortVals[1]};
             }
             return undefined;
