@@ -13,7 +13,7 @@ export interface Column {
     styleClass?: string;
     showSort?: boolean;
     sortKey?: string;
-    sort?: 'descend' | 'ascend' | null;
+    sort?: 'DESC' | 'ASC' | null;
     sortChange?: Function;
 }
 
