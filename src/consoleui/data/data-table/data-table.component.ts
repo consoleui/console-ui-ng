@@ -121,8 +121,8 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
     }
 
     let paginationChange: SimpleChange = changes['pagination'];
-    if (paginationChange) {
-     this._refreshSort(paginationChange.currentValue);
+    if (paginationChange && paginationChange.currentValue) {
+      this._refreshSort(paginationChange.currentValue);
     }
   }
 
