@@ -6,12 +6,12 @@ export interface CuiPagination {
     numberOfElements: number;
     size: number;
     sort: string | {
-        ascending?: boolean
-        descending?: boolean
-        direction?: string
-        ignoreCase?: boolean
-        nullHandling?: string
-        property: string
+        ascending?: boolean;
+        descending?: boolean;
+        direction?: string;
+        ignoreCase?: boolean;
+        nullHandling?: string;
+        property: string;
     }[];
     totalElements: number;
     totalPages: number;
