@@ -1,8 +1,8 @@
 <ng-container *ngIf="mode == 'file' && multiple">
-    <div class="btn btn-primary cui-fileupload-choose">
+    <div class="btn btn-primary cui-fileupload-choose" (click)="chooseFile()">
         <span class="fa fa-plus"></span>
         <span>选择文件...</span>
-        <input type="file" class="form-control-file" name="file" [multiple]="multiple" cuiFileSelect [uploader]="uploader"
+        <input #file type="file" class="form-control-file" name="file" [multiple]="multiple" cuiFileSelect [uploader]="uploader"
             (onFileSelected)="onSelected($event)" [accept]="accept">
     </div>
     <ng-container *ngIf="!auto">
@@ -27,7 +27,7 @@
 </ng-container>
 
 <ng-container *ngIf="mode == 'file' && !multiple">
-    <div class="input-group cui-fileupload-choose">
+    <div class="input-group cui-fileupload-choose" (click)="chooseFile()">
         <div class="form-control p-0" style="position: relative;">
             <div *ngIf="hasFiles()" class="progress rounded-0 input-progress">
                 <div *ngIf="!uploader.queue[0]?.isError" class="progress-bar progress-bar-striped" [ngClass]="{'bg-success': uploader.queue[0]?.isSuccess}" [style.width]="uploader.queue[0]?.progress+'%'"></div>
@@ -44,7 +44,7 @@
             <span>选择文件</span>
             </div>
         </span>
-        <input type="file" class="form-control-file" name="file" cuiFileSelect [uploader]="uploader"
+        <input #file type="file" class="form-control-file" name="file" cuiFileSelect [uploader]="uploader"
             (onFileSelected)="onSelected($event)" [accept]="accept">
     </div>
     <div *ngIf="hasFiles()">
@@ -58,7 +58,7 @@
 </ng-container>
 
 <ng-container *ngIf="mode == 'image' && !multiple">
-    <div class="cui-fileupload-choose image-holder-wrapper">
+    <div class="cui-fileupload-choose image-holder-wrapper" (click)="chooseFile()">
         <span *ngIf="!hasFiles() && !imageHolder" class="fa fa-image image-holder text-center"></span>
         <span *ngIf="!hasFiles() && imageHolder">
             <img [src]="imageHolder" [alt]="imageHolder" width="100%">
@@ -70,7 +70,7 @@
         <div *ngIf="hasFiles()" class="progress" style="height: 3px;">
             <div class="progress-bar progress-bar-striped" [ngClass]="{'bg-success': uploader.progress==100}" [style.width]="uploader.progress+'%'"></div>
         </div>
-        <input [accept]="accept" type="file" class="form-control-file" name="files" cuiFileSelect 
+        <input #file [accept]="accept" type="file" class="form-control-file" name="files" cuiFileSelect 
             (onFileSelected)="onSelected($event)" [uploader]="uploader">
     </div>
 </ng-container>

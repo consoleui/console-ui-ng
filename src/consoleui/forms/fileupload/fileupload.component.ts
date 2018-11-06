@@ -40,6 +40,7 @@ export class FileuploadComponent implements OnInit, OnChanges {
     @Output() error = new EventEmitter();
 
     @ViewChildren(FileSelectDirective) fileSelectors: QueryList<FileSelectDirective>;
+    @ViewChild('file') file: ElementRef;
 
     public uploader: FileUploader; // = new FileUploader({url: URL});
     public results: any[];
@@ -205,5 +206,11 @@ export class FileuploadComponent implements OnInit, OnChanges {
             }).filter(item => item !== null);
 
         this.uploadComplete.emit(this.multiple ? this.results : (this.results && this.results.length > 0 ? this.results[0] : undefined));
+    }
+
+    chooseFile() {
+        if (this.file) {
+            (this.file.nativeElement as HTMLInputElement).click();
+        }
     }
 }
