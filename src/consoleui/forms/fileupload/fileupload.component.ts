@@ -35,6 +35,7 @@ export class FileuploadComponent implements OnInit, OnChanges {
     @Input() maxFileSize: number = 1024 * 1024;
     @Input() imageHolder: string;
     @Input() showErr: boolean = true;
+    @Input() isCsrfTokenHeader = true;
 
     @Output() uploadComplete = new EventEmitter();
     @Output() error = new EventEmitter();
@@ -76,14 +77,28 @@ export class FileuploadComponent implements OnInit, OnChanges {
 
     constructor(private sanitizer: DomSanitizer) { }
 
+    private _getXsrfToken() {
+        const tokenName = "XSRF-TOKEN";
+        const reg = new RegExp("(^| )" + tokenName + "=([^;]*)(;|$)");
+        const matched = document.cookie.match(reg);
+        if (!!matched && matched.length >= 3) {
+            return unescape(matched[2]);
+        }
+    }
+
     ngOnInit() {
+        const csrfToken = this._getXsrfToken();
+        const csrfTokenHeader = (this.isCsrfTokenHeader && csrfToken) ? {name: "X-XSRF-TOKEN", value: csrfToken} : undefined;
+        const headers = csrfTokenHeader ? [csrfTokenHeader] : [];
+
         this.uploader = new FileUploader({
             url: this.url,
             itemAlias: this.name,
             autoUpload: this.auto,
             // allowedFileType: this.allowedFileType,
             accept: this.accept,
-            maxFileSize: this.maxFileSize
+            maxFileSize: this.maxFileSize,
+            headers: headers
         });
 
         // this.uploader.
@@ -93,7 +108,7 @@ export class FileuploadComponent implements OnInit, OnChanges {
         };
 
         this.uploader.onErrorItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any => {
-            console.log({ item, response, status, headers })
+            // console.log({ item, response, status, headers })
             return { item, response, status, headers };
         };
 
