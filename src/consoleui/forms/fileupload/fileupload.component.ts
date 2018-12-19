@@ -16,6 +16,19 @@ export interface ErrorMessage {
     message: string;
 }
 
+export function getCookie(name) {
+    const cookies = document.cookie;
+    const list = cookies.split("; ");          // 解析出名/值对列表
+
+    for (let i = 0; i < list.length; i++) {
+        const arr = list[i].split("=");          // 解析出名和值
+        if (arr[0] == name) {
+            return decodeURIComponent(arr[1]);   // 对cookie值解码
+        }
+    }
+    return "";
+}
+
 @Component({
     selector: 'cui-fileupload',
     templateUrl: './fileupload.component.html',
@@ -79,16 +92,12 @@ export class FileuploadComponent implements OnInit, OnChanges {
 
     private _getXsrfToken() {
         const tokenName = "XSRF-TOKEN";
-        const reg = new RegExp("(^| )" + tokenName + "=([^;]*)(;|$)");
-        const matched = document.cookie.match(reg);
-        if (!!matched && matched.length >= 3) {
-            return unescape(matched[2]);
-        }
+        return getCookie(tokenName);
     }
 
     ngOnInit() {
         const csrfToken = this._getXsrfToken();
-        const csrfTokenHeader = (this.isCsrfTokenHeader && csrfToken) ? {name: "X-XSRF-TOKEN", value: csrfToken} : undefined;
+        const csrfTokenHeader = (this.isCsrfTokenHeader && !!csrfToken) ? { name: "X-XSRF-TOKEN", value: csrfToken } : undefined;
         const headers = csrfTokenHeader ? [csrfTokenHeader] : [];
 
         this.uploader = new FileUploader({
