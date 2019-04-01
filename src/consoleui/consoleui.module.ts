@@ -55,7 +55,7 @@ export class ConsoleuiModule {
     }
 }
 
-
+export * from './core/core.module';
 export * from './layer';
 export * from './data';
 export * from './navigation';
