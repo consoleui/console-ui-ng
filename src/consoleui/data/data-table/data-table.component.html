@@ -23,6 +23,7 @@
         <label *ngIf="selectType=='checkbox'" nz-checkbox [(ngModel)]="_allChecked" [nzIndeterminate]="_indeterminate" (ngModelChange)="checkAll($event)"></label>
         <span *ngIf="selectType=='radio'"></span>
       </th>
+      <th *ngIf="showSerialNumber" style="width: 40px;">{{serialNumberLabel}}</th>
       <th *ngFor="let col of columnsVisible" [ngStyle]="col.style" [ngClass]="col.styleClass">
         <div [class.cui-table-column-sortable]="col.showSort" (click)="updateSort(col)">
           {{col.title || col.name || col.data | uppercase}}
@@ -37,7 +38,7 @@
     </tr>
   </thead>
   <tbody *ngIf="data && data.length > 0">
-    <tr *ngFor="let row of data" > <!-- *ngIf="data && data.length > 0" -->
+    <tr *ngFor="let row of data; index as index" > <!-- *ngIf="data && data.length > 0" -->
       <td *ngIf="!!selectType" class="align-middle">
         <!-- <input type="{{selectType}}" name="ids" value="{{row['id']}}" #ids [checked]="isSelectAll || rowChecked(row)" (change)="selectItem(row, ids.checked)"/> -->
         <!-- <cui-checkbox *ngIf="selectType=='checkbox'" name="ids" [value]="row['id']" #ids [binary]="true" [checked]="isSelectAll || rowChecked(row)"
@@ -45,12 +46,13 @@
         <label *ngIf="selectType=='checkbox'" nz-checkbox [(ngModel)]="row.checked" [nzDisabled]="row.checkable == false" (ngModelChange)="_refreshStatus()"></label>
         <cui-radio *ngIf="selectType=='radio'" name="ids" [(ngModel)]="row.checked" #ids  (ngModelChange)="selectItem(row, ids.checked)"></cui-radio>
       </td>
+      <td *ngIf="showSerialNumber" class="text-center">{{index + 1}}</td>
       <td *ngFor="let col of columnsVisible" [ngStyle]="col.style" [ngClass]="col.styleClass">
         <div *ngIf="!!col.data && !colTpls[col.tpl]">{{row | objectPath: col.data}}</div>
-        <ng-container *ngIf="!!colTpls[col.tpl]" [ngTemplateOutlet]="colTpls[col.tpl]" [ngTemplateOutletContext]="{row: row}"></ng-container>
+        <ng-container *ngIf="!!colTpls[col.tpl]" [ngTemplateOutlet]="colTpls[col.tpl]" [ngTemplateOutletContext]="{row: row, index: index}"></ng-container>
       </td>
       <td class="text-right tb-nowrap" *ngIf="!!rowActions">
-        <ng-container [ngTemplateOutlet]="rowActions" [ngTemplateOutletContext]="{row: row}"></ng-container>
+        <ng-container [ngTemplateOutlet]="rowActions" [ngTemplateOutletContext]="{row: row, index: index}"></ng-container>
       </td>
     </tr>
   </tbody>
@@ -61,7 +63,7 @@
         <!-- <cui-checkbox *ngIf="selectType=='checkbox'" name="toggleSelect" [binary]="true" [(ngModel)]="isSelectAll" (change)="selectAll()"></cui-checkbox> -->
         <label *ngIf="selectType=='checkbox' && actionGroup" nz-checkbox [(ngModel)]="_allChecked" [nzIndeterminate]="_indeterminate" (ngModelChange)="checkAll($event)"></label>
       </td>
-      <td [attr.colspan]='columnsVisible.length + (!!rowActions ? 1 : 0)'>
+      <td [attr.colspan]='columnsVisible.length + (!!rowActions ? 1 : 0) + (!!showSerialNumber ? 1 : 0)'>
         <!-- <ng-content select=".action-group"></ng-content> -->
         <div class="action-group" *ngIf="actionGroup">
           <ng-container [ngTemplateOutlet]="actionGroup"></ng-container>
