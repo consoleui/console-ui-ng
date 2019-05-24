@@ -41,7 +41,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy, A
     @Input() readonly: boolean;
     @Input() debounce: string;
     @Input() toolbarMode: string = "basic"; // for ueditor alias
-    @Input() urlWithBasePath: boolean = false;
+    @Input() urlWithBasePath: boolean = true;
 
     @Output() change = new EventEmitter();
     @Output() editorChange = new EventEmitter();
@@ -233,7 +233,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy, A
                         this.debounceTimeout = setTimeout(() => {
                             this.updateValue(value);
                             this.debounceTimeout = null;
-                        }, parseInt(this.debounce));
+                        }, parseInt(this.debounce, 10));
 
                         // Live update
                     } else {
@@ -260,7 +260,7 @@ export class CKEditorComponent implements OnChanges, AfterViewInit, OnDestroy, A
                             this.debounceTimeout = setTimeout(() => {
                                 this.updateValue(value);
                                 this.debounceTimeout = null;
-                            }, parseInt(this.debounce));
+                            }, parseInt(this.debounce, 10));
 
                             // Live update
                         } else {
