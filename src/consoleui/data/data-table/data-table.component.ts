@@ -119,6 +119,45 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
       console.log(this.selection);
       // this._refreshSel();
     }
+
+    let paginationChange: SimpleChange = changes['pagination'];
+    if (paginationChange && paginationChange.currentValue) {
+      this._refreshSort(paginationChange.currentValue);
+    }
+  }
+
+  private _refreshSort (pagination: CuiPagination) {
+    const pageSort = pagination.sort;
+    let sorts = [];
+    if (Array.isArray(pageSort)) {
+      sorts = pageSort.map(it => {
+        return {sortKey: it.property, sort: it.direction};
+      });
+    } else if (pageSort && pageSort != "") {
+      sorts = pageSort.split(/;|; /)
+        .map(it => it.trim())
+        .map(it => {
+          const sortVals = it.split(/,|, /);
+          if (!!sortVals && sortVals.length == 1) {
+            return {sortKey: sortVals[0], sort: undefined};
+          } else if (!!sortVals && sortVals.length == 2) {
+            return {sortKey: sortVals[0], sort: sortVals[1]};
+          }
+          return undefined;
+        })
+        .filter(it => it !== undefined);
+    }
+    this.columns.forEach(col => {
+      if (col.sortKey) {
+        const sort = sorts.find(it => it.sortKey == col.sortKey);
+        if (!!sort) {
+          col.sort = (!!sort.sort && sort.sort.toUpperCase() == 'DESC') ? 'DESC' : 'ASC';
+        } else {
+          col.sort = undefined;
+        }
+      }
+    });
+    pagination.sort = undefined;
   }
 
   _refreshSel() {
@@ -248,6 +287,28 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
 
   get hasData(): boolean {
     return this.data && this.data.length > 0;
+  }
+
+  updateSort(col) {
+    const {showSort, sortKey, sort} = col;
+
+    if (!showSort) {
+      return ;
+    }
+
+    let sortStr = sortKey;
+    if (sort === 'ASC') {
+      col.sort = 'DESC';
+      sortStr = sortStr + ',' + 'DESC';
+    } else if (sort === 'DESC') {
+      col.sort = undefined;
+      sortStr = "";
+    } else {
+      col.sort = 'ASC';
+      sortStr = sortStr + ',' + 'ASC';
+    }
+    this.pagination.sort = sortStr;
+    this.fireReload();
   }
 
 }

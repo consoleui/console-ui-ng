@@ -70,7 +70,7 @@ export class PlanApiService {
     list = list.slice(pageSize * pageNum, (pageNum + 1) * pageSize);
     let data: Pagination<Plan> = {
       first: pageNum == 0, last: false, number: pageNum, numberOfElements: 115, size: pageSize,
-      sort: null, totalElements: 115, totalPages: 12, content: list
+      sort: '', totalElements: 115, totalPages: 12, content: list
     };
 
     return Observable.of(data);
@@ -91,7 +91,7 @@ export class DataTableSynthesizeDemoComponent implements OnInit {
   loading: boolean = false;
   columns: Column[] = [
     { title: '计划名称', tpl: 'name', style: { 'max-width': '100px', width: '100px' }, styleClass: 'add' },
-    { title: '预算', tpl: 'budget' },
+    { title: '预算', tpl: 'budget', showSort: true, sortKey: 'budget' },
     { title: '发起单位', data: 'submitedGroup.name' },
     { title: '发起人', tpl: 'submitedBy.displayName' },
     { title: '创建时间', tpl: 'createdDate' },

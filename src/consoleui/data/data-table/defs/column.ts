@@ -10,4 +10,8 @@ export interface Column {
     width?: number | string;
     style?: string;
     styleClass?: string;
+    showSort?: boolean;
+    sortKey?: string;
+    sort?: 'DESC' | 'ASC' | null;
+    sortChange?: Function;
 }

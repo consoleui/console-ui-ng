@@ -16,6 +16,19 @@ export interface ErrorMessage {
     message: string;
 }
 
+export function getCookie(name) {
+    const cookies = document.cookie;
+    const list = cookies.split("; ");          // 解析出名/值对列表
+
+    for (let i = 0; i < list.length; i++) {
+        const arr = list[i].split("=");          // 解析出名和值
+        if (arr[0] == name) {
+            return decodeURIComponent(arr[1]);   // 对cookie值解码
+        }
+    }
+    return "";
+}
+
 @Component({
     selector: 'cui-fileupload',
     templateUrl: './fileupload.component.html',
@@ -35,11 +48,13 @@ export class FileuploadComponent implements OnInit, OnChanges {
     @Input() maxFileSize: number = 1024 * 1024;
     @Input() imageHolder: string;
     @Input() showErr: boolean = true;
+    @Input() isCsrfTokenHeader = true;
 
     @Output() uploadComplete = new EventEmitter();
     @Output() error = new EventEmitter();
 
     @ViewChildren(FileSelectDirective) fileSelectors: QueryList<FileSelectDirective>;
+    @ViewChild('file') file: ElementRef;
 
     public uploader: FileUploader; // = new FileUploader({url: URL});
     public results: any[];
@@ -75,14 +90,24 @@ export class FileuploadComponent implements OnInit, OnChanges {
 
     constructor(private sanitizer: DomSanitizer) { }
 
+    private _getXsrfToken() {
+        const tokenName = "XSRF-TOKEN";
+        return getCookie(tokenName);
+    }
+
     ngOnInit() {
+        const csrfToken = this._getXsrfToken();
+        const csrfTokenHeader = (this.isCsrfTokenHeader && !!csrfToken) ? { name: "X-XSRF-TOKEN", value: csrfToken } : undefined;
+        const headers = csrfTokenHeader ? [csrfTokenHeader] : [];
+
         this.uploader = new FileUploader({
             url: this.url,
             itemAlias: this.name,
             autoUpload: this.auto,
             // allowedFileType: this.allowedFileType,
             accept: this.accept,
-            maxFileSize: this.maxFileSize
+            maxFileSize: this.maxFileSize,
+            headers: headers
         });
 
         // this.uploader.
@@ -92,7 +117,7 @@ export class FileuploadComponent implements OnInit, OnChanges {
         };
 
         this.uploader.onErrorItem = (item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): any => {
-            console.log({ item, response, status, headers })
+            // console.log({ item, response, status, headers })
             return { item, response, status, headers };
         };
 
@@ -205,5 +230,11 @@ export class FileuploadComponent implements OnInit, OnChanges {
             }).filter(item => item !== null);
 
         this.uploadComplete.emit(this.multiple ? this.results : (this.results && this.results.length > 0 ? this.results[0] : undefined));
+    }
+
+    chooseFile() {
+        if (this.file) {
+            (this.file.nativeElement as HTMLInputElement).click();
+        }
     }
 }
