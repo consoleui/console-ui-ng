@@ -15,6 +15,7 @@ export interface Column {
     sortKey?: string;
     sort?: 'DESC' | 'ASC' | null;
     sortChange?: Function;
+    sortSwitchNull?: boolean;
 }
 
 export interface DataTebleConfig {

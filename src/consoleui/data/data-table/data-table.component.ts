@@ -157,7 +157,12 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
         }
       }
     });
-    pagination.sort = undefined;
+
+    if (sorts && sorts.length > 0) {
+      pagination.sort = sorts.map(it => `${it.sortKey}, ${it.sort}`).join("; ");
+    } else {
+      pagination.sort = undefined;
+    }
   }
 
   _refreshSel() {
@@ -290,7 +295,7 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
   }
 
   updateSort(col) {
-    const {showSort, sortKey, sort} = col;
+    const {showSort, sortKey, sort, sortSwitchNull} = col;
 
     if (!showSort) {
       return ;
@@ -300,7 +305,7 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
     if (sort === 'ASC') {
       col.sort = 'DESC';
       sortStr = sortStr + ',' + 'DESC';
-    } else if (sort === 'DESC') {
+    } else if (sort === 'DESC' && sortSwitchNull !== false) {
       col.sort = undefined;
       sortStr = "";
     } else {
