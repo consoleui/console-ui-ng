@@ -116,7 +116,7 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
         }, 300);
       }
 
-      console.log(this.selection);
+      // console.log(this.selection);
       // this._refreshSel();
     }
 
@@ -159,7 +159,7 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
     });
 
     if (sorts && sorts.length > 0) {
-      pagination.sort = sorts.map(it => `${it.sortKey}, ${it.sort}`).join("; ");
+      pagination.sort = sorts.map(it => `${it.sortKey},${it.sort}`).join(";");
     } else {
       pagination.sort = undefined;
     }
