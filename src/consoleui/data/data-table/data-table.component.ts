@@ -37,6 +37,7 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
   @Input() keepSelection: boolean = false; // 是否在加载数据后或刷新数据后 没有找到 selection 的项时，保持 selection 的项
 
   @Input() rowId: string = 'id';
+  @Input() sortFromFirst = true;
 
   @ContentChild('rowActions') rowActions: TemplateRef<any>;
   @ContentChildren(ColTplDirective) _colTpls: QueryList<ColTplDirective>;
@@ -313,6 +314,9 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
       sortStr = sortStr + ',' + 'ASC';
     }
     this.pagination.sort = sortStr;
+    if (this.sortFromFirst !== false) {
+      this.pagination.number = 0;
+    }
     this.fireReload();
   }
 
