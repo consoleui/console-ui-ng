@@ -49,7 +49,7 @@
     </div>
     <div *ngIf="hasFiles()">
         <span class="mr-3">文件大小: <strong>{{uploader.queue[0]?.file?.size | cuiFilesizeFormat}}</strong></span>
-        <span class="mr-3">进度: <strong>{{uploader.queue[0]?.progress}}%</strong></span>
+        <span class="mr-3">进度: <strong>{{(uploader.queue[0]?.progress == 100 && !uploader.queue[0]?.isSuccess) ? 99 : uploader.queue[0]?.progress}}%</strong></span>
         <!-- <span class="mr-3">速度: <strong>{{speed | cuiFilesizeFormat}}/s</strong></span> -->
         <span *ngIf="uploader.queue[0]?.isError" class="mr-3">状态: <strong>上传失败</strong></span>
         <span *ngIf="uploader.queue[0]?.isUploading" class="mr-3">状态: <strong>正在上传</strong></span>
