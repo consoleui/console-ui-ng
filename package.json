@@ -8,8 +8,8 @@
     "start": "ng serve -pc proxy.conf.json --port 4000",
     "build": "ng build",
     "generate": "bash ./build.sh",
-    "release": "npm version patch && npm run generate && ng build --prod && npm publish publish",
-    "release:only": "npm version patch && npm run generate && npm publish publish",
+    "release": "npm version patch && npm run generate && ng build --prod && npm publish publish --registry https://registry.npmjs.org",
+    "release:only": "npm version patch && npm run generate && npm publish publish --registry https://registry.npmjs.org",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

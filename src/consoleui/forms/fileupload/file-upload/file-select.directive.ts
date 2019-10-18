@@ -28,6 +28,11 @@ export class FileSelectDirective {
   @HostListener('change')
   public onChange(): any {
     let files = this.element.nativeElement.files;
+    
+    if (!files || files.length <= 0) {
+      return ;
+    }
+
     let options = this.getOptions();
     let filters = this.getFilters();
 
