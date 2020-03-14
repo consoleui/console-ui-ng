@@ -36,11 +36,17 @@ export class ImageLazyLoadDirective implements OnInit {
             return Observable.of(false);
         }
 
-        return this.http.get(this.src).map((resp) => {
-            return true;
-        }).catch((resp) => {
-            return Observable.of(false);
-        });
+        // return this.http.get(this.src).map((resp) => {
+        //     return true;
+        // }).catch((resp) => {
+        //     return Observable.of(false);
+        // });
+        const img = new Image();
+        img.src = this.src;
+        if (img.naturalWidth > 0 && img.naturalHeight > 0) {
+            return Observable.of(true);
+        }
+        return Observable.of(false);
     }
 
     setImage() {
