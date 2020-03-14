@@ -1,7 +1,7 @@
 import { defaultImage } from './default-image-code';
 import { Observable } from 'rxjs/Observable';
 import { Http } from '@angular/http';
-import { Directive, Input, OnInit, ElementRef } from '@angular/core';
+import { Directive, Input, OnInit, ElementRef, HostListener } from '@angular/core';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -17,18 +17,23 @@ export class ImageLazyLoadDirective implements OnInit {
     constructor(private el: ElementRef, private http: Http) { }
 
     ngOnInit() {
-        this.checkValid().subscribe(
-            (ok) => {
-                if (ok) {
-                    this.setImage();
-                } else {
-                    this.setErrClass();
-                }
-            },
-            (err) => {
-                this.setErrClass();
-            }
-        );
+        // this.checkValid().subscribe(
+        //     (ok) => {
+        //         if (ok) {
+        //             this.setImage();
+        //         } else {
+        //             this.setErrClass();
+        //         }
+        //     },
+        //     (err) => {
+        //         this.setErrClass();
+        //     }
+        // );
+    }
+
+    @HostListener('error', ['$event'])
+    onError($e) {
+        this.setErrClass();
     }
 
     checkValid(): Observable<boolean> {
@@ -36,17 +41,11 @@ export class ImageLazyLoadDirective implements OnInit {
             return Observable.of(false);
         }
 
-        // return this.http.get(this.src).map((resp) => {
-        //     return true;
-        // }).catch((resp) => {
-        //     return Observable.of(false);
-        // });
-        const img = new Image();
-        img.src = this.src;
-        if (img.naturalWidth > 0 && img.naturalHeight > 0) {
-            return Observable.of(true);
-        }
-        return Observable.of(false);
+        return this.http.get(this.src).map((resp) => {
+            return true;
+        }).catch((resp) => {
+            return Observable.of(false);
+        });
     }
 
     setImage() {

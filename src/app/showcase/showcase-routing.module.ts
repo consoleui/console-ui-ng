@@ -12,6 +12,7 @@ const routes: Routes = [
       {path: 'data', loadChildren: 'app/showcase/data-showcase/data-showcase.module#DataShowcaseModule'},
       {path: 'cropper', loadChildren: 'app/showcase/cropper-showcase/cropper-showcase.module#CropperShowcaseModule'},
       {path: 'forms', loadChildren: 'app/showcase/forms-showcase/forms-showcase.module#FormsShowcaseModule'},
+      {path: 'imgLoader', loadChildren: 'app/showcase/img-lazy-load-showcase/img-lazy-load-showcase.module#ImgLazyLoadShowcaseModule'},
     ]},
   ]}
 ,

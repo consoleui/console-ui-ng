@@ -26,6 +26,7 @@ export class ShowcaseLayoutSiderComponent implements OnInit {
     ]},
     {title: 'Utils', children: [
       {title: 'Cropper 图片裁剪', routerLink: ['/showcase', 'cropper']},
+      {title: '图片加载', routerLink: ['/showcase', 'imgLoader']},
     ]},
   ];
 
