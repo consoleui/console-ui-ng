@@ -12,7 +12,7 @@ import 'rxjs/add/operator/delay';
 
 @Directive({ selector: 'img[cui-lazy-load]' })
 export class ImageLazyLoadDirective implements OnInit {
-    @Input() src: string;
+    // @Input() src: string;
 
     constructor(private el: ElementRef, private http: Http) { }
 
@@ -36,22 +36,22 @@ export class ImageLazyLoadDirective implements OnInit {
         this.setErrClass();
     }
 
-    checkValid(): Observable<boolean> {
-        if (!this.src) {
-            return Observable.of(false);
-        }
+    // checkValid(): Observable<boolean> {
+    //     if (!this.src) {
+    //         return Observable.of(false);
+    //     }
 
-        return this.http.get(this.src).map((resp) => {
-            return true;
-        }).catch((resp) => {
-            return Observable.of(false);
-        });
-    }
+    //     return this.http.get(this.src).map((resp) => {
+    //         return true;
+    //     }).catch((resp) => {
+    //         return Observable.of(false);
+    //     });
+    // }
 
-    setImage() {
-        let imgTag: Element = this.el.nativeElement;
-        imgTag.setAttribute('src', this.src);
-    }
+    // setImage() {
+    //     let imgTag: Element = this.el.nativeElement;
+    //     imgTag.setAttribute('src', this.src);
+    // }
 
     setErrClass() {
         let imgTag: Element = this.el.nativeElement;
