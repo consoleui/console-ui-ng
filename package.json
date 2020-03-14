@@ -1,6 +1,6 @@
 {
   "name": "console-ui-ng",
-  "version": "0.1.105",
+  "version": "0.1.108",
   "license": "MIT",
   "description": "An enterprise-class UI components based on Ant Design and Angular",
   "scripts": {
@@ -8,8 +8,8 @@
     "start": "ng serve -pc proxy.conf.json --port 4000",
     "build": "ng build",
     "generate": "bash ./build.sh",
-    "release": "npm version patch && npm run generate && ng build --prod && npm publish publish",
-    "release:only": "npm version patch && npm run generate && npm publish publish",
+    "release": "npm version patch && npm run generate && ng build --prod && npm publish publish --registry https://registry.npmjs.org",
+    "release:only": "npm version patch && npm run generate && npm publish publish --registry https://registry.npmjs.org",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -72,7 +72,7 @@
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "node-sass": "^4.5.3",
+    "node-sass": "^4.13.1",
     "protractor": "~5.1.2",
     "rollup": "^0.49.2",
     "rollup-plugin-angular": "^0.5.3",
