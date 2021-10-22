@@ -8,6 +8,7 @@ import * as ObjectPath from 'object-path';
 export class ObjectPathPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
+    console.log("cuitable:", value, args)
     if ('function' == typeof args[0] ) {
       return args[0](value);
     }
