@@ -134,7 +134,7 @@ export class DataTableComponent implements OnInit, AfterContentInit, OnChanges {
       sorts = pageSort.map(it => {
         return {sortKey: it.property, sort: it.direction};
       });
-    } else if (pageSort && pageSort != "") {
+    } else if (pageSort && (typeof pageSort == 'string') && pageSort != "") {
       sorts = pageSort.split(/;|; /)
         .map(it => it.trim())
         .map(it => {
