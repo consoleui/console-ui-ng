@@ -34,7 +34,7 @@ export class CkeditorCustomDemoComponent implements OnInit {
     toolbar: 'basic',
     // toolbarCanCollapse: true
   };
-  constructor(protected sanitizer: DomSanitizer) { }
+  constructor(public readonly sanitizer: DomSanitizer) { }
 
   ngOnInit() {
   }

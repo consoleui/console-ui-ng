@@ -8,7 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class CkeditorFullDemoComponent implements OnInit {
   content = '请输入内容';
-  constructor(protected sanitizer: DomSanitizer) { }
+  constructor(public readonly sanitizer: DomSanitizer) { }
 
   ngOnInit() {
   }
