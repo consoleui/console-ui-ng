@@ -3,12 +3,13 @@ import { FileItem } from './file-upload/file-item.class';
 import { FileUploader, ParsedResponseHeaders } from './file-upload/file-uploader.class';
 import {
     Component, OnInit, Input, Output, EventEmitter, OnChanges,
-    SimpleChanges, ViewChild, ViewChildren, ElementRef, QueryList
+    SimpleChanges, ViewChild, ViewChildren, ElementRef, QueryList, Inject, Optional
 } from '@angular/core';
 import { FileLikeObject } from './file-upload/file-like-object.class';
 import { FileType } from './file-upload/file-type.class';
 import { FileSize } from './file-upload/file-size.class';
 import { FileSelectDirective } from './file-upload/file-select.directive';
+import { CUI_ROOT_CONFIG } from '../../consoleui-config';
 
 export type FileuploadMode = 'advanced' | 'doc' | 'video' | 'image' | 'zip' | 'file';
 export interface ErrorMessage {
@@ -69,6 +70,8 @@ export class FileuploadComponent implements OnInit, OnChanges {
         'zip': ".zip",
     };
 
+    basePath = '';
+
     @Input()
     set mode(value: FileuploadMode) {
         this._mode = value;
@@ -88,7 +91,13 @@ export class FileuploadComponent implements OnInit, OnChanges {
         return this.accept.split(/,|，/).map(it => FileType.getMimeClassByType(it));
     }
 
-    constructor(private sanitizer: DomSanitizer) { }
+    constructor(private sanitizer: DomSanitizer,
+        @Inject(CUI_ROOT_CONFIG) @Optional() private cuiRootConfig: any | undefined) {
+        if (cuiRootConfig && cuiRootConfig.fileUpload && cuiRootConfig.fileUpload.basePath) {
+            const basePath = cuiRootConfig.fileUpload.basePath;
+            this.basePath = basePath.endsWith("/") ? basePath.substring(0, basePath.length - 1) : basePath;
+        }
+    }
 
     private _getXsrfToken() {
         const tokenName = "XSRF-TOKEN";
@@ -101,7 +110,7 @@ export class FileuploadComponent implements OnInit, OnChanges {
         const headers = csrfTokenHeader ? [csrfTokenHeader] : [];
 
         this.uploader = new FileUploader({
-            url: this.url,
+            url: (this.basePath || '') + this.url,
             itemAlias: this.name,
             autoUpload: this.auto,
             // allowedFileType: this.allowedFileType,
